@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=yes, viewport-fit=cover" />
     <meta name="description" content="FlintsMarket - Create your trading account" />
     <title>FlintsMarket | Sign Up</title>
-    <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,20 80,40 80,70 50,90 20,70 20,40' fill='%233b82f6'/%3E%3C/svg%3E" />
+    <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,20 80,40 80,70 50,90 20,70 20,40' fill='%23c99a3b'/%3E%3C/svg%3E" />
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
         /* ============================================================
-                   CLEAN MODERN SIGNUP THEME
+                   DARK THEME — MATCHES INDEX PAGE
                    ============================================================ */
         * {
             margin: 0;
@@ -21,20 +21,19 @@
         }
 
         :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-card: rgba(255, 255, 255, 0.04);
-            --bg-card-hover: rgba(255, 255, 255, 0.07);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted: #475569;
-            --border-color: rgba(255, 255, 255, 0.06);
-            --blue-primary: #3b82f6;
-            --blue-light: #60a5fa;
-            --blue-gradient: linear-gradient(135deg, #3b82f6, #6366f1);
-            --emerald: #10b981;
-            --rose: #f43f5e;
-            --gold: #f59e0b;
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #0d1224;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-hover: rgba(255, 255, 255, 0.06);
+            --text-primary: #f0ede8;
+            --text-secondary: #b0abc4;
+            --text-muted: #6b6882;
+            --border-color: rgba(255, 255, 255, 0.04);
+            --gold-primary: #c99a3b;
+            --gold-light: #e8c86a;
+            --gold-gradient: linear-gradient(135deg, #c99a3b, #e8c86a, #b8862a);
+            --emerald: #3dd68c;
+            --rose: #f4727a;
             --radius-lg: 20px;
             --radius-md: 14px;
             --radius-sm: 10px;
@@ -64,9 +63,9 @@
             z-index: 0;
             pointer-events: none;
             background: 
-                radial-gradient(ellipse at 20% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(99, 102, 241, 0.06) 0%, transparent 40%),
-                radial-gradient(ellipse at 50% 80%, rgba(16, 185, 129, 0.04) 0%, transparent 40%);
+                radial-gradient(ellipse at 20% 50%, rgba(201, 154, 59, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(201, 154, 59, 0.03) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 80%, rgba(61, 214, 140, 0.02) 0%, transparent 40%);
             animation: bgFloat 20s ease-in-out infinite;
         }
 
@@ -99,7 +98,7 @@
         }
 
         .signup-card:hover {
-            border-color: rgba(59, 130, 246, 0.1);
+            border-color: rgba(201, 154, 59, 0.08);
         }
 
         /* ===== LOGO ===== */
@@ -111,15 +110,15 @@
         .signup-logo .logo-icon {
             width: 56px;
             height: 56px;
-            background: var(--blue-gradient);
+            background: var(--gold-gradient);
             border-radius: 14px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            color: white;
+            color: #0a0e1a;
             font-size: 24px;
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
+            box-shadow: 0 4px 20px rgba(201, 154, 59, 0.25);
             margin-bottom: 0.8rem;
         }
 
@@ -130,7 +129,10 @@
         }
 
         .signup-logo h1 span {
-            color: var(--blue-primary);
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .signup-logo p {
@@ -163,8 +165,8 @@
         }
 
         .form-group .input-wrap:focus-within {
-            border-color: var(--blue-primary);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.05);
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 0 3px rgba(201, 154, 59, 0.05);
         }
 
         .form-group .input-wrap i {
@@ -200,6 +202,16 @@
             color: var(--text-primary);
         }
 
+        .form-group .helper {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+        }
+
+        .form-group .helper i {
+            margin-right: 4px;
+        }
+
         /* ===== NAME ROW ===== */
         .name-row {
             display: grid;
@@ -218,7 +230,7 @@
         .terms-row input[type="checkbox"] {
             width: 16px;
             height: 16px;
-            accent-color: var(--blue-primary);
+            accent-color: var(--gold-primary);
             cursor: pointer;
             margin-top: 2px;
             flex-shrink: 0;
@@ -231,7 +243,7 @@
         }
 
         .terms-row label a {
-            color: var(--blue-primary);
+            color: var(--gold-primary);
             text-decoration: none;
             font-weight: 500;
         }
@@ -246,8 +258,8 @@
             padding: 0.9rem;
             border: none;
             border-radius: var(--radius-sm);
-            background: var(--blue-gradient);
-            color: white;
+            background: var(--gold-gradient);
+            color: #0a0e1a;
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
             font-weight: 700;
@@ -274,7 +286,7 @@
 
         .btn-signup:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 40px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 40px rgba(201, 154, 59, 0.3);
         }
 
         .btn-signup:disabled {
@@ -353,7 +365,7 @@
         }
 
         .login-link a {
-            color: var(--blue-primary);
+            color: var(--gold-primary);
             text-decoration: none;
             font-weight: 600;
         }
@@ -365,8 +377,8 @@
         /* ===== ERROR MESSAGE ===== */
         .error-msg {
             display: none;
-            background: rgba(244, 63, 94, 0.08);
-            border: 1px solid rgba(244, 63, 94, 0.15);
+            background: rgba(244, 114, 122, 0.08);
+            border: 1px solid rgba(244, 114, 122, 0.15);
             border-radius: var(--radius-sm);
             padding: 0.6rem 1rem;
             color: var(--rose);
@@ -375,6 +387,22 @@
         }
 
         .error-msg.show {
+            display: block;
+        }
+
+        /* ===== SUCCESS MESSAGE ===== */
+        .success-msg {
+            display: none;
+            background: rgba(61, 214, 140, 0.08);
+            border: 1px solid rgba(61, 214, 140, 0.15);
+            border-radius: var(--radius-sm);
+            padding: 0.6rem 1rem;
+            color: var(--emerald);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-msg.show {
             display: block;
         }
 
@@ -425,7 +453,13 @@
             <!-- ===== ERROR MESSAGE ===== -->
             <div class="error-msg" id="errorMsg">
                 <i class="fas fa-exclamation-circle" style="margin-right:6px;"></i>
-                Please fix the errors above and try again.
+                <span id="errorText">Please fix the errors above and try again.</span>
+            </div>
+
+            <!-- ===== SUCCESS MESSAGE ===== -->
+            <div class="success-msg" id="successMsg">
+                <i class="fas fa-check-circle" style="margin-right:6px;"></i>
+                <span id="successText">Account created! Redirecting...</span>
             </div>
 
             <!-- ===== SIGNUP FORM ===== -->
@@ -456,7 +490,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Phone Number</label>
+                    <label>Phone Number (Optional)</label>
                     <div class="input-wrap">
                         <i class="fas fa-phone"></i>
                         <input type="tel" id="phoneInput" placeholder="+233 20 123 4567" />
@@ -472,7 +506,7 @@
                             <i class="fas fa-eye" id="passwordIcon"></i>
                         </span>
                     </div>
-                    <div style="font-size:0.7rem;color:var(--text-muted);margin-top:0.3rem;">
+                    <div class="helper">
                         <i class="fas fa-info-circle"></i> Min 8 characters, 1 uppercase, 1 number
                     </div>
                 </div>
@@ -516,7 +550,7 @@
 
             <!-- ===== LOGIN LINK ===== -->
             <div class="login-link">
-                Already have an account? <a href="#" onclick="showMessage('Redirecting to login...')">Sign in</a>
+                Already have an account? <a href="login.html">Sign in</a>
             </div>
         </div>
     </div>
@@ -524,107 +558,136 @@
     <!-- ============================================================
     JAVASCRIPT
     ============================================================ -->
-    <script>
+    <script type="module">
+        import { signUp, getSession } from './supabase.js'
+
+        // ===== CHECK IF ALREADY LOGGED IN =====
+        async function checkSession() {
+            const session = await getSession()
+            if (session) {
+                window.location.href = 'dashboard.html'
+            }
+        }
+        checkSession()
+
         // ===== TOGGLE PASSWORD VISIBILITY =====
-        function togglePassword() {
-            const passwordInput = document.getElementById('passwordInput');
-            const icon = document.getElementById('passwordIcon');
+        window.togglePassword = function() {
+            const passwordInput = document.getElementById('passwordInput')
+            const icon = document.getElementById('passwordIcon')
 
             if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                icon.className = 'fas fa-eye-slash';
+                passwordInput.type = 'text'
+                icon.className = 'fas fa-eye-slash'
             } else {
-                passwordInput.type = 'password';
-                icon.className = 'fas fa-eye';
+                passwordInput.type = 'password'
+                icon.className = 'fas fa-eye'
             }
         }
 
         // ===== HANDLE SIGNUP =====
-        function handleSignup(event) {
-            event.preventDefault();
+        window.handleSignup = async function(event) {
+            event.preventDefault()
 
-            const firstName = document.getElementById('firstNameInput').value.trim();
-            const lastName = document.getElementById('lastNameInput').value.trim();
-            const email = document.getElementById('emailInput').value.trim();
-            const password = document.getElementById('passwordInput').value;
-            const confirm = document.getElementById('confirmInput').value;
-            const terms = document.getElementById('termsCheck').checked;
-            const errorMsg = document.getElementById('errorMsg');
-            const btn = document.getElementById('signupBtn');
+            const firstName = document.getElementById('firstNameInput').value.trim()
+            const lastName = document.getElementById('lastNameInput').value.trim()
+            const email = document.getElementById('emailInput').value.trim()
+            const password = document.getElementById('passwordInput').value
+            const confirm = document.getElementById('confirmInput').value
+            const terms = document.getElementById('termsCheck').checked
+            const errorMsg = document.getElementById('errorMsg')
+            const successMsg = document.getElementById('successMsg')
+            const btn = document.getElementById('signupBtn')
+            const errorText = document.getElementById('errorText')
 
-            // Reset error
-            errorMsg.classList.remove('show');
+            // Hide previous messages
+            errorMsg.classList.remove('show')
+            successMsg.classList.remove('show')
 
             // Validation
             if (!firstName || !lastName) {
-                errorMsg.textContent = '⚠️ Please enter your full name.';
-                errorMsg.classList.add('show');
-                return;
+                errorText.textContent = '⚠️ Please enter your full name.'
+                errorMsg.classList.add('show')
+                return
             }
 
             if (!email || !email.includes('@')) {
-                errorMsg.textContent = '⚠️ Please enter a valid email address.';
-                errorMsg.classList.add('show');
-                return;
+                errorText.textContent = '⚠️ Please enter a valid email address.'
+                errorMsg.classList.add('show')
+                return
             }
 
             if (password.length < 8) {
-                errorMsg.textContent = '⚠️ Password must be at least 8 characters long.';
-                errorMsg.classList.add('show');
-                return;
+                errorText.textContent = '⚠️ Password must be at least 8 characters long.'
+                errorMsg.classList.add('show')
+                return
             }
 
             if (password !== confirm) {
-                errorMsg.textContent = '⚠️ Passwords do not match.';
-                errorMsg.classList.add('show');
-                return;
+                errorText.textContent = '⚠️ Passwords do not match.'
+                errorMsg.classList.add('show')
+                return
             }
 
             if (!terms) {
-                errorMsg.textContent = '⚠️ Please agree to the Terms & Conditions.';
-                errorMsg.classList.add('show');
-                return;
+                errorText.textContent = '⚠️ Please agree to the Terms & Conditions.'
+                errorMsg.classList.add('show')
+                return
             }
 
             // Show loading state
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Creating Account...';
-            btn.disabled = true;
+            const originalText = btn.innerHTML
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Creating Account...'
+            btn.disabled = true
 
-            // Simulate signup
-            setTimeout(() => {
-                // Success
-                btn.innerHTML = '✅ Account Created!';
-                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            try {
+                const fullName = firstName + ' ' + lastName
+                const { data, error } = await signUp(email, password, fullName)
 
-                setTimeout(() => {
-                    alert('🎉 Account created successfully!\n\nWelcome to FlintsMarket, ' + firstName + '!\nPlease check your email to verify your account.');
-                    btn.innerHTML = originalText;
-                    btn.style.background = '';
-                    btn.disabled = false;
-                    // Reset form
-                    document.getElementById('signupForm').reset();
-                }, 1000);
-            }, 1800);
+                if (error) {
+                    errorText.textContent = '❌ ' + error.message
+                    errorMsg.classList.add('show')
+                    btn.innerHTML = originalText
+                    btn.disabled = false
+                    return
+                }
+
+                if (data?.user) {
+                    // Success
+                    successMsg.classList.add('show')
+                    document.getElementById('successText').textContent = '✅ Account created! Please check your email to verify.'
+
+                    btn.innerHTML = '✅ Success!'
+                    btn.style.background = 'linear-gradient(135deg, #3dd68c, #2d9b6e)'
+
+                    setTimeout(() => {
+                        window.location.href = 'login.html'
+                    }, 2000)
+                }
+            } catch (err) {
+                errorText.textContent = '❌ An unexpected error occurred. Please try again.'
+                errorMsg.classList.add('show')
+                btn.innerHTML = originalText
+                btn.disabled = false
+            }
         }
 
         // ===== SHOW MESSAGE =====
-        function showMessage(msg) {
-            alert(msg);
+        window.showMessage = function(msg) {
+            alert(msg)
         }
 
         // ===== KEYBOARD SUPPORT =====
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
-                const form = document.getElementById('signupForm');
+                const form = document.getElementById('signupForm')
                 if (form) {
-                    form.dispatchEvent(new Event('submit'));
+                    form.dispatchEvent(new Event('submit'))
                 }
             }
-        });
+        })
 
-        console.log('📝 FlintsMarket Signup Page loaded successfully!');
-        console.log('👤 New users can create an account to start trading.');
+        console.log('📝 FlintsMarket Signup Page loaded!')
+        console.log('👤 New users can create an account to start trading.')
     </script>
 </body>
 </html>
