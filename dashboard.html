@@ -70,7 +70,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.8rem 1.5rem;
+            padding: 0.6rem 1rem;
             background: var(--nav-bg);
             border-bottom: 1px solid var(--border-color);
             position: fixed;
@@ -84,13 +84,13 @@
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
             cursor: pointer;
         }
 
         .logo-icon {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             background: var(--gold-gradient);
             border-radius: 8px;
             display: flex;
@@ -98,11 +98,11 @@
             justify-content: center;
             font-weight: 700;
             color: #0a0e1a;
-            font-size: 14px;
+            font-size: 12px;
         }
 
         .site-name {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
@@ -118,12 +118,12 @@
         .right-menu {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.5rem;
         }
 
         .flag-icon {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             object-fit: cover;
             cursor: pointer;
@@ -132,10 +132,10 @@
 
         .balance-display {
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--text-primary);
             background: rgba(255, 255, 255, 0.04);
-            padding: 0.4rem 1rem;
+            padding: 0.3rem 0.7rem;
             border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
@@ -144,12 +144,14 @@
             background: none;
             border: none;
             color: var(--text-primary);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             cursor: pointer;
             padding: 0.3rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            min-height: 40px;
+            min-width: 40px;
         }
 
         /* ===== SIDEBAR ===== */
@@ -190,7 +192,7 @@
         }
 
         .sidebar-header {
-            padding: 1.5rem;
+            padding: 1.2rem 1.5rem;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
@@ -198,8 +200,8 @@
         }
 
         .sidebar-header .avatar-large {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             background: var(--gold-gradient);
             border-radius: 50%;
             display: flex;
@@ -207,7 +209,7 @@
             justify-content: center;
             color: #0a0e1a;
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         .sidebar-header .user-info {
@@ -217,12 +219,12 @@
 
         .sidebar-header .user-name {
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--text-primary);
         }
 
         .sidebar-header .user-email {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
         }
 
@@ -233,6 +235,8 @@
             font-size: 1.2rem;
             cursor: pointer;
             color: var(--text-muted);
+            min-height: 40px;
+            min-width: 40px;
         }
 
         .sidebar-nav {
@@ -244,10 +248,10 @@
 
         .sidebar-nav a {
             display: block;
-            padding: 0.8rem 1.5rem;
+            padding: 0.7rem 1.5rem;
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
             transition: all 0.3s ease;
         }
@@ -277,30 +281,30 @@
 
         /* ===== MAIN CONTAINER ===== */
         .main-container {
-            padding: 1.5rem;
+            padding: 1rem;
             max-width: 1600px;
             margin-left: auto;
             margin-right: auto;
             width: 100%;
-            margin-top: 65px;
+            margin-top: 60px;
         }
 
-        /* ===== WELCOME SECTION — REDESIGNED ===== */
+        /* ===== WELCOME SECTION ===== */
         .welcome-section {
             background: linear-gradient(135deg, rgba(201, 154, 59, 0.12), rgba(61, 214, 140, 0.05));
             border: 1px solid rgba(201, 154, 59, 0.08);
             border-radius: var(--radius-md);
-            padding: 1.5rem 2rem;
-            margin-bottom: 1.5rem;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1.2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 0.8rem;
         }
 
         .welcome-section .greeting h1 {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--text-primary);
         }
@@ -314,24 +318,27 @@
 
         .welcome-section .greeting p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-top: 0.2rem;
+            font-size: 0.8rem;
+            margin-top: 0.1rem;
         }
 
         .welcome-section .quick-action {
             display: flex;
-            gap: 0.8rem;
+            gap: 0.6rem;
+            flex-wrap: wrap;
         }
 
         .welcome-section .quick-action button {
-            padding: 0.6rem 1.5rem;
+            padding: 0.5rem 1.2rem;
             border: none;
             border-radius: var(--radius-full);
             font-family: 'Inter', sans-serif;
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            min-height: 44px;
+            min-width: 44px;
         }
 
         .welcome-section .quick-action .btn-deposit {
@@ -358,14 +365,14 @@
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
         }
 
         .stat-card {
             background: var(--bg-card);
             border-radius: var(--radius-sm);
-            padding: 1rem 1.2rem;
+            padding: 0.8rem 1rem;
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
         }
@@ -376,22 +383,22 @@
         }
 
         .stat-card .stat-label {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
         }
 
         .stat-card .stat-value {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--text-primary);
         }
 
         .stat-card .stat-change {
-            font-size: 0.7rem;
-            margin-top: 0.2rem;
+            font-size: 0.6rem;
+            margin-top: 0.1rem;
             font-weight: 500;
         }
 
@@ -406,11 +413,11 @@
         .dashboard-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+            gap: 1.2rem;
+            margin-bottom: 1.2rem;
         }
 
-        /* ===== CHART — SMALLER ===== */
+        /* ===== CHART ===== */
         .chart-container {
             background: var(--bg-card);
             border-radius: var(--radius-md);
@@ -422,14 +429,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.8rem 1rem;
+            padding: 0.6rem 1rem;
             border-bottom: 1px solid var(--border-color);
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
 
         .chart-header h3 {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--text-primary);
         }
@@ -441,13 +448,14 @@
             background: var(--bg-card);
             color: var(--text-primary);
             font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
+            min-height: 32px;
         }
 
         #dashboard_chart {
-            height: 280px;
+            height: 260px;
             width: 100%;
-            min-height: 200px;
+            min-height: 180px;
             background: #ffffff;
         }
 
@@ -456,25 +464,25 @@
             background: var(--bg-card);
             border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
-            padding: 1.2rem;
+            padding: 1rem;
         }
 
         .order-panel .panel-title {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
         }
 
         .order-panel .price-display {
             text-align: center;
-            padding: 0.6rem 0;
+            padding: 0.4rem 0;
             border-bottom: 1px solid var(--border-color);
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
         }
 
         .order-panel .price-display .price {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
         }
 
@@ -486,16 +494,16 @@
         }
 
         .order-panel .price-display .change {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
         }
 
         .order-panel .input-group {
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem;
         }
 
         .order-panel .input-group label {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
             display: block;
             margin-bottom: 0.2rem;
@@ -512,20 +520,21 @@
 
         .order-panel .input-group .input-wrap input {
             flex: 1;
-            padding: 0.5rem 0.7rem;
+            padding: 0.4rem 0.6rem;
             background: none;
             border: none;
             color: var(--text-primary);
             font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             outline: none;
             min-width: 0;
+            min-height: 40px;
         }
 
         .order-panel .input-group .input-wrap .currency {
-            padding: 0.5rem 0.7rem;
-            font-size: 0.65rem;
+            padding: 0.4rem 0.6rem;
+            font-size: 0.6rem;
             color: var(--text-muted);
             background: rgba(255, 255, 255, 0.02);
             border-left: 1px solid var(--border-color);
@@ -539,16 +548,17 @@
         }
 
         .order-panel .quick-amounts button {
-            padding: 0.2rem;
+            padding: 0.3rem;
             border: 1px solid var(--border-color);
             border-radius: var(--radius-sm);
             background: transparent;
             color: var(--text-secondary);
             font-family: 'Inter', sans-serif;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            min-height: 36px;
         }
 
         .order-panel .quick-amounts button:hover {
@@ -559,8 +569,8 @@
         .order-panel .trade-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.6rem;
-            margin-top: 0.6rem;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
         }
 
         .order-panel .trade-buttons .btn-buy {
@@ -571,9 +581,10 @@
             color: #0a0e1a;
             font-family: 'Inter', sans-serif;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            min-height: 44px;
         }
 
         .order-panel .trade-buttons .btn-buy:hover {
@@ -590,9 +601,10 @@
             color: #0a0e1a;
             font-family: 'Inter', sans-serif;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            min-height: 44px;
         }
 
         .order-panel .trade-buttons .btn-sell:hover {
@@ -605,15 +617,15 @@
         .watchlist-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
         }
 
         .watchlist-item {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-sm);
-            padding: 0.8rem 1rem;
+            padding: 0.6rem 0.8rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -628,17 +640,17 @@
         .watchlist-item .asset {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.5rem;
         }
 
         .watchlist-item .asset .icon {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             background: rgba(255, 255, 255, 0.04);
         }
@@ -662,11 +674,11 @@
 
         .watchlist-item .asset .name {
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
         }
 
         .watchlist-item .asset .full {
-            font-size: 0.65rem;
+            font-size: 0.55rem;
             color: var(--text-muted);
         }
 
@@ -676,11 +688,11 @@
 
         .watchlist-item .price-data .price {
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
         }
 
         .watchlist-item .price-data .change {
-            font-size: 0.65rem;
+            font-size: 0.55rem;
             font-weight: 600;
         }
 
@@ -697,47 +709,49 @@
             border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
             overflow: hidden;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
         .portfolio-container .section-header {
-            padding: 0.8rem 1rem;
+            padding: 0.6rem 1rem;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.3rem;
         }
 
         .portfolio-container .section-header h3 {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--text-primary);
         }
 
         .portfolio-container .section-header a {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--gold-primary);
             font-weight: 600;
+            text-decoration: none;
         }
 
         .portfolio-table-wrap {
             overflow-x: auto;
             padding: 0 1rem 1rem;
+            -webkit-overflow-scrolling: touch;
         }
 
         .portfolio-table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 500px;
+            min-width: 450px;
         }
 
         .portfolio-table th {
             text-align: left;
-            padding: 0.6rem 0.5rem;
+            padding: 0.5rem 0.4rem;
             color: var(--text-muted);
-            font-size: 0.65rem;
+            font-size: 0.55rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -745,8 +759,8 @@
         }
 
         .portfolio-table td {
-            padding: 0.6rem 0.5rem;
-            font-size: 0.8rem;
+            padding: 0.5rem 0.4rem;
+            font-size: 0.7rem;
             color: var(--text-primary);
             border-bottom: 1px solid var(--border-color);
         }
@@ -770,13 +784,14 @@
             background: var(--gold-gradient);
             color: #0a0e1a;
             border: none;
-            padding: 0.2rem 0.7rem;
+            padding: 0.2rem 0.6rem;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 600;
             font-family: 'Inter', sans-serif;
             transition: all 0.3s ease;
+            min-height: 32px;
         }
 
         .btn-small:hover {
@@ -801,13 +816,13 @@
 
         @media (max-width: 768px) {
             .main-container {
-                padding: 1rem;
-                margin-top: 60px;
+                padding: 0.8rem;
+                margin-top: 56px;
             }
             .welcome-section {
                 flex-direction: column;
                 text-align: center;
-                padding: 1.2rem;
+                padding: 1rem;
             }
             .welcome-section .quick-action {
                 flex-direction: column;
@@ -815,47 +830,84 @@
             }
             .welcome-section .quick-action button {
                 width: 100%;
+                justify-content: center;
             }
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 0.5rem;
             }
             .stat-card {
-                padding: 0.7rem 0.8rem;
+                padding: 0.6rem 0.7rem;
             }
             .stat-card .stat-value {
-                font-size: 1.2rem;
+                font-size: 1rem;
+            }
+            .stat-card .stat-label {
+                font-size: 0.5rem;
             }
             #dashboard_chart {
-                height: 200px;
-                min-height: 150px;
+                height: 180px;
+                min-height: 140px;
             }
             .watchlist-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 0.5rem;
             }
             .watchlist-item {
-                padding: 0.5rem 0.7rem;
+                padding: 0.4rem 0.6rem;
             }
             .watchlist-item .price-data .price {
-                font-size: 0.75rem;
+                font-size: 0.65rem;
             }
             .order-panel {
-                padding: 0.8rem;
+                padding: 0.7rem;
             }
             .order-panel .price-display .price {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
+            }
+            .order-panel .trade-buttons .btn-buy,
+            .order-panel .trade-buttons .btn-sell {
+                font-size: 0.7rem;
+                min-height: 40px;
             }
             .balance-display {
-                font-size: 0.65rem;
-                padding: 0.2rem 0.6rem;
+                font-size: 0.6rem;
+                padding: 0.2rem 0.5rem;
             }
             .flag-icon {
-                width: 22px;
-                height: 22px;
+                width: 20px;
+                height: 20px;
             }
             .portfolio-table {
-                min-width: 450px;
+                min-width: 400px;
+            }
+            .portfolio-table td {
+                font-size: 0.65rem;
+                padding: 0.4rem 0.3rem;
+            }
+            .portfolio-table th {
+                font-size: 0.5rem;
+                padding: 0.4rem 0.3rem;
+            }
+            .site-name {
+                font-size: 0.85rem;
+            }
+            .logo-icon {
+                width: 24px;
+                height: 24px;
+                font-size: 10px;
+            }
+            .chart-header h3 {
+                font-size: 0.7rem;
+            }
+            .chart-header .pair-selector {
+                font-size: 0.65rem;
+                min-height: 28px;
+            }
+            .order-panel .quick-amounts button {
+                font-size: 0.55rem;
+                min-height: 32px;
+                padding: 0.2rem;
             }
         }
 
@@ -867,7 +919,10 @@
                 grid-template-columns: 1fr;
             }
             .welcome-section .greeting h1 {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
+            }
+            .welcome-section .greeting p {
+                font-size: 0.7rem;
             }
             .order-panel .trade-buttons {
                 grid-template-columns: 1fr;
@@ -875,13 +930,86 @@
             .order-panel .quick-amounts {
                 grid-template-columns: repeat(2, 1fr);
             }
-            .site-name {
+            .order-panel .price-display .price {
+                font-size: 1rem;
+            }
+            #dashboard_chart {
+                height: 150px;
+                min-height: 120px;
+            }
+            .stat-card .stat-value {
                 font-size: 0.9rem;
             }
-            .logo-icon {
-                width: 28px;
-                height: 28px;
-                font-size: 12px;
+            .portfolio-table {
+                min-width: 350px;
+            }
+            .portfolio-table td {
+                font-size: 0.6rem;
+                padding: 0.3rem 0.2rem;
+            }
+            .portfolio-table th {
+                font-size: 0.45rem;
+                padding: 0.3rem 0.2rem;
+            }
+            .btn-small {
+                font-size: 0.5rem;
+                padding: 0.15rem 0.5rem;
+                min-height: 28px;
+            }
+            .balance-display {
+                font-size: 0.55rem;
+                padding: 0.15rem 0.4rem;
+            }
+            .flag-icon {
+                width: 18px;
+                height: 18px;
+            }
+            .mobile-menu-btn {
+                font-size: 1rem;
+                min-height: 36px;
+                min-width: 36px;
+            }
+            .right-menu {
+                gap: 0.3rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .main-container {
+                padding: 0.5rem;
+            }
+            .welcome-section {
+                padding: 0.8rem;
+            }
+            .welcome-section .greeting h1 {
+                font-size: 0.95rem;
+            }
+            .stat-card {
+                padding: 0.4rem 0.5rem;
+            }
+            .stat-card .stat-value {
+                font-size: 0.8rem;
+            }
+            .chart-header {
+                padding: 0.4rem 0.6rem;
+            }
+            #dashboard_chart {
+                height: 130px;
+            }
+            .order-panel {
+                padding: 0.5rem;
+            }
+            .order-panel .price-display .price {
+                font-size: 0.9rem;
+            }
+            .watchlist-item {
+                padding: 0.3rem 0.4rem;
+            }
+            .watchlist-item .asset .name {
+                font-size: 0.6rem;
+            }
+            .watchlist-item .price-data .price {
+                font-size: 0.6rem;
             }
         }
     </style>
@@ -897,7 +1025,9 @@
         <div class="right-menu">
             <img src="https://flagcdn.com/w320/us.png" alt="USD" class="flag-icon" onclick="showMessage('Currency: USD')">
             <div class="balance-display" id="balanceDisplay">$12,450.00</div>
-            <button class="mobile-menu-btn" onclick="openSidebar()">☰</button>
+            <button class="mobile-menu-btn" onclick="openSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
 
@@ -917,9 +1047,9 @@
                 <a href="trade.html" onclick="closeSidebar()">Trade</a>
                 <a href="markets.html" onclick="closeSidebar()">Markets</a>
                 <a href="binary-options.html" onclick="closeSidebar()">Binary Options</a>
-                <a href="forex.html" onclick="closeSidebar()">Forex</a>
-                <a href="crypto.html" onclick="closeSidebar()">Crypto</a>
-                <a href="oil.html" onclick="closeSidebar()">Oil</a>
+                <a href="#" onclick="closeSidebar()">Forex</a>
+                <a href="#" onclick="closeSidebar()">Crypto</a>
+                <a href="#" onclick="closeSidebar()">Oil</a>
                 <a href="deposit.html" onclick="closeSidebar()">Deposit</a>
                 <a href="withdraw.html" onclick="closeSidebar()">Withdraw</a>
                 <a href="history.html" onclick="closeSidebar()">History</a>
@@ -932,7 +1062,7 @@
     <!-- ===== MAIN CONTENT ===== -->
     <div class="main-container">
 
-        <!-- ===== WELCOME SECTION — REDESIGNED ===== -->
+        <!-- ===== WELCOME SECTION ===== -->
         <div class="welcome-section">
             <div class="greeting">
                 <h1>Welcome back, <span>Kwame</span> 👋</h1>
@@ -940,10 +1070,10 @@
             </div>
             <div class="quick-action">
                 <button class="btn-deposit" onclick="showMessage('Deposit page coming soon')">
-                    <i class="fas fa-wallet" style="margin-right:6px;"></i> Deposit
+                    <i class="fas fa-wallet" style="margin-right:4px;"></i> Deposit
                 </button>
                 <button class="btn-trade" onclick="location.href='#'">
-                    <i class="fas fa-arrow-trend-up" style="margin-right:6px;"></i> Trade Now
+                    <i class="fas fa-arrow-trend-up" style="margin-right:4px;"></i> Trade Now
                 </button>
             </div>
         </div>
@@ -974,7 +1104,7 @@
 
         <!-- ===== DASHBOARD GRID: CHART + ORDER ===== -->
         <div class="dashboard-grid">
-            <!-- Chart — Smaller -->
+            <!-- Chart -->
             <div class="chart-container">
                 <div class="chart-header">
                     <h3>📊 Market Overview</h3>
@@ -1053,7 +1183,7 @@
             </div>
             <div class="watchlist-item">
                 <div class="asset">
-                    <span class="icon oil"><i class="fas fa-oil-can" style="font-size:11px;"></i></span>
+                    <span class="icon oil"><i class="fas fa-oil-can" style="font-size:10px;"></i></span>
                     <div>
                         <div class="name">OIL/USD</div>
                         <div class="full">Crude Oil</div>
@@ -1105,7 +1235,7 @@
                             <td>$38,500</td>
                             <td>$43,250</td>
                             <td>$1,081.25</td>
-                            <td class="pnl profit">▲ +$118.75 (12.3%)</td>
+                            <td class="pnl profit">▲ +$118.75</td>
                             <td><button class="btn-small">Trade</button></td>
                         </tr>
                         <tr>
@@ -1114,7 +1244,7 @@
                             <td>$85.00</td>
                             <td>$95.50</td>
                             <td>$238.75</td>
-                            <td class="pnl profit">▲ +$26.25 (12.3%)</td>
+                            <td class="pnl profit">▲ +$26.25</td>
                             <td><button class="btn-small">Trade</button></td>
                         </tr>
                         <tr>
@@ -1123,7 +1253,7 @@
                             <td>$83.20</td>
                             <td>$82.50</td>
                             <td>$825.00</td>
-                            <td class="pnl loss">▼ -$7.00 (0.8%)</td>
+                            <td class="pnl loss">▼ -$7.00</td>
                             <td><button class="btn-small">Trade</button></td>
                         </tr>
                         <tr>
@@ -1132,7 +1262,7 @@
                             <td>1.0910</td>
                             <td>1.0892</td>
                             <td>$1,089.20</td>
-                            <td class="pnl loss">▼ -$1.80 (0.2%)</td>
+                            <td class="pnl loss">▼ -$1.80</td>
                             <td><button class="btn-small">Trade</button></td>
                         </tr>
                     </tbody>
@@ -1141,7 +1271,7 @@
         </div>
 
         <!-- Footer -->
-        <div style="text-align:center;padding:1rem 0 0.5rem;font-size:0.7rem;color:var(--text-muted);border-top:1px solid var(--border-color);">
+        <div style="text-align:center;padding:0.8rem 0 0.3rem;font-size:0.6rem;color:var(--text-muted);border-top:1px solid var(--border-color);">
             &copy; 2026 FlintsMarket — Premier Trading Platform
         </div>
     </div>
@@ -1150,7 +1280,7 @@
     JAVASCRIPT
     ============================================================ -->
     <script>
-        // ===== TRADING VIEW CHART — WHITE BACKGROUND =====
+        // ===== TRADING VIEW CHART =====
         let tvWidget = null;
         let currentSymbol = 'BTCUSD';
 
@@ -1172,7 +1302,7 @@
                     fullscreen: false,
                     container_id: 'dashboard_chart',
                     width: '100%',
-                    height: 280,
+                    height: 260,
                     autosize: true,
                     toolbar_bg: '#f0f0f0',
                     enable_publishing: false,
@@ -1345,20 +1475,13 @@
 
         // ===== INIT =====
         function init() {
-            // Load chart after a delay
             setTimeout(() => initDashboardChart('BTCUSD'), 800);
-
-            // Update watchlist every 4 seconds
             setInterval(updateWatchlistPrices, 4000);
-
-            // Update balance every 8 seconds
             setInterval(updateBalance, 8000);
-
-            // Update dashboard price every 3 seconds
             setInterval(updateDashPriceLive, 3000);
 
             console.log('📊 FlintsMarket Dashboard loaded!');
-            console.log('💡 Chart has white background, smaller size');
+            console.log('📱 Fully optimized for mobile devices');
         }
 
         document.addEventListener('DOMContentLoaded', init);
