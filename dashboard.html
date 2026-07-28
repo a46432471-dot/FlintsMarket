@@ -144,14 +144,19 @@
             background: none;
             border: none;
             color: var(--text-primary);
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             cursor: pointer;
             padding: 0.3rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 40px;
-            min-width: 40px;
+            min-height: 44px;
+            min-width: 44px;
+            font-weight: 300;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--gold-primary);
         }
 
         /* ===== SIDEBAR ===== */
@@ -361,7 +366,7 @@
             background: rgba(255, 255, 255, 0.08);
         }
 
-        /* ===== STATS ===== */
+        /* ===== STATS — 2 ROWS ON MOBILE ===== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -417,7 +422,7 @@
             margin-bottom: 1.2rem;
         }
 
-        /* ===== CHART ===== */
+        /* ===== CHART — BIGGER ===== */
         .chart-container {
             background: var(--bg-card);
             border-radius: var(--radius-md);
@@ -453,9 +458,9 @@
         }
 
         #dashboard_chart {
-            height: 260px;
+            height: 320px;
             width: 100%;
-            min-height: 180px;
+            min-height: 220px;
             background: #ffffff;
         }
 
@@ -802,6 +807,8 @@
         /* ============================================================
                    RESPONSIVE
                    ============================================================ */
+
+        /* ===== TABLET ===== */
         @media (max-width: 1024px) {
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -812,8 +819,12 @@
             .watchlist-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            #dashboard_chart {
+                height: 300px;
+            }
         }
 
+        /* ===== MOBILE ===== */
         @media (max-width: 768px) {
             .main-container {
                 padding: 0.8rem;
@@ -832,6 +843,8 @@
                 width: 100%;
                 justify-content: center;
             }
+
+            /* STATS — 2 ROWS OF 2 */
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 0.5rem;
@@ -845,10 +858,13 @@
             .stat-card .stat-label {
                 font-size: 0.5rem;
             }
+
+            /* CHART — BIGGER */
             #dashboard_chart {
-                height: 180px;
-                min-height: 140px;
+                height: 240px;
+                min-height: 180px;
             }
+
             .watchlist-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 0.5rem;
@@ -859,6 +875,7 @@
             .watchlist-item .price-data .price {
                 font-size: 0.65rem;
             }
+
             .order-panel {
                 padding: 0.7rem;
             }
@@ -870,6 +887,7 @@
                 font-size: 0.7rem;
                 min-height: 40px;
             }
+
             .balance-display {
                 font-size: 0.6rem;
                 padding: 0.2rem 0.5rem;
@@ -878,6 +896,7 @@
                 width: 20px;
                 height: 20px;
             }
+
             .portfolio-table {
                 min-width: 400px;
             }
@@ -889,6 +908,7 @@
                 font-size: 0.5rem;
                 padding: 0.4rem 0.3rem;
             }
+
             .site-name {
                 font-size: 0.85rem;
             }
@@ -909,11 +929,23 @@
                 min-height: 32px;
                 padding: 0.2rem;
             }
+
+            /* HAMBURGER MENU VISIBLE */
+            .mobile-menu-btn {
+                font-size: 1.4rem;
+                min-height: 44px;
+                min-width: 44px;
+                color: var(--text-primary);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
         }
 
+        /* ===== SMALL PHONES ===== */
         @media (max-width: 480px) {
             .stats-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
             }
             .watchlist-grid {
                 grid-template-columns: 1fr;
@@ -933,13 +965,16 @@
             .order-panel .price-display .price {
                 font-size: 1rem;
             }
+
             #dashboard_chart {
-                height: 150px;
-                min-height: 120px;
+                height: 200px;
+                min-height: 160px;
             }
+
             .stat-card .stat-value {
                 font-size: 0.9rem;
             }
+
             .portfolio-table {
                 min-width: 350px;
             }
@@ -951,6 +986,7 @@
                 font-size: 0.45rem;
                 padding: 0.3rem 0.2rem;
             }
+
             .btn-small {
                 font-size: 0.5rem;
                 padding: 0.15rem 0.5rem;
@@ -965,9 +1001,9 @@
                 height: 18px;
             }
             .mobile-menu-btn {
-                font-size: 1rem;
-                min-height: 36px;
-                min-width: 36px;
+                font-size: 1.3rem;
+                min-height: 40px;
+                min-width: 40px;
             }
             .right-menu {
                 gap: 0.3rem;
@@ -994,7 +1030,8 @@
                 padding: 0.4rem 0.6rem;
             }
             #dashboard_chart {
-                height: 130px;
+                height: 170px;
+                min-height: 140px;
             }
             .order-panel {
                 padding: 0.5rem;
@@ -1010,6 +1047,11 @@
             }
             .watchlist-item .price-data .price {
                 font-size: 0.6rem;
+            }
+            .mobile-menu-btn {
+                font-size: 1.2rem;
+                min-height: 36px;
+                min-width: 36px;
             }
         }
     </style>
@@ -1078,7 +1120,7 @@
             </div>
         </div>
 
-        <!-- ===== STATS ===== -->
+        <!-- ===== STATS — 2 ROWS ON MOBILE ===== -->
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-label">Total Balance</div>
@@ -1104,7 +1146,7 @@
 
         <!-- ===== DASHBOARD GRID: CHART + ORDER ===== -->
         <div class="dashboard-grid">
-            <!-- Chart -->
+            <!-- Chart — Bigger -->
             <div class="chart-container">
                 <div class="chart-header">
                     <h3>📊 Market Overview</h3>
@@ -1302,7 +1344,7 @@
                     fullscreen: false,
                     container_id: 'dashboard_chart',
                     width: '100%',
-                    height: 260,
+                    height: 320,
                     autosize: true,
                     toolbar_bg: '#f0f0f0',
                     enable_publishing: false,
@@ -1481,7 +1523,7 @@
             setInterval(updateDashPriceLive, 3000);
 
             console.log('📊 FlintsMarket Dashboard loaded!');
-            console.log('📱 Fully optimized for mobile devices');
+            console.log('📱 Stats in 2 rows, bigger chart, visible menu');
         }
 
         document.addEventListener('DOMContentLoaded', init);
