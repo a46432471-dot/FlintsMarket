@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=yes, viewport-fit=cover" />
+    <meta name="description" content="FlintsMarket - Complete trading history, deposits, withdrawals and P&L statements" />
+    <title>FlintsMarket | History</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,20 80,40 80,70 50,90 20,70 20,40' fill='%233b82f6'/%3E%3C/svg%3E" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        /* ============================================================
+                   CLEAN MODERN THEME
+                   ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --bg-card-hover: rgba(255, 255, 255, 0.07);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #475569;
+            --border-color: rgba(255, 255, 255, 0.06);
+            --blue-primary: #3b82f6;
+            --blue-light: #60a5fa;
+            --blue-gradient: linear-gradient(135deg, #3b82f6, #6366f1);
+            --emerald: #10b981;
+            --rose: #f43f5e;
+            --gold: #f59e0b;
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            --radius-full: 60px;
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* ===== ANIMATED BACKGROUND ===== */
+        .bg-glow {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            z-index: 0;
+            pointer-events: none;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(99, 102, 241, 0.04) 0%, transparent 40%);
+            animation: bgFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-30px, 20px) scale(1.05); }
+            66% { transform: translate(20px, -30px) scale(0.95); }
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--blue-primary); border-radius: 10px; }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--blue-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 16px;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .site-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .site-name span { color: var(--blue-primary); }
+
+        .right-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .flag-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid var(--border-color);
+        }
+
+        .balance-display {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 0.3rem;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        .sidebar-overlay.active { visibility: visible; opacity: 1; }
+
+        .sidebar-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100%;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
+            z-index: 2001;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-overlay.active .sidebar-menu { right: 0; }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .sidebar-header .avatar-large {
+            width: 48px;
+            height: 48px;
+            background: var(--blue-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-header .user-name { font-weight: 600; color: var(--text-primary); }
+        .sidebar-header .user-email { font-size: 0.7rem; color: var(--text-secondary); }
+
+        .close-sidebar {
+            margin-left: auto;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem 0;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.8rem 1.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+        }
+
+        .sidebar-nav a.active {
+            background: rgba(59, 130, 246, 0.08);
+            color: var(--blue-primary);
+            border-left: 3px solid var(--blue-primary);
+        }
+
+        .sidebar-nav .logout-item {
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            margin-top: 1rem;
+            color: var(--rose);
+        }
+
+        .sidebar-nav .logout-item:hover { background: rgba(244, 63, 94, 0.08); }
+
+        /* ===== MAIN CONTAINER ===== */
+        .main-container {
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-top: 75px;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .page-header h1 i {
+            color: var(--blue-primary);
+            margin-right: 0.5rem;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+        }
+
+        /* ===== STATS ROW ===== */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.2rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            border-color: rgba(59, 130, 246, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .stat-box .label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-box .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 0.2rem;
+        }
+
+        .stat-box .value.green { color: var(--emerald); }
+        .stat-box .value.red { color: var(--rose); }
+        .stat-box .value.blue { color: var(--blue-primary); }
+        .stat-box .value.gold { color: var(--gold); }
+
+        /* ===== FILTERS ===== */
+        .filters-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 0.8rem 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-group button {
+            padding: 0.3rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-group button:hover {
+            border-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
+
+        .filter-group button.active {
+            background: var(--blue-gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        .date-range {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .date-range input {
+            padding: 0.3rem 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            outline: none;
+        }
+
+        .date-range input:focus {
+            border-color: var(--blue-primary);
+        }
+
+        /* ===== HISTORY TABLE ===== */
+        .history-table-wrap {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .history-table-wrap .table-header {
+            padding: 1.2rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .history-table-wrap .table-header h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .history-table-wrap .table-header .export-btn {
+            padding: 0.3rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .history-table-wrap .table-header .export-btn:hover {
+            border-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
+
+        .history-table-wrap .table-scroll {
+            overflow-x: auto;
+            padding: 0 2rem 1.5rem;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        .history-table th {
+            text-align: left;
+            padding: 0.8rem 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .history-table td {
+            padding: 0.8rem 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .history-table tr:last-child td { border-bottom: none; }
+        .history-table tr:hover td { background: rgba(255, 255, 255, 0.01); }
+
+        .history-table .type-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .history-table .type-badge.trade { background: rgba(59, 130, 246, 0.1); color: var(--blue-primary); }
+        .history-table .type-badge.deposit { background: rgba(16, 185, 129, 0.1); color: var(--emerald); }
+        .history-table .type-badge.withdraw { background: rgba(244, 63, 94, 0.1); color: var(--rose); }
+        .history-table .type-badge.bonus { background: rgba(245, 158, 11, 0.1); color: var(--gold); }
+
+        .history-table .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .history-table .status-badge.completed { background: rgba(16, 185, 129, 0.1); color: var(--emerald); }
+        .history-table .status-badge.pending { background: rgba(245, 158, 11, 0.1); color: var(--gold); }
+        .history-table .status-badge.failed { background: rgba(244, 63, 94, 0.1); color: var(--rose); }
+
+        .history-table .amount.positive { color: var(--emerald); font-weight: 600; }
+        .history-table .amount.negative { color: var(--rose); font-weight: 600; }
+
+        /* ===== PAGINATION ===== */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .pagination .info {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .page-btn {
+            padding: 0.3rem 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .page-btn:hover {
+            border-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
+
+        .page-btn.active {
+            background: var(--blue-gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* ============================================================
+                   RESPONSIVE
+                   ============================================================ */
+        @media (max-width: 1024px) {
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+                margin-top: 65px;
+            }
+            .stats-row {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+            .stat-box {
+                padding: 0.8rem 1rem;
+            }
+            .stat-box .value {
+                font-size: 1.1rem;
+            }
+            .filters-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.8rem;
+            }
+            .filter-group {
+                overflow-x: auto;
+                white-space: nowrap;
+                flex-wrap: nowrap;
+                padding-bottom: 0.3rem;
+            }
+            .date-range {
+                flex-wrap: wrap;
+            }
+            .date-range input {
+                flex: 1;
+            }
+            .history-table-wrap .table-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+            }
+            .history-table {
+                min-width: 600px;
+            }
+            .history-table td, .history-table th {
+                padding: 0.5rem 0.4rem;
+                font-size: 0.75rem;
+            }
+            .balance-display {
+                font-size: 0.65rem;
+                padding: 0.2rem 0.6rem;
+            }
+            .flag-icon {
+                width: 22px;
+                height: 22px;
+            }
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-row {
+                grid-template-columns: 1fr 1fr;
+            }
+            .site-name {
+                font-size: 0.9rem;
+            }
+            .logo-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+            .history-table {
+                min-width: 500px;
+            }
+            .pagination {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== ANIMATED BACKGROUND ===== -->
+    <div class="bg-glow"></div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav>
+        <div class="logo-area" onclick="location.href='index.html'">
+            <div class="logo-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="site-name">Flints<span>Market</span></div>
+        </div>
+
+        <div class="right-menu">
+            <img src="https://flagcdn.com/w320/us.png" alt="USD" class="flag-icon" onclick="showMessage('Currency: USD')">
+            <div class="balance-display" id="balanceDisplay">$12,450.00</div>
+            <button class="mobile-menu-btn" onclick="openSidebar()"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- ===== SIDEBAR ===== -->
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()">
+        <div class="sidebar-menu" onclick="event.stopPropagation()">
+            <div class="sidebar-header">
+                <div class="avatar-large" id="sidebarAvatar">KA</div>
+                <div>
+                    <div class="user-name" id="sidebarName">Kwame Adjei</div>
+                    <div class="user-email" id="sidebarEmail">kwame@example.com</div>
+                </div>
+                <button class="close-sidebar" onclick="closeSidebar()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="sidebar-nav">
+                <a href="dashboard.html" onclick="closeSidebar()"><i class="fas fa-th-large"></i> Dashboard</a>
+                <a href="trade.html" onclick="closeSidebar()"><i class="fas fa-arrow-trend-up"></i> Trade</a>
+                <a href="markets.html" onclick="closeSidebar()"><i class="fas fa-chart-simple"></i> Markets</a>
+                <a href="deposit.html" onclick="closeSidebar()"><i class="fas fa-wallet"></i> Deposit</a>
+                <a href="withdraw.html" onclick="closeSidebar()"><i class="fas fa-arrow-right-from-bracket"></i> Withdraw</a>
+                <a href="history.html" class="active" onclick="closeSidebar()"><i class="fas fa-clock-rotate-left"></i> History</a>
+                <a href="settings.html" onclick="closeSidebar()"><i class="fas fa-gear"></i> Settings</a>
+                <a href="index.html" class="logout-item" onclick="logout(); closeSidebar();"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-container">
+
+        <!-- ===== PAGE HEADER ===== -->
+        <div class="page-header">
+            <h1><i class="fas fa-clock-rotate-left"></i> Transaction History</h1>
+            <p>Complete overview of all your trades, deposits, and withdrawals</p>
+        </div>
+
+        <!-- ===== STATS ROW ===== -->
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="label">Total Trades</div>
+                <div class="value blue">127</div>
+            </div>
+            <div class="stat-box">
+                <div class="label">Win Rate</div>
+                <div class="value green">68%</div>
+            </div>
+            <div class="stat-box">
+                <div class="label">Total P&L</div>
+                <div class="value green">+$3,240.00</div>
+            </div>
+            <div class="stat-box">
+                <div class="label">Total Volume</div>
+                <div class="value gold">$18,450.00</div>
+            </div>
+        </div>
+
+        <!-- ===== FILTERS ===== -->
+        <div class="filters-bar">
+            <div class="filter-group" id="filterGroup">
+                <button class="active" data-filter="all">All</button>
+                <button data-filter="trade">Trades</button>
+                <button data-filter="deposit">Deposits</button>
+                <button data-filter="withdraw">Withdrawals</button>
+                <button data-filter="bonus">Bonuses</button>
+            </div>
+            <div class="date-range">
+                <input type="date" id="dateFrom" value="2026-01-01" />
+                <span style="color:var(--text-muted);">to</span>
+                <input type="date" id="dateTo" />
+            </div>
+        </div>
+
+        <!-- ===== HISTORY TABLE ===== -->
+        <div class="history-table-wrap">
+            <div class="table-header">
+                <h3><i class="fas fa-list" style="color:var(--blue-primary);margin-right:6px;"></i> Transaction History</h3>
+                <button class="export-btn" onclick="exportHistory()"><i class="fas fa-download" style="margin-right:4px;"></i> Export CSV</button>
+            </div>
+            <div class="table-scroll">
+                <table class="history-table" id="historyTable">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Asset</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Reference</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody">
+                        <!-- Generated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ===== PAGINATION ===== -->
+        <div class="pagination">
+            <div class="info" id="paginationInfo">Showing 1-10 of 127 transactions</div>
+            <div class="pagination-controls">
+                <button class="page-btn" id="prevBtn" onclick="prevPage()"><i class="fas fa-chevron-left"></i></button>
+                <button class="page-btn active" data-page="1">1</button>
+                <button class="page-btn" data-page="2">2</button>
+                <button class="page-btn" data-page="3">3</button>
+                <button class="page-btn" data-page="4">4</button>
+                <button class="page-btn" data-page="5">5</button>
+                <button class="page-btn" id="nextBtn" onclick="nextPage()"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align:center;padding:1.5rem 0 0.5rem;font-size:0.75rem;color:var(--text-muted);border-top:1px solid var(--border-color);margin-top:1.5rem;">
+            &copy; 2026 FlintsMarket — Premier Trading Platform
+        </div>
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        // ===== SAMPLE HISTORY DATA =====
+        const historyData = [
+            { date: '2026-07-28 14:32', type: 'trade', asset: 'BTC/USD', amount: 342.50, status: 'completed', ref: 'TXN-001' },
+            { date: '2026-07-28 12:15', type: 'deposit', asset: 'USD', amount: 500.00, status: 'completed', ref: 'TXN-002' },
+            { date: '2026-07-27 18:45', type: 'trade', asset: 'SOL/USD', amount: 89.20, status: 'completed', ref: 'TXN-003' },
+            { date: '2026-07-27 10:20', type: 'withdraw', asset: 'USD', amount: -200.00, status: 'completed', ref: 'TXN-004' },
+            { date: '2026-07-26 22:10', type: 'trade', asset: 'OIL/USD', amount: -45.80, status: 'failed', ref: 'TXN-005' },
+            { date: '2026-07-26 16:00', type: 'bonus', asset: 'USD', amount: 50.00, status: 'completed', ref: 'TXN-006' },
+            { date: '2026-07-26 09:30', type: 'trade', asset: 'ETH/USD', amount: 215.00, status: 'pending', ref: 'TXN-007' },
+            { date: '2026-07-25 20:15', type: 'deposit', asset: 'USD', amount: 1000.00, status: 'completed', ref: 'TXN-008' },
+            { date: '2026-07-25 14:45', type: 'trade', asset: 'BTC/USD', amount: -125.30, status: 'completed', ref: 'TXN-009' },
+            { date: '2026-07-25 08:00', type: 'withdraw', asset: 'USD', amount: -50.00, status: 'pending', ref: 'TXN-010' },
+            { date: '2026-07-24 19:30', type: 'trade', asset: 'SOL/USD', amount: 156.75, status: 'completed', ref: 'TXN-011' },
+            { date: '2026-07-24 12:00', type: 'deposit', asset: 'USD', amount: 250.00, status: 'completed', ref: 'TXN-012' },
+            { date: '2026-07-23 23:15', type: 'trade', asset: 'OIL/USD', amount: 78.50, status: 'completed', ref: 'TXN-013' },
+            { date: '2026-07-23 17:40', type: 'bonus', asset: 'USD', amount: 25.00, status: 'completed', ref: 'TXN-014' },
+            { date: '2026-07-23 09:00', type: 'trade', asset: 'EUR/USD', amount: -32.40, status: 'failed', ref: 'TXN-015' },
+            { date: '2026-07-22 21:30', type: 'deposit', asset: 'USD', amount: 750.00, status: 'completed', ref: 'TXN-016' },
+            { date: '2026-07-22 15:20', type: 'withdraw', asset: 'USD', amount: -100.00, status: 'completed', ref: 'TXN-017' },
+            { date: '2026-07-22 10:45', type: 'trade', asset: 'BTC/USD', amount: 289.60, status: 'completed', ref: 'TXN-018' },
+            { date: '2026-07-21 13:00', type: 'trade', asset: 'SOL/USD', amount: -67.20, status: 'completed', ref: 'TXN-019' },
+            { date: '2026-07-21 08:30', type: 'deposit', asset: 'USD', amount: 150.00, status: 'pending', ref: 'TXN-020' },
+        ];
+
+        // ===== STATE =====
+        let currentFilter = 'all';
+        let currentPage = 1;
+        let itemsPerPage = 10;
+
+        // ===== RENDER HISTORY =====
+        function renderHistory() {
+            const tbody = document.getElementById('historyBody');
+            let filtered = [...historyData];
+
+            // Apply filter
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(item => item.type === currentFilter);
+            }
+
+            // Apply date filter
+            const dateFrom = document.getElementById('dateFrom').value;
+            const dateTo = document.getElementById('dateTo').value;
+            if (dateFrom) {
+                filtered = filtered.filter(item => item.date >= dateFrom);
+            }
+            if (dateTo) {
+                filtered = filtered.filter(item => item.date <= dateTo + ' 23:59');
+            }
+
+            // Pagination
+            const totalItems = filtered.length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = Math.min(start + itemsPerPage, totalItems);
+            const paginated = filtered.slice(start, end);
+
+            // Update pagination info
+            document.getElementById('paginationInfo').textContent = 
+                `Showing ${totalItems > 0 ? start + 1 : 0}-${end} of ${totalItems} transactions`;
+
+            // Update page buttons
+            document.querySelectorAll('.page-btn[data-page]').forEach(btn => {
+                const page = parseInt(btn.dataset.page);
+                btn.classList.toggle('active', page === currentPage);
+                btn.style.display = page <= totalPages ? 'inline-block' : 'none';
+            });
+
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages || totalPages === 0;
+
+            if (paginated.length === 0) {
+                tbody.innerHTML = `
+                        <tr>
+                            <td colspan="6" style="text-align:center;padding:2rem;color:var(--text-muted);">
+                                <span style="font-size:2rem;display:block;margin-bottom:0.5rem;"><i class="fas fa-inbox"></i></span>
+                                No transactions found
+                            </td>
+                        </tr>
+                    `;
+                return;
+            }
+
+            tbody.innerHTML = paginated.map(item => {
+                const typeIcons = {
+                    trade: 'fa-arrow-trend-up',
+                    deposit: 'fa-arrow-down',
+                    withdraw: 'fa-arrow-up',
+                    bonus: 'fa-gift'
+                };
+                const typeLabels = {
+                    trade: 'Trade',
+                    deposit: 'Deposit',
+                    withdraw: 'Withdrawal',
+                    bonus: 'Bonus'
+                };
+                const isPositive = item.amount > 0;
+                const isDeposit = item.type === 'deposit' || item.type === 'bonus';
+                const amountClass = (isDeposit || item.type === 'trade' && item.amount > 0) ? 'positive' : 'negative';
+                const amountPrefix = isDeposit || item.type === 'bonus' ? '+' : (item.type === 'withdraw' ? '-' : (item.amount > 0 ? '+' : ''));
+
+                return `
+                        <tr>
+                            <td style="color:var(--text-secondary);font-size:0.75rem;">${item.date}</td>
+                            <td><span class="type-badge ${item.type}"><i class="fas ${typeIcons[item.type]}"></i> ${typeLabels[item.type]}</span></td>
+                            <td>${item.asset}</td>
+                            <td class="amount ${amountClass}">${amountPrefix}$${Math.abs(item.amount).toFixed(2)}</td>
+                            <td><span class="status-badge ${item.status}"><i class="fas ${item.status === 'completed' ? 'fa-check-circle' : item.status === 'pending' ? 'fa-clock' : 'fa-times-circle'}"></i> ${item.status.charAt(0).toUpperCase() + item.status.slice(1)}</span></td>
+                            <td style="color:var(--text-muted);font-size:0.75rem;">${item.ref}</td>
+                        </tr>
+                    `;
+            }).join('');
+        }
+
+        // ===== FILTER BUTTONS =====
+        document.querySelectorAll('#filterGroup button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('#filterGroup button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+                currentPage = 1;
+                renderHistory();
+            });
+        });
+
+        // ===== DATE FILTERS =====
+        document.getElementById('dateFrom').addEventListener('change', () => { currentPage = 1; renderHistory(); });
+        document.getElementById('dateTo').addEventListener('change', () => { currentPage = 1; renderHistory(); });
+
+        // ===== PAGINATION =====
+        function prevPage() {
+            if (currentPage > 1) { currentPage--; renderHistory(); }
+        }
+
+        function nextPage() {
+            const totalItems = historyData.filter(item => 
+                currentFilter === 'all' || item.type === currentFilter
+            ).length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            if (currentPage < totalPages) { currentPage++; renderHistory(); }
+        }
+
+        document.querySelectorAll('.page-btn[data-page]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                currentPage = parseInt(this.dataset.page);
+                renderHistory();
+            });
+        });
+
+        // ===== EXPORT CSV =====
+        function exportHistory() {
+            let csv = "Date,Type,Asset,Amount,Status,Reference\n";
+            historyData.forEach(item => {
+                csv += `${item.date},${item.type},${item.asset},${item.amount},${item.status},${item.ref}\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'flintsmarket_history.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // ===== SIDEBAR =====
+        function openSidebar() { document.getElementById('sidebarOverlay').classList.add('active'); }
+        function closeSidebar() { document.getElementById('sidebarOverlay').classList.remove('active'); }
+        function logout() { if (confirm('Are you sure you want to logout?')) { alert('Logging out...'); } }
+        function showMessage(msg) { alert(msg); }
+
+        // ===== INIT =====
+        function init() {
+            // Set default date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('dateTo').value = today;
+
+            renderHistory();
+            console.log('📋 FlintsMarket History Page loaded successfully!');
+            console.log('📊 Showing all transactions with filters and pagination');
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

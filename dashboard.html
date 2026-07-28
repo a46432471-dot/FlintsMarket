@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=yes, viewport-fit=cover" />
+    <meta name="description" content="FlintsMarket - Institutional-grade trading platform dashboard" />
+    <title>FlintsMarket | Dashboard</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,20 80,40 80,70 50,90 20,70 20,40' fill='%23c99a3b'/%3E%3C/svg%3E" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+
+    <!-- TradingView Library -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+
+    <style>
+        /* ============================================================
+                   DARK THEME WITH GOLD ACCENTS
+                   ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #0d1224;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-solid: #111830;
+            --text-primary: #f0ede8;
+            --text-secondary: #b0abc4;
+            --text-muted: #6b6882;
+            --border-color: rgba(255, 255, 255, 0.04);
+            --nav-bg: rgba(13, 18, 36, 0.95);
+            --hover-bg: rgba(255, 255, 255, 0.06);
+            --gold-primary: #c99a3b;
+            --gold-light: #e8c86a;
+            --gold-gradient: linear-gradient(135deg, #c99a3b, #e8c86a, #b8862a);
+            --emerald: #3dd68c;
+            --rose: #f4727a;
+            --blue-accent: #4a8cf7;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            --radius-full: 60px;
+            --chart-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-primary);
+            border-radius: 10px;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--gold-gradient);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #0a0e1a;
+            font-size: 14px;
+        }
+
+        .site-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .site-name span {
+            color: var(--text-primary);
+            -webkit-text-fill-color: var(--text-primary);
+        }
+
+        .right-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .flag-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .balance-display {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 0.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2000;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .sidebar-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100%;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
+            z-index: 2001;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-overlay.active .sidebar-menu {
+            right: 0;
+        }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .sidebar-header .avatar-large {
+            width: 48px;
+            height: 48px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0a0e1a;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-header .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header .user-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        .sidebar-header .user-email {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .close-sidebar {
+            margin-left: auto;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem 0;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--hover-bg);
+            color: var(--gold-primary);
+        }
+
+        .sidebar-nav a.active {
+            background: rgba(201, 154, 59, 0.08);
+            color: var(--gold-primary);
+            border-left: 3px solid var(--gold-primary);
+        }
+
+        .sidebar-nav .logout-item {
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            margin-top: 1rem;
+            color: var(--rose);
+        }
+
+        .sidebar-nav .logout-item:hover {
+            background: rgba(244, 114, 122, 0.08);
+            color: var(--rose);
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .main-container {
+            padding: 1.5rem;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            margin-top: 65px;
+        }
+
+        /* ===== WELCOME SECTION — REDESIGNED ===== */
+        .welcome-section {
+            background: linear-gradient(135deg, rgba(201, 154, 59, 0.12), rgba(61, 214, 140, 0.05));
+            border: 1px solid rgba(201, 154, 59, 0.08);
+            border-radius: var(--radius-md);
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .welcome-section .greeting h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .welcome-section .greeting h1 span {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .welcome-section .greeting p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.2rem;
+        }
+
+        .welcome-section .quick-action {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .welcome-section .quick-action button {
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-full);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .welcome-section .quick-action .btn-deposit {
+            background: var(--gold-gradient);
+            color: #0a0e1a;
+        }
+
+        .welcome-section .quick-action .btn-deposit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(201, 154, 59, 0.3);
+        }
+
+        .welcome-section .quick-action .btn-trade {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .welcome-section .quick-action .btn-trade:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* ===== STATS ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            padding: 1rem 1.2rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(201, 154, 59, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-card .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .stat-card .stat-change {
+            font-size: 0.7rem;
+            margin-top: 0.2rem;
+            font-weight: 500;
+        }
+
+        .stat-card .stat-change.positive {
+            color: var(--emerald);
+        }
+        .stat-card .stat-change.negative {
+            color: var(--rose);
+        }
+
+        /* ===== DASHBOARD GRID ===== */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== CHART — SMALLER ===== */
+        .chart-container {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .chart-header h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .chart-header .pair-selector {
+            padding: 0.2rem 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+        }
+
+        #dashboard_chart {
+            height: 280px;
+            width: 100%;
+            min-height: 200px;
+            background: #ffffff;
+        }
+
+        /* ===== ORDER PANEL ===== */
+        .order-panel {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            padding: 1.2rem;
+        }
+
+        .order-panel .panel-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .order-panel .price-display {
+            text-align: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .order-panel .price-display .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .order-panel .price-display .price.up {
+            color: var(--emerald);
+        }
+        .order-panel .price-display .price.down {
+            color: var(--rose);
+        }
+
+        .order-panel .price-display .change {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .order-panel .input-group {
+            margin-bottom: 0.6rem;
+        }
+
+        .order-panel .input-group label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .order-panel .input-group .input-wrap {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+        }
+
+        .order-panel .input-group .input-wrap input {
+            flex: 1;
+            padding: 0.5rem 0.7rem;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            outline: none;
+            min-width: 0;
+        }
+
+        .order-panel .input-group .input-wrap .currency {
+            padding: 0.5rem 0.7rem;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 1px solid var(--border-color);
+        }
+
+        .order-panel .quick-amounts {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.3rem;
+            margin-top: 0.3rem;
+        }
+
+        .order-panel .quick-amounts button {
+            padding: 0.2rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .order-panel .quick-amounts button:hover {
+            border-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
+
+        .order-panel .trade-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+            margin-top: 0.6rem;
+        }
+
+        .order-panel .trade-buttons .btn-buy {
+            padding: 0.6rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            background: var(--emerald);
+            color: #0a0e1a;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .order-panel .trade-buttons .btn-buy:hover {
+            background: #4ae89a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(61, 214, 140, 0.2);
+        }
+
+        .order-panel .trade-buttons .btn-sell {
+            padding: 0.6rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            background: var(--rose);
+            color: #0a0e1a;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .order-panel .trade-buttons .btn-sell:hover {
+            background: #f58a92;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(244, 114, 122, 0.2);
+        }
+
+        /* ===== WATCHLIST ===== */
+        .watchlist-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .watchlist-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 0.8rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .watchlist-item:hover {
+            border-color: rgba(201, 154, 59, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .watchlist-item .asset {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .watchlist-item .asset .icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .watchlist-item .asset .icon.btc {
+            color: #f7931a;
+            background: rgba(247, 147, 26, 0.1);
+        }
+        .watchlist-item .asset .icon.sol {
+            color: #9945ff;
+            background: rgba(153, 69, 255, 0.1);
+        }
+        .watchlist-item .asset .icon.oil {
+            color: var(--gold-primary);
+            background: rgba(201, 154, 59, 0.1);
+        }
+        .watchlist-item .asset .icon.forex {
+            color: var(--emerald);
+            background: rgba(61, 214, 140, 0.1);
+        }
+
+        .watchlist-item .asset .name {
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .watchlist-item .asset .full {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        .watchlist-item .price-data {
+            text-align: right;
+        }
+
+        .watchlist-item .price-data .price {
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .watchlist-item .price-data .change {
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+
+        .watchlist-item .price-data .change.up {
+            color: var(--emerald);
+        }
+        .watchlist-item .price-data .change.down {
+            color: var(--rose);
+        }
+
+        /* ===== PORTFOLIO ===== */
+        .portfolio-container {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .portfolio-container .section-header {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .portfolio-container .section-header h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .portfolio-container .section-header a {
+            font-size: 0.7rem;
+            color: var(--gold-primary);
+            font-weight: 600;
+        }
+
+        .portfolio-table-wrap {
+            overflow-x: auto;
+            padding: 0 1rem 1rem;
+        }
+
+        .portfolio-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 500px;
+        }
+
+        .portfolio-table th {
+            text-align: left;
+            padding: 0.6rem 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .portfolio-table td {
+            padding: 0.6rem 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .portfolio-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .portfolio-table .pnl {
+            font-weight: 700;
+        }
+
+        .portfolio-table .pnl.profit {
+            color: var(--emerald);
+        }
+        .portfolio-table .pnl.loss {
+            color: var(--rose);
+        }
+
+        .btn-small {
+            background: var(--gold-gradient);
+            color: #0a0e1a;
+            border: none;
+            padding: 0.2rem 0.7rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.65rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .btn-small:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(201, 154, 59, 0.3);
+        }
+
+        /* ============================================================
+                   RESPONSIVE
+                   ============================================================ */
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .watchlist-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+                margin-top: 60px;
+            }
+            .welcome-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.2rem;
+            }
+            .welcome-section .quick-action {
+                flex-direction: column;
+                width: 100%;
+            }
+            .welcome-section .quick-action button {
+                width: 100%;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+            .stat-card {
+                padding: 0.7rem 0.8rem;
+            }
+            .stat-card .stat-value {
+                font-size: 1.2rem;
+            }
+            #dashboard_chart {
+                height: 200px;
+                min-height: 150px;
+            }
+            .watchlist-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+            .watchlist-item {
+                padding: 0.5rem 0.7rem;
+            }
+            .watchlist-item .price-data .price {
+                font-size: 0.75rem;
+            }
+            .order-panel {
+                padding: 0.8rem;
+            }
+            .order-panel .price-display .price {
+                font-size: 1.2rem;
+            }
+            .balance-display {
+                font-size: 0.65rem;
+                padding: 0.2rem 0.6rem;
+            }
+            .flag-icon {
+                width: 22px;
+                height: 22px;
+            }
+            .portfolio-table {
+                min-width: 450px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .watchlist-grid {
+                grid-template-columns: 1fr;
+            }
+            .welcome-section .greeting h1 {
+                font-size: 1.2rem;
+            }
+            .order-panel .trade-buttons {
+                grid-template-columns: 1fr;
+            }
+            .order-panel .quick-amounts {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .site-name {
+                font-size: 0.9rem;
+            }
+            .logo-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== NAVIGATION ===== -->
+    <nav>
+        <div class="logo-area" onclick="location.href='index.html'">
+            <div class="logo-icon">F</div>
+            <div class="site-name">Flints<span>Market</span></div>
+        </div>
+
+        <div class="right-menu">
+            <img src="https://flagcdn.com/w320/us.png" alt="USD" class="flag-icon" onclick="showMessage('Currency: USD')">
+            <div class="balance-display" id="balanceDisplay">$12,450.00</div>
+            <button class="mobile-menu-btn" onclick="openSidebar()">☰</button>
+        </div>
+    </nav>
+
+    <!-- ===== SIDEBAR ===== -->
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()">
+        <div class="sidebar-menu" onclick="event.stopPropagation()">
+            <div class="sidebar-header">
+                <div class="avatar-large" id="sidebarAvatar">KA</div>
+                <div class="user-info">
+                    <span class="user-name" id="sidebarName">Kwame Adjei</span>
+                    <span class="user-email" id="sidebarEmail">kwame@example.com</span>
+                </div>
+                <button class="close-sidebar" onclick="closeSidebar()">✕</button>
+            </div>
+            <div class="sidebar-nav">
+                <a href="dashboard.html" class="active" onclick="closeSidebar()">Dashboard</a>
+                <a href="trade.html" onclick="closeSidebar()">Trade</a>
+                <a href="markets.html" onclick="closeSidebar()">Markets</a>
+                <a href="binary-options.html" onclick="closeSidebar()">Binary Options</a>
+                <a href="forex.html" onclick="closeSidebar()">Forex</a>
+                <a href="crypto.html" onclick="closeSidebar()">Crypto</a>
+                <a href="oil.html" onclick="closeSidebar()">Oil</a>
+                <a href="deposit.html" onclick="closeSidebar()">Deposit</a>
+                <a href="withdraw.html" onclick="closeSidebar()">Withdraw</a>
+                <a href="history.html" onclick="closeSidebar()">History</a>
+                <a href="settings.html" onclick="closeSidebar()">Settings</a>
+                <a href="index.html" class="logout-item" onclick="logout(); closeSidebar();">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-container">
+
+        <!-- ===== WELCOME SECTION — REDESIGNED ===== -->
+        <div class="welcome-section">
+            <div class="greeting">
+                <h1>Welcome back, <span>Kwame</span> 👋</h1>
+                <p>Your portfolio is up <strong style="color:var(--emerald);">+8.2%</strong> this month. Ready to trade?</p>
+            </div>
+            <div class="quick-action">
+                <button class="btn-deposit" onclick="showMessage('Deposit page coming soon')">
+                    <i class="fas fa-wallet" style="margin-right:6px;"></i> Deposit
+                </button>
+                <button class="btn-trade" onclick="location.href='#'">
+                    <i class="fas fa-arrow-trend-up" style="margin-right:6px;"></i> Trade Now
+                </button>
+            </div>
+        </div>
+
+        <!-- ===== STATS ===== -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Balance</div>
+                <div class="stat-value">$12,450.00</div>
+                <div class="stat-change positive">▲ +8.2% this month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">24h Volume</div>
+                <div class="stat-value">$3,240.00</div>
+                <div class="stat-change" style="color:var(--text-muted);">Active trading day</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total P&L</div>
+                <div class="stat-value" style="color:var(--emerald);">+$1,890.00</div>
+                <div class="stat-change positive">▲ +15.2% all time</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Open Positions</div>
+                <div class="stat-value">4</div>
+                <div class="stat-change" style="color:var(--text-muted);">3 profitable, 1 loss</div>
+            </div>
+        </div>
+
+        <!-- ===== DASHBOARD GRID: CHART + ORDER ===== -->
+        <div class="dashboard-grid">
+            <!-- Chart — Smaller -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3>📊 Market Overview</h3>
+                    <select class="pair-selector" id="chartPair" onchange="changeChartPair()">
+                        <option value="BTCUSD">BTC/USD</option>
+                        <option value="ETHUSD">ETH/USD</option>
+                        <option value="SOLUSD">SOL/USD</option>
+                        <option value="OILUSD">OIL/USD</option>
+                        <option value="EURUSD">EUR/USD</option>
+                    </select>
+                </div>
+                <div id="dashboard_chart"></div>
+            </div>
+
+            <!-- Order Panel -->
+            <div class="order-panel">
+                <div class="panel-title">⚡ Quick Trade</div>
+
+                <div class="price-display">
+                    <div class="price up" id="dashPrice">$67,432.50</div>
+                    <div class="change">▲ +2.4% (24h change)</div>
+                </div>
+
+                <div class="input-group">
+                    <label>Amount (USD)</label>
+                    <div class="input-wrap">
+                        <input type="number" id="dashAmount" value="100" step="10" min="0" />
+                        <span class="currency">USD</span>
+                    </div>
+                    <div class="quick-amounts">
+                        <button onclick="setDashAmount(50)">$50</button>
+                        <button onclick="setDashAmount(100)">$100</button>
+                        <button onclick="setDashAmount(500)">$500</button>
+                        <button onclick="setDashAmount(1000)">$1K</button>
+                    </div>
+                </div>
+
+                <div class="trade-buttons">
+                    <button class="btn-buy" onclick="executeDashTrade('buy')">
+                        <i class="fas fa-arrow-up" style="margin-right:4px;"></i> Buy
+                    </button>
+                    <button class="btn-sell" onclick="executeDashTrade('sell')">
+                        <i class="fas fa-arrow-down" style="margin-right:4px;"></i> Sell
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== WATCHLIST ===== -->
+        <div class="watchlist-grid">
+            <div class="watchlist-item">
+                <div class="asset">
+                    <span class="icon btc">₿</span>
+                    <div>
+                        <div class="name">BTC/USD</div>
+                        <div class="full">Bitcoin</div>
+                    </div>
+                </div>
+                <div class="price-data">
+                    <div class="price">$67,432</div>
+                    <div class="change up">▲ +2.4%</div>
+                </div>
+            </div>
+            <div class="watchlist-item">
+                <div class="asset">
+                    <span class="icon sol">◎</span>
+                    <div>
+                        <div class="name">SOL/USD</div>
+                        <div class="full">Solana</div>
+                    </div>
+                </div>
+                <div class="price-data">
+                    <div class="price">$145.20</div>
+                    <div class="change up">▲ +5.1%</div>
+                </div>
+            </div>
+            <div class="watchlist-item">
+                <div class="asset">
+                    <span class="icon oil"><i class="fas fa-oil-can" style="font-size:11px;"></i></span>
+                    <div>
+                        <div class="name">OIL/USD</div>
+                        <div class="full">Crude Oil</div>
+                    </div>
+                </div>
+                <div class="price-data">
+                    <div class="price">$82.50</div>
+                    <div class="change down">▼ -0.8%</div>
+                </div>
+            </div>
+            <div class="watchlist-item">
+                <div class="asset">
+                    <span class="icon forex">€</span>
+                    <div>
+                        <div class="name">EUR/USD</div>
+                        <div class="full">Euro/Dollar</div>
+                    </div>
+                </div>
+                <div class="price-data">
+                    <div class="price">1.0892</div>
+                    <div class="change up">▲ +0.3%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== PORTFOLIO ===== -->
+        <div class="portfolio-container">
+            <div class="section-header">
+                <h3>📋 Your Portfolio</h3>
+                <a href="#">View All <i class="fas fa-arrow-right" style="margin-left:4px;"></i></a>
+            </div>
+            <div class="portfolio-table-wrap">
+                <table class="portfolio-table">
+                    <thead>
+                        <tr>
+                            <th>Asset</th>
+                            <th>Holdings</th>
+                            <th>Avg. Price</th>
+                            <th>Current Price</th>
+                            <th>Value</th>
+                            <th>P&L</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Bitcoin</strong> BTC</td>
+                            <td>0.025 BTC</td>
+                            <td>$38,500</td>
+                            <td>$43,250</td>
+                            <td>$1,081.25</td>
+                            <td class="pnl profit">▲ +$118.75 (12.3%)</td>
+                            <td><button class="btn-small">Trade</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Solana</strong> SOL</td>
+                            <td>2.5 SOL</td>
+                            <td>$85.00</td>
+                            <td>$95.50</td>
+                            <td>$238.75</td>
+                            <td class="pnl profit">▲ +$26.25 (12.3%)</td>
+                            <td><button class="btn-small">Trade</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Crude Oil</strong> OIL</td>
+                            <td>10 OIL</td>
+                            <td>$83.20</td>
+                            <td>$82.50</td>
+                            <td>$825.00</td>
+                            <td class="pnl loss">▼ -$7.00 (0.8%)</td>
+                            <td><button class="btn-small">Trade</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Euro</strong> EUR/USD</td>
+                            <td>1,000 EUR</td>
+                            <td>1.0910</td>
+                            <td>1.0892</td>
+                            <td>$1,089.20</td>
+                            <td class="pnl loss">▼ -$1.80 (0.2%)</td>
+                            <td><button class="btn-small">Trade</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align:center;padding:1rem 0 0.5rem;font-size:0.7rem;color:var(--text-muted);border-top:1px solid var(--border-color);">
+            &copy; 2026 FlintsMarket — Premier Trading Platform
+        </div>
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        // ===== TRADING VIEW CHART — WHITE BACKGROUND =====
+        let tvWidget = null;
+        let currentSymbol = 'BTCUSD';
+
+        function initDashboardChart(symbol) {
+            try {
+                if (tvWidget) {
+                    tvWidget.remove();
+                    tvWidget = null;
+                }
+
+                const container = document.getElementById('dashboard_chart');
+                if (!container) return;
+
+                container.style.background = '#ffffff';
+
+                tvWidget = new TradingView.widget({
+                    symbol: symbol || 'BTCUSD',
+                    interval: '240',
+                    fullscreen: false,
+                    container_id: 'dashboard_chart',
+                    width: '100%',
+                    height: 280,
+                    autosize: true,
+                    toolbar_bg: '#f0f0f0',
+                    enable_publishing: false,
+                    hide_side_toolbar: true,
+                    allow_symbol_change: false,
+                    save_image: false,
+                    style: '1',
+                    timezone: 'exchange',
+                    theme: 'light',
+                    backgroundColor: '#ffffff',
+                    gridColor: 'rgba(0,0,0,0.05)',
+                    hide_top_toolbar: true,
+                    hide_legend: false,
+                    withdateranges: false,
+                    hide_volume: true,
+                    studies: [],
+                    locale: 'en'
+                });
+
+                console.log('✅ Dashboard chart loaded for ' + symbol);
+                updateDashPrice(symbol);
+
+            } catch (error) {
+                console.error('❌ Error loading dashboard chart:', error);
+                const container = document.getElementById('dashboard_chart');
+                if (container) {
+                    container.innerHTML = `
+                            <div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:0.3rem;background:#ffffff;color:#333;border-radius:12px;">
+                                <span style="font-size:1.5rem;">📊</span>
+                                <span style="font-size:0.8rem;font-weight:600;">Chart Loading...</span>
+                            </div>
+                        `;
+                }
+            }
+        }
+
+        // ===== UPDATE DASHBOARD PRICE =====
+        function updateDashPrice(symbol) {
+            const prices = {
+                'BTCUSD': { price: 67432.50, change: '+2.4%', up: true },
+                'SOLUSD': { price: 145.20, change: '+5.1%', up: true },
+                'OILUSD': { price: 82.50, change: '-0.8%', up: false },
+                'EURUSD': { price: 1.0892, change: '+0.3%', up: true },
+                'ETHUSD': { price: 2250.00, change: '+3.2%', up: true }
+            };
+
+            const data = prices[symbol] || prices['BTCUSD'];
+            const priceEl = document.getElementById('dashPrice');
+            priceEl.textContent = '$' + data.price.toFixed(2);
+            priceEl.className = 'price ' + (data.up ? 'up' : 'down');
+        }
+
+        // ===== CHANGE CHART PAIR =====
+        function changeChartPair() {
+            const pair = document.getElementById('chartPair').value;
+            currentSymbol = pair;
+            initDashboardChart(pair);
+            updateDashPrice(pair);
+        }
+
+        // ===== QUICK AMOUNT =====
+        function setDashAmount(amount) {
+            document.getElementById('dashAmount').value = amount;
+        }
+
+        // ===== EXECUTE TRADE =====
+        function executeDashTrade(type) {
+            const amount = parseFloat(document.getElementById('dashAmount').value);
+            if (!amount || amount <= 0) {
+                alert('Please enter a valid amount');
+                return;
+            }
+
+            const btn = type === 'buy' ? document.querySelector('.btn-buy') : document.querySelector('.btn-sell');
+            const originalText = btn.innerHTML;
+
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            btn.style.opacity = '0.7';
+
+            setTimeout(() => {
+                btn.innerHTML = '✅ Order Placed!';
+                btn.style.background = type === 'buy' ? '#2d9b6e' : '#d45a62';
+
+                const direction = type === 'buy' ? 'BUY' : 'SELL';
+                alert(`${direction} order executed!\nAmount: $${amount}\nPrice: ${document.getElementById('dashPrice').textContent}`);
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                    btn.style.opacity = '1';
+                }, 1500);
+            }, 1200);
+        }
+
+        // ===== SIDEBAR =====
+        function openSidebar() {
+            document.getElementById('sidebarOverlay').classList.add('active');
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebarOverlay').classList.remove('active');
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                alert('Logging out...');
+            }
+        }
+
+        function showMessage(msg) {
+            alert(msg);
+        }
+
+        // ===== SIMULATE WATCHLIST PRICE UPDATES =====
+        function updateWatchlistPrices() {
+            const items = document.querySelectorAll('.watchlist-item');
+            const changes = [
+                { change: (Math.random() - 0.45) * 100, isPrice: true },
+                { change: (Math.random() - 0.45) * 5, isPrice: true },
+                { change: (Math.random() - 0.45) * 2, isPrice: true },
+                { change: (Math.random() - 0.45) * 0.005, isPrice: false }
+            ];
+
+            items.forEach((item, i) => {
+                if (i < changes.length) {
+                    const priceEl = item.querySelector('.price');
+                    const changeEl = item.querySelector('.change');
+                    const currentPrice = parseFloat(priceEl.textContent.replace(/[^0-9.]/g, ''));
+                    if (!isNaN(currentPrice)) {
+                        const change = changes[i].change;
+                        const newPrice = currentPrice + change;
+                        const isPrice = changes[i].isPrice;
+                        priceEl.textContent = isPrice ? '$' + newPrice.toFixed(2) : newPrice.toFixed(4);
+
+                        const isUp = change > 0;
+                        changeEl.className = 'change ' + (isUp ? 'up' : 'down');
+                        changeEl.textContent = (isUp ? '▲ +' : '▼ -') + (Math.random() * 4 + 0.3).toFixed(1) + '%';
+                    }
+                }
+            });
+        }
+
+        // ===== SIMULATE BALANCE UPDATE =====
+        function updateBalance() {
+            const balanceEl = document.getElementById('balanceDisplay');
+            if (balanceEl) {
+                const current = parseFloat(balanceEl.textContent.replace(/[^0-9.]/g, ''));
+                if (!isNaN(current)) {
+                    const change = (Math.random() - 0.48) * 5;
+                    const newBalance = Math.max(0, current + change);
+                    balanceEl.textContent = '$' + newBalance.toFixed(2);
+                }
+            }
+        }
+
+        // ===== SIMULATE DASHBOARD PRICE =====
+        function updateDashPriceLive() {
+            const priceEl = document.getElementById('dashPrice');
+            if (priceEl) {
+                const current = parseFloat(priceEl.textContent.replace(/[^0-9.]/g, ''));
+                if (!isNaN(current)) {
+                    const change = (Math.random() - 0.45) * 5;
+                    const newPrice = Math.max(0, current + change);
+                    const isUp = change > 0;
+                    priceEl.textContent = '$' + newPrice.toFixed(2);
+                    priceEl.className = 'price ' + (isUp ? 'up' : 'down');
+                }
+            }
+        }
+
+        // ===== INIT =====
+        function init() {
+            // Load chart after a delay
+            setTimeout(() => initDashboardChart('BTCUSD'), 800);
+
+            // Update watchlist every 4 seconds
+            setInterval(updateWatchlistPrices, 4000);
+
+            // Update balance every 8 seconds
+            setInterval(updateBalance, 8000);
+
+            // Update dashboard price every 3 seconds
+            setInterval(updateDashPriceLive, 3000);
+
+            console.log('📊 FlintsMarket Dashboard loaded!');
+            console.log('💡 Chart has white background, smaller size');
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

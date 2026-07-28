@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=yes, viewport-fit=cover" />
+    <meta name="description" content="FlintsMarket - Withdraw funds from your trading account" />
+    <title>FlintsMarket | Withdraw</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,20 80,40 80,70 50,90 20,70 20,40' fill='%233b82f6'/%3E%3C/svg%3E" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        /* ============================================================
+                   CLEAN MODERN THEME — MATCHES DEPOSIT PAGE
+                   ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --bg-card-hover: rgba(255, 255, 255, 0.07);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #475569;
+            --border-color: rgba(255, 255, 255, 0.06);
+            --blue-primary: #3b82f6;
+            --blue-light: #60a5fa;
+            --blue-gradient: linear-gradient(135deg, #3b82f6, #6366f1);
+            --emerald: #10b981;
+            --rose: #f43f5e;
+            --purple: #8b5cf6;
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            --radius-full: 60px;
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 8px 40px rgba(59, 130, 246, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* ===== ANIMATED BACKGROUND ===== */
+        .bg-glow {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            z-index: 0;
+            pointer-events: none;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(99, 102, 241, 0.04) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 80%, rgba(16, 185, 129, 0.03) 0%, transparent 40%);
+            animation: bgFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-30px, 20px) scale(1.05); }
+            66% { transform: translate(20px, -30px) scale(0.95); }
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--blue-primary); border-radius: 10px; }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--blue-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 16px;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .site-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .site-name span {
+            color: var(--blue-primary);
+        }
+
+        .right-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .flag-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid var(--border-color);
+        }
+
+        .balance-display {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 0.3rem;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        .sidebar-overlay.active { visibility: visible; opacity: 1; }
+
+        .sidebar-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100%;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
+            z-index: 2001;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-overlay.active .sidebar-menu { right: 0; }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .sidebar-header .avatar-large {
+            width: 48px;
+            height: 48px;
+            background: var(--blue-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-header .user-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .sidebar-header .user-email {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        .close-sidebar {
+            margin-left: auto;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem 0;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.8rem 1.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+        }
+
+        .sidebar-nav a.active {
+            background: rgba(59, 130, 246, 0.08);
+            color: var(--blue-primary);
+            border-left: 3px solid var(--blue-primary);
+        }
+
+        .sidebar-nav .logout-item {
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            margin-top: 1rem;
+            color: var(--rose);
+        }
+
+        .sidebar-nav .logout-item:hover {
+            background: rgba(244, 63, 94, 0.08);
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .main-container {
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            margin-top: 75px;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .page-header h1 i {
+            color: var(--blue-primary);
+            margin-right: 0.5rem;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+        }
+
+        /* ===== BALANCE CARD ===== */
+        .balance-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .balance-card:hover {
+            border-color: rgba(59, 130, 246, 0.15);
+            box-shadow: var(--shadow-card);
+        }
+
+        .balance-card .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .balance-card .label i {
+            color: var(--emerald);
+            margin-right: 6px;
+        }
+
+        .balance-card .amount {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -1px;
+        }
+
+        .balance-card .amount .currency {
+            color: var(--blue-primary);
+            font-weight: 700;
+        }
+
+        .balance-card .tier {
+            text-align: right;
+        }
+
+        .balance-card .tier .badge {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--blue-primary);
+            padding: 0.3rem 1.2rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        /* ===== WITHDRAW METHODS ===== */
+        .withdraw-methods {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .withdraw-method {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .withdraw-method:hover {
+            transform: translateY(-4px);
+            border-color: rgba(59, 130, 246, 0.15);
+            background: var(--bg-card-hover);
+            box-shadow: var(--shadow-card);
+        }
+
+        .withdraw-method.active {
+            border-color: var(--blue-primary);
+            background: rgba(59, 130, 246, 0.06);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .withdraw-method .icon {
+            font-size: 2.2rem;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .withdraw-method .name {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .withdraw-method.active .name {
+            color: var(--blue-primary);
+        }
+
+        /* ===== WITHDRAW FORM ===== */
+        .withdraw-form {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .withdraw-form:hover {
+            border-color: rgba(59, 130, 246, 0.08);
+        }
+
+        .withdraw-form .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .withdraw-form .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .withdraw-form .form-group .input-wrap {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .withdraw-form .form-group .input-wrap:focus-within {
+            border-color: var(--blue-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.05);
+        }
+
+        .withdraw-form .form-group .input-wrap input {
+            flex: 1;
+            padding: 0.9rem 1.2rem;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            outline: none;
+            min-width: 0;
+        }
+
+        .withdraw-form .form-group .input-wrap .currency-label {
+            padding: 0.9rem 1.2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--blue-primary);
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 1px solid var(--border-color);
+        }
+
+        .withdraw-form .quick-amounts {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-top: 0.8rem;
+        }
+
+        .withdraw-form .quick-amounts button {
+            padding: 0.5rem 1.2rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .withdraw-form .quick-amounts button:hover {
+            border-color: rgba(59, 130, 246, 0.2);
+            color: var(--text-primary);
+        }
+
+        .withdraw-form .quick-amounts button.active {
+            background: rgba(59, 130, 246, 0.08);
+            border-color: var(--blue-primary);
+            color: var(--blue-primary);
+        }
+
+        .withdraw-form .info-row {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 1rem 0 1.5rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .withdraw-form .info-row i {
+            margin-right: 0.4rem;
+            color: var(--blue-primary);
+        }
+
+        .withdraw-form .btn-withdraw {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            background: var(--blue-gradient);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .withdraw-form .btn-withdraw::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .withdraw-form .btn-withdraw:hover::before {
+            left: 100%;
+        }
+
+        .withdraw-form .btn-withdraw:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px rgba(59, 130, 246, 0.3);
+        }
+
+        .withdraw-form .btn-withdraw:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* ===== METHOD DETAILS ===== */
+        #methodDetails .detail-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 1.2rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        #methodDetails .detail-card .method-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        #methodDetails .detail-card .method-desc {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin: 0.3rem 0 0.8rem;
+        }
+
+        #methodDetails .detail-card .method-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        #methodDetails .detail-card .method-fields .field-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #methodDetails .detail-card .method-fields .field-row label {
+            min-width: 100px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        #methodDetails .detail-card .method-fields .field-row input {
+            flex: 1;
+            padding: 0.5rem 0.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        #methodDetails .detail-card .method-fields .field-row input:focus {
+            border-color: var(--blue-primary);
+        }
+
+        /* ===== TRANSACTIONS ===== */
+        .transactions-section {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .transactions-section .section-header {
+            padding: 1.2rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .transactions-section .section-header h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .transactions-section .section-header h3 i {
+            color: var(--blue-primary);
+            margin-right: 6px;
+        }
+
+        .transactions-section .section-header a {
+            font-size: 0.8rem;
+            color: var(--blue-primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .transactions-section .section-header a:hover {
+            text-decoration: underline;
+        }
+
+        .transactions-table-wrap {
+            overflow-x: auto;
+            padding: 0 2rem 1.5rem;
+        }
+
+        .transactions-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 400px;
+        }
+
+        .transactions-table th {
+            text-align: left;
+            padding: 0.8rem 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .transactions-table td {
+            padding: 0.8rem 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .transactions-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .transactions-table .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .transactions-table .status.completed {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--emerald);
+        }
+
+        .transactions-table .status.pending {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--blue-primary);
+        }
+
+        .transactions-table .status.failed {
+            background: rgba(244, 63, 94, 0.1);
+            color: var(--rose);
+        }
+
+        .transactions-table .amount.negative {
+            color: var(--rose);
+            font-weight: 600;
+        }
+
+        .transactions-table .date {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        /* ============================================================
+                   RESPONSIVE
+                   ============================================================ */
+        @media (max-width: 1024px) {
+            .withdraw-methods {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+                margin-top: 65px;
+            }
+            .balance-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+            .balance-card .amount {
+                font-size: 2.2rem;
+            }
+            .balance-card .tier {
+                text-align: center;
+            }
+            .withdraw-methods {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+            .withdraw-method {
+                padding: 0.8rem 0.3rem;
+            }
+            .withdraw-method .icon {
+                font-size: 1.6rem;
+            }
+            .withdraw-method .name {
+                font-size: 0.6rem;
+            }
+            .withdraw-form {
+                padding: 1.2rem;
+            }
+            .withdraw-form .quick-amounts {
+                gap: 0.3rem;
+            }
+            .withdraw-form .quick-amounts button {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.7rem;
+            }
+            .withdraw-form .info-row {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+            #methodDetails .detail-card .method-fields .field-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            #methodDetails .detail-card .method-fields .field-row label {
+                min-width: 0;
+            }
+            .transactions-table {
+                min-width: 350px;
+            }
+            .balance-display {
+                font-size: 0.65rem;
+                padding: 0.2rem 0.6rem;
+            }
+            .flag-icon {
+                width: 22px;
+                height: 22px;
+            }
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .withdraw-methods {
+                grid-template-columns: 1fr 1fr;
+            }
+            .site-name {
+                font-size: 0.9rem;
+            }
+            .logo-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+            .withdraw-form .form-group .input-wrap input {
+                font-size: 1rem;
+                padding: 0.6rem 0.8rem;
+            }
+            .withdraw-form .form-group .input-wrap .currency-label {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== ANIMATED BACKGROUND ===== -->
+    <div class="bg-glow"></div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav>
+        <div class="logo-area" onclick="location.href='index.html'">
+            <div class="logo-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="site-name">Flints<span>Market</span></div>
+        </div>
+
+        <div class="right-menu">
+            <img src="https://flagcdn.com/w320/us.png" alt="USD" class="flag-icon" onclick="showMessage('Currency: USD')">
+            <div class="balance-display" id="balanceDisplay">$12,450.00</div>
+            <button class="mobile-menu-btn" onclick="openSidebar()"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- ===== SIDEBAR ===== -->
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()">
+        <div class="sidebar-menu" onclick="event.stopPropagation()">
+            <div class="sidebar-header">
+                <div class="avatar-large" id="sidebarAvatar">KA</div>
+                <div>
+                    <div class="user-name" id="sidebarName">Kwame Adjei</div>
+                    <div class="user-email" id="sidebarEmail">kwame@example.com</div>
+                </div>
+                <button class="close-sidebar" onclick="closeSidebar()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="sidebar-nav">
+                <a href="dashboard.html" onclick="closeSidebar()"><i class="fas fa-th-large"></i> Dashboard</a>
+                <a href="trade.html" onclick="closeSidebar()"><i class="fas fa-arrow-trend-up"></i> Trade</a>
+                <a href="markets.html" onclick="closeSidebar()"><i class="fas fa-chart-simple"></i> Markets</a>
+                <a href="deposit.html" onclick="closeSidebar()"><i class="fas fa-wallet"></i> Deposit</a>
+                <a href="withdraw.html" class="active" onclick="closeSidebar()"><i class="fas fa-arrow-right-from-bracket"></i> Withdraw</a>
+                <a href="history.html" onclick="closeSidebar()"><i class="fas fa-clock-rotate-left"></i> History</a>
+                <a href="settings.html" onclick="closeSidebar()"><i class="fas fa-gear"></i> Settings</a>
+                <a href="index.html" class="logout-item" onclick="logout(); closeSidebar();"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-container">
+
+        <!-- ===== PAGE HEADER ===== -->
+        <div class="page-header">
+            <h1><i class="fas fa-arrow-right-from-bracket"></i> Withdraw Funds</h1>
+            <p>Withdraw your earnings to your preferred payment method</p>
+        </div>
+
+        <!-- ===== BALANCE CARD ===== -->
+        <div class="balance-card">
+            <div>
+                <div class="label"><i class="fas fa-circle"></i> Available Balance</div>
+                <div class="amount"><span class="currency">$</span>12,450.00</div>
+            </div>
+            <div class="tier">
+                <div class="label">Account Tier</div>
+                <div class="badge"><i class="fas fa-crown" style="margin-right:4px;"></i> Pro Trader</div>
+            </div>
+        </div>
+
+        <!-- ===== WITHDRAW METHODS ===== -->
+        <div class="withdraw-methods" id="withdrawMethods">
+            <div class="withdraw-method active" data-method="mobile">
+                <span class="icon">📱</span>
+                <span class="name">Mobile Money</span>
+            </div>
+            <div class="withdraw-method" data-method="bank">
+                <span class="icon">🏦</span>
+                <span class="name">Bank Transfer</span>
+            </div>
+            <div class="withdraw-method" data-method="crypto">
+                <span class="icon">₿</span>
+                <span class="name">Crypto</span>
+            </div>
+            <div class="withdraw-method" data-method="card">
+                <span class="icon">💳</span>
+                <span class="name">Card</span>
+            </div>
+        </div>
+
+        <!-- ===== WITHDRAW FORM ===== -->
+        <div class="withdraw-form" id="withdrawForm">
+            <div class="form-group">
+                <label>Enter Amount (USD)</label>
+                <div class="input-wrap">
+                    <input type="number" id="withdrawAmount" value="100" step="1" min="10" />
+                    <span class="currency-label">USD</span>
+                </div>
+                <div class="quick-amounts" id="quickAmounts">
+                    <button data-amount="50">$50</button>
+                    <button data-amount="100" class="active">$100</button>
+                    <button data-amount="250">$250</button>
+                    <button data-amount="500">$500</button>
+                    <button data-amount="1000">$1,000</button>
+                </div>
+            </div>
+
+            <div class="form-group" id="methodDetails">
+                <label>Withdrawal Details</label>
+                <div class="detail-card" id="methodInfo">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+
+            <div class="info-row">
+                <span><i class="fas fa-shield-alt"></i> Secure & encrypted</span>
+                <span><i class="fas fa-clock"></i> Processing: 1-24 hours</span>
+                <span><i class="fas fa-circle-check"></i> Min: $10 • Max: $50,000</span>
+            </div>
+
+            <button class="btn-withdraw" id="withdrawBtn" onclick="processWithdraw()">
+                <i class="fas fa-arrow-right" style="margin-right:8px;"></i>
+                Withdraw Now
+            </button>
+        </div>
+
+        <!-- ===== RECENT TRANSACTIONS ===== -->
+        <div class="transactions-section">
+            <div class="section-header">
+                <h3><i class="fas fa-clock-rotate-left"></i> Recent Withdrawals</h3>
+                <a href="#">View All <i class="fas fa-arrow-right" style="margin-left:4px;"></i></a>
+            </div>
+            <div class="transactions-table-wrap">
+                <table class="transactions-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionsBody">
+                        <tr>
+                            <td><i class="fas fa-mobile-screen" style="color:var(--blue-primary);margin-right:6px;"></i> Mobile Money</td>
+                            <td class="amount negative">-$200.00</td>
+                            <td><span class="status completed"><i class="fas fa-check-circle"></i> Completed</span></td>
+                            <td class="date">1 day ago</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-building-columns" style="color:var(--blue-primary);margin-right:6px;"></i> Bank Transfer</td>
+                            <td class="amount negative">-$500.00</td>
+                            <td><span class="status pending"><i class="fas fa-clock"></i> Pending</span></td>
+                            <td class="date">3 days ago</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fab fa-bitcoin" style="color:var(--blue-primary);margin-right:6px;"></i> Crypto</td>
+                            <td class="amount negative">-$150.00</td>
+                            <td><span class="status completed"><i class="fas fa-check-circle"></i> Completed</span></td>
+                            <td class="date">5 days ago</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-credit-card" style="color:var(--blue-primary);margin-right:6px;"></i> Card</td>
+                            <td class="amount negative">-$50.00</td>
+                            <td><span class="status completed"><i class="fas fa-check-circle"></i> Completed</span></td>
+                            <td class="date">1 week ago</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align:center;padding:1.5rem 0 0.5rem;font-size:0.75rem;color:var(--text-muted);border-top:1px solid var(--border-color);margin-top:1.5rem;">
+            &copy; 2026 FlintsMarket — Premier Trading Platform
+        </div>
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        // ===== WITHDRAW METHOD DETAILS =====
+        const methodDetails = {
+            mobile: {
+                icon: '📱',
+                name: 'Mobile Money',
+                details: 'Withdraw funds directly to your Mobile Money account. Funds arrive within 1-2 hours.',
+                fields: ['Phone Number', 'Network Provider']
+            },
+            bank: {
+                icon: '🏦',
+                name: 'Bank Transfer',
+                details: 'Withdraw funds to your bank account. Processing takes 1-2 business days.',
+                fields: ['Bank Name', 'Account Number', 'Account Holder Name']
+            },
+            crypto: {
+                icon: '₿',
+                name: 'Cryptocurrency',
+                details: 'Withdraw funds to your crypto wallet. Processing takes 10-30 minutes.',
+                fields: ['Crypto Address', 'Network (BTC/ETH/SOL/USDT)']
+            },
+            card: {
+                icon: '💳',
+                name: 'Card Withdrawal',
+                details: 'Withdraw funds back to your Visa or Mastercard. Processing takes 1-3 business days.',
+                fields: ['Card Number', 'Card Holder Name']
+            }
+        };
+
+        // ===== SELECT WITHDRAW METHOD =====
+        document.querySelectorAll('.withdraw-method').forEach(el => {
+            el.addEventListener('click', function() {
+                document.querySelectorAll('.withdraw-method').forEach(m => m.classList.remove('active'));
+                this.classList.add('active');
+
+                const method = this.dataset.method;
+                const info = methodDetails[method];
+                if (info) {
+                    document.getElementById('methodInfo').innerHTML = `
+                            <div class="method-title">${info.icon} ${info.name}</div>
+                            <div class="method-desc">${info.details}</div>
+                            <div class="method-fields">
+                                ${info.fields.map(f => `
+                                    <div class="field-row">
+                                        <label>${f}</label>
+                                        <input type="text" placeholder="Enter ${f}" />
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                }
+            });
+        });
+
+        // ===== QUICK AMOUNTS =====
+        document.querySelectorAll('.quick-amounts button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.quick-amounts button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById('withdrawAmount').value = this.dataset.amount;
+            });
+        });
+
+        // ===== WITHDRAW PROCESS =====
+        function processWithdraw() {
+            const amount = parseFloat(document.getElementById('withdrawAmount').value);
+            const btn = document.getElementById('withdrawBtn');
+
+            if (!amount || amount < 10) {
+                alert('⚠️ Minimum withdrawal is $10. Please enter a valid amount.');
+                return;
+            }
+
+            if (amount > 50000) {
+                alert('⚠️ Maximum withdrawal is $50,000. Please enter a smaller amount.');
+                return;
+            }
+
+            // Check if amount exceeds balance
+            const balanceEl = document.querySelector('.balance-card .amount');
+            const currentBalance = parseFloat(balanceEl.textContent.replace(/[^0-9.]/g, ''));
+            if (amount > currentBalance) {
+                alert('⚠️ Insufficient balance. Your available balance is $' + currentBalance.toFixed(2));
+                return;
+            }
+
+            const activeMethod = document.querySelector('.withdraw-method.active');
+            const methodName = activeMethod ? activeMethod.querySelector('.name').textContent : 'Unknown';
+
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Processing...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = '✅ Withdrawal Requested!';
+                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+
+                // Update balance
+                if (balanceEl) {
+                    const newBalance = currentBalance - amount;
+                    balanceEl.innerHTML = `<span class="currency">$</span>${newBalance.toFixed(2)}`;
+                }
+
+                // Update nav balance
+                const navBalance = document.getElementById('balanceDisplay');
+                if (navBalance) {
+                    const current = parseFloat(navBalance.textContent.replace(/[^0-9.]/g, ''));
+                    if (!isNaN(current)) {
+                        const newBalance = current - amount;
+                        navBalance.textContent = '$' + newBalance.toFixed(2);
+                    }
+                }
+
+                // Add to transaction history
+                const tbody = document.getElementById('transactionsBody');
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                        <td><i class="fas fa-arrow-up" style="color:var(--rose);margin-right:6px;"></i> ${methodName}</td>
+                        <td class="amount negative">-$${amount.toFixed(2)}</td>
+                        <td><span class="status pending"><i class="fas fa-clock"></i> Pending</span></td>
+                        <td class="date">Just now</td>
+                    `;
+                tbody.prepend(newRow);
+
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-arrow-right" style="margin-right:8px;"></i> Withdraw Now';
+                    btn.style.background = '';
+                    btn.disabled = false;
+
+                    alert(`✅ Withdrawal Requested!\n\n$${amount.toFixed(2)} via ${methodName}\nProcessing time: 1-24 hours\nNew Balance: $${document.querySelector('.balance-card .amount').textContent.replace(/[^0-9.]/g, '')}`);
+                }, 2000);
+            }, 2000);
+        }
+
+        // ===== SIDEBAR =====
+        function openSidebar() {
+            document.getElementById('sidebarOverlay').classList.add('active');
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebarOverlay').classList.remove('active');
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                alert('Logging out...');
+            }
+        }
+
+        function showMessage(msg) {
+            alert(msg);
+        }
+
+        // ===== SIMULATE BALANCE UPDATE =====
+        function updateBalance() {
+            const balanceEl = document.getElementById('balanceDisplay');
+            if (balanceEl) {
+                const current = parseFloat(balanceEl.textContent.replace(/[^0-9.]/g, ''));
+                if (!isNaN(current)) {
+                    const change = (Math.random() - 0.48) * 2;
+                    const newBalance = Math.max(0, current + change);
+                    balanceEl.textContent = '$' + newBalance.toFixed(2);
+
+                    const mainBalance = document.querySelector('.balance-card .amount');
+                    if (mainBalance) {
+                        mainBalance.innerHTML = `<span class="currency">$</span>${newBalance.toFixed(2)}`;
+                    }
+                }
+            }
+        }
+
+        // ===== INIT =====
+        function init() {
+            // Set default method info
+            const defaultMethod = document.querySelector('.withdraw-method.active');
+            if (defaultMethod) {
+                const method = defaultMethod.dataset.method;
+                const info = methodDetails[method];
+                if (info) {
+                    document.getElementById('methodInfo').innerHTML = `
+                            <div class="method-title">${info.icon} ${info.name}</div>
+                            <div class="method-desc">${info.details}</div>
+                            <div class="method-fields">
+                                ${info.fields.map(f => `
+                                    <div class="field-row">
+                                        <label>${f}</label>
+                                        <input type="text" placeholder="Enter ${f}" />
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                }
+            }
+
+            setInterval(updateBalance, 8000);
+            console.log('💸 FlintsMarket Withdraw Page loaded successfully!');
+            console.log('💳 Methods: Mobile Money, Bank Transfer, Crypto, Card');
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

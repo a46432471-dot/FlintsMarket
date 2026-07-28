@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=yes, viewport-fit=cover" />
+    <meta name="description" content="FlintsMarket - Create your trading account" />
+    <title>FlintsMarket | Sign Up</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,20 80,40 80,70 50,90 20,70 20,40' fill='%233b82f6'/%3E%3C/svg%3E" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        /* ============================================================
+                   CLEAN MODERN SIGNUP THEME
+                   ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --bg-card-hover: rgba(255, 255, 255, 0.07);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #475569;
+            --border-color: rgba(255, 255, 255, 0.06);
+            --blue-primary: #3b82f6;
+            --blue-light: #60a5fa;
+            --blue-gradient: linear-gradient(135deg, #3b82f6, #6366f1);
+            --emerald: #10b981;
+            --rose: #f43f5e;
+            --gold: #f59e0b;
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            --radius-full: 60px;
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== ANIMATED BACKGROUND ===== */
+        .bg-glow {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            z-index: 0;
+            pointer-events: none;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(99, 102, 241, 0.06) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 80%, rgba(16, 185, 129, 0.04) 0%, transparent 40%);
+            animation: bgFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-30px, 20px) scale(1.05); }
+            66% { transform: translate(20px, -30px) scale(0.95); }
+        }
+
+        /* ===== SIGNUP CONTAINER ===== */
+        .signup-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 480px;
+            padding: 1.5rem;
+            margin: 1rem;
+        }
+
+        /* ===== SIGNUP CARD ===== */
+        .signup-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+        }
+
+        .signup-card:hover {
+            border-color: rgba(59, 130, 246, 0.1);
+        }
+
+        /* ===== LOGO ===== */
+        .signup-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .signup-logo .logo-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--blue-gradient);
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
+            margin-bottom: 0.8rem;
+        }
+
+        .signup-logo h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .signup-logo h1 span {
+            color: var(--blue-primary);
+        }
+
+        .signup-logo p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.2rem;
+        }
+
+        /* ===== FORM ===== */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group .input-wrap {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .form-group .input-wrap:focus-within {
+            border-color: var(--blue-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.05);
+        }
+
+        .form-group .input-wrap i {
+            padding: 0 0 0 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .form-group .input-wrap input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            min-width: 0;
+        }
+
+        .form-group .input-wrap input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group .input-wrap .toggle-password {
+            padding: 0 1rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .form-group .input-wrap .toggle-password:hover {
+            color: var(--text-primary);
+        }
+
+        /* ===== NAME ROW ===== */
+        .name-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+
+        /* ===== TERMS ===== */
+        .terms-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin: 1rem 0 1.2rem;
+        }
+
+        .terms-row input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--blue-primary);
+            cursor: pointer;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .terms-row label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .terms-row label a {
+            color: var(--blue-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .terms-row label a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-signup {
+            width: 100%;
+            padding: 0.9rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            background: var(--blue-gradient);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-signup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-signup:hover::before {
+            left: 100%;
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-signup:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .divider span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== SOCIAL SIGNUP ===== */
+        .social-signup {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+
+        .social-btn {
+            padding: 0.6rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .social-btn:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
+
+        .social-btn i {
+            font-size: 1.1rem;
+        }
+
+        .social-btn.google i { color: #ea4335; }
+        .social-btn.apple i { color: var(--text-primary); }
+
+        /* ===== LOGIN LINK ===== */
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .login-link a {
+            color: var(--blue-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== ERROR MESSAGE ===== */
+        .error-msg {
+            display: none;
+            background: rgba(244, 63, 94, 0.08);
+            border: 1px solid rgba(244, 63, 94, 0.15);
+            border-radius: var(--radius-sm);
+            padding: 0.6rem 1rem;
+            color: var(--rose);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .error-msg.show {
+            display: block;
+        }
+
+        /* ============================================================
+                   RESPONSIVE
+                   ============================================================ */
+        @media (max-width: 480px) {
+            .signup-card {
+                padding: 1.8rem 1.2rem;
+            }
+            .signup-logo .logo-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+            }
+            .signup-logo h1 {
+                font-size: 1.3rem;
+            }
+            .name-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            .social-signup {
+                grid-template-columns: 1fr;
+            }
+            .btn-signup {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== ANIMATED BACKGROUND ===== -->
+    <div class="bg-glow"></div>
+
+    <!-- ===== SIGNUP CONTAINER ===== -->
+    <div class="signup-container">
+        <div class="signup-card">
+
+            <!-- ===== LOGO ===== -->
+            <div class="signup-logo">
+                <div class="logo-icon"><i class="fas fa-chart-line"></i></div>
+                <h1>Flints<span>Market</span></h1>
+                <p>Create your account and start trading</p>
+            </div>
+
+            <!-- ===== ERROR MESSAGE ===== -->
+            <div class="error-msg" id="errorMsg">
+                <i class="fas fa-exclamation-circle" style="margin-right:6px;"></i>
+                Please fix the errors above and try again.
+            </div>
+
+            <!-- ===== SIGNUP FORM ===== -->
+            <form id="signupForm" onsubmit="handleSignup(event)">
+                <div class="name-row">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <div class="input-wrap">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="firstNameInput" placeholder="Kwame" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <div class="input-wrap">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="lastNameInput" placeholder="Adjei" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="emailInput" placeholder="you@example.com" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="phoneInput" placeholder="+233 20 123 4567" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="passwordInput" placeholder="Create a strong password" required />
+                        <span class="toggle-password" onclick="togglePassword()">
+                            <i class="fas fa-eye" id="passwordIcon"></i>
+                        </span>
+                    </div>
+                    <div style="font-size:0.7rem;color:var(--text-muted);margin-top:0.3rem;">
+                        <i class="fas fa-info-circle"></i> Min 8 characters, 1 uppercase, 1 number
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="confirmInput" placeholder="Confirm your password" required />
+                    </div>
+                </div>
+
+                <div class="terms-row">
+                    <input type="checkbox" id="termsCheck" required />
+                    <label for="termsCheck">
+                        I agree to the <a href="#" onclick="showMessage('Terms & Conditions page coming soon')">Terms & Conditions</a> 
+                        and <a href="#" onclick="showMessage('Privacy Policy page coming soon')">Privacy Policy</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-signup" id="signupBtn">
+                    <i class="fas fa-user-plus" style="margin-right:8px;"></i>
+                    Create Account
+                </button>
+            </form>
+
+            <!-- ===== DIVIDER ===== -->
+            <div class="divider">
+                <span>Or continue with</span>
+            </div>
+
+            <!-- ===== SOCIAL SIGNUP ===== -->
+            <div class="social-signup">
+                <button class="social-btn google" onclick="showMessage('Google signup coming soon')">
+                    <i class="fab fa-google"></i> Google
+                </button>
+                <button class="social-btn apple" onclick="showMessage('Apple signup coming soon')">
+                    <i class="fab fa-apple"></i> Apple
+                </button>
+            </div>
+
+            <!-- ===== LOGIN LINK ===== -->
+            <div class="login-link">
+                Already have an account? <a href="#" onclick="showMessage('Redirecting to login...')">Sign in</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        // ===== TOGGLE PASSWORD VISIBILITY =====
+        function togglePassword() {
+            const passwordInput = document.getElementById('passwordInput');
+            const icon = document.getElementById('passwordIcon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.className = 'fas fa-eye-slash';
+            } else {
+                passwordInput.type = 'password';
+                icon.className = 'fas fa-eye';
+            }
+        }
+
+        // ===== HANDLE SIGNUP =====
+        function handleSignup(event) {
+            event.preventDefault();
+
+            const firstName = document.getElementById('firstNameInput').value.trim();
+            const lastName = document.getElementById('lastNameInput').value.trim();
+            const email = document.getElementById('emailInput').value.trim();
+            const password = document.getElementById('passwordInput').value;
+            const confirm = document.getElementById('confirmInput').value;
+            const terms = document.getElementById('termsCheck').checked;
+            const errorMsg = document.getElementById('errorMsg');
+            const btn = document.getElementById('signupBtn');
+
+            // Reset error
+            errorMsg.classList.remove('show');
+
+            // Validation
+            if (!firstName || !lastName) {
+                errorMsg.textContent = '⚠️ Please enter your full name.';
+                errorMsg.classList.add('show');
+                return;
+            }
+
+            if (!email || !email.includes('@')) {
+                errorMsg.textContent = '⚠️ Please enter a valid email address.';
+                errorMsg.classList.add('show');
+                return;
+            }
+
+            if (password.length < 8) {
+                errorMsg.textContent = '⚠️ Password must be at least 8 characters long.';
+                errorMsg.classList.add('show');
+                return;
+            }
+
+            if (password !== confirm) {
+                errorMsg.textContent = '⚠️ Passwords do not match.';
+                errorMsg.classList.add('show');
+                return;
+            }
+
+            if (!terms) {
+                errorMsg.textContent = '⚠️ Please agree to the Terms & Conditions.';
+                errorMsg.classList.add('show');
+                return;
+            }
+
+            // Show loading state
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Creating Account...';
+            btn.disabled = true;
+
+            // Simulate signup
+            setTimeout(() => {
+                // Success
+                btn.innerHTML = '✅ Account Created!';
+                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+
+                setTimeout(() => {
+                    alert('🎉 Account created successfully!\n\nWelcome to FlintsMarket, ' + firstName + '!\nPlease check your email to verify your account.');
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                    btn.disabled = false;
+                    // Reset form
+                    document.getElementById('signupForm').reset();
+                }, 1000);
+            }, 1800);
+        }
+
+        // ===== SHOW MESSAGE =====
+        function showMessage(msg) {
+            alert(msg);
+        }
+
+        // ===== KEYBOARD SUPPORT =====
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const form = document.getElementById('signupForm');
+                if (form) {
+                    form.dispatchEvent(new Event('submit'));
+                }
+            }
+        });
+
+        console.log('📝 FlintsMarket Signup Page loaded successfully!');
+        console.log('👤 New users can create an account to start trading.');
+    </script>
+</body>
+</html>

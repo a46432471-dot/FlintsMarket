@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=yes, viewport-fit=cover" />
+    <meta name="description" content="FlintsMarket - Trade Binary Options with Rise, Fall & Matches" />
+    <title>FlintsMarket | Binary Options</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,20 80,40 80,70 50,90 20,70 20,40' fill='%233b82f6'/%3E%3C/svg%3E" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- TradingView Library -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+
+    <style>
+        /* ============================================================
+                   HOT BINARY OPTIONS THEME
+                   ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111927;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-hover: rgba(255, 255, 255, 0.06);
+            --text-primary: #f0f4f8;
+            --text-secondary: #94a3b8;
+            --text-muted: #475569;
+            --border-color: rgba(255, 255, 255, 0.05);
+            --blue-primary: #3b82f6;
+            --blue-light: #60a5fa;
+            --blue-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            --emerald: #10b981;
+            --emerald-gradient: linear-gradient(135deg, #10b981, #34d399);
+            --rose: #f43f5e;
+            --rose-gradient: linear-gradient(135deg, #f43f5e, #fb7185);
+            --gold: #f59e0b;
+            --purple: #8b5cf6;
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            --radius-full: 60px;
+            --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 8px 40px rgba(59, 130, 246, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* ===== ANIMATED BACKGROUND ===== */
+        .bg-glow {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            z-index: 0;
+            pointer-events: none;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(139, 92, 246, 0.04) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 80%, rgba(16, 185, 129, 0.03) 0%, transparent 40%);
+            animation: bgFloat 25s ease-in-out infinite;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-40px, 30px) scale(1.05); }
+            66% { transform: translate(30px, -40px) scale(0.95); }
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--blue-primary); border-radius: 10px; }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            background: rgba(10, 14, 23, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--blue-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 16px;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
+        }
+
+        .site-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .site-name span { 
+            background: var(--blue-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .right-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .flag-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid var(--border-color);
+        }
+
+        .balance-display {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 0.3rem;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        .sidebar-overlay.active { visibility: visible; opacity: 1; }
+
+        .sidebar-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100%;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
+            z-index: 2001;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-overlay.active .sidebar-menu { right: 0; }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .sidebar-header .avatar-large {
+            width: 48px;
+            height: 48px;
+            background: var(--blue-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-header .user-name { font-weight: 600; color: var(--text-primary); }
+        .sidebar-header .user-email { font-size: 0.7rem; color: var(--text-secondary); }
+
+        .close-sidebar {
+            margin-left: auto;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem 0;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.8rem 1.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+        }
+
+        .sidebar-nav a.active {
+            background: rgba(59, 130, 246, 0.08);
+            color: var(--blue-primary);
+            border-left: 3px solid var(--blue-primary);
+        }
+
+        .sidebar-nav .logout-item {
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            margin-top: 1rem;
+            color: var(--rose);
+        }
+
+        .sidebar-nav .logout-item:hover { background: rgba(244, 63, 94, 0.08); }
+
+        /* ===== MAIN CONTAINER ===== */
+        .main-container {
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            margin-top: 75px;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .page-header h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .page-header h1 i {
+            background: var(--blue-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ===== ASSET SELECTOR ===== */
+        .asset-selector {
+            display: flex;
+            gap: 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            padding: 0.3rem;
+        }
+
+        .asset-selector button {
+            padding: 0.4rem 1.2rem;
+            border: none;
+            border-radius: var(--radius-full);
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .asset-selector button:hover {
+            color: var(--text-primary);
+        }
+
+        .asset-selector button.active {
+            background: var(--blue-gradient);
+            color: white;
+        }
+
+        /* ===== TRADING GRID ===== */
+        .trade-grid {
+            display: grid;
+            grid-template-columns: 1.8fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== CHART ===== */
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .chart-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .chart-toolbar .left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .chart-toolbar .left .asset-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chart-toolbar .left .asset-info .price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .chart-toolbar .left .asset-info .price.up { color: var(--emerald); }
+        .chart-toolbar .left .asset-info .price.down { color: var(--rose); }
+
+        .chart-toolbar .left .asset-info .change {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: var(--radius-full);
+        }
+
+        .chart-toolbar .left .asset-info .change.up {
+            color: var(--emerald);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .chart-toolbar .left .asset-info .change.down {
+            color: var(--rose);
+            background: rgba(244, 63, 94, 0.1);
+        }
+
+        .chart-toolbar .timeframes {
+            display: flex;
+            gap: 0.2rem;
+        }
+
+        .chart-toolbar .timeframes button {
+            padding: 0.2rem 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chart-toolbar .timeframes button:hover {
+            border-color: rgba(255,255,255,0.1);
+            color: var(--text-primary);
+        }
+
+        .chart-toolbar .timeframes button.active {
+            background: var(--blue-primary);
+            color: white;
+            border-color: var(--blue-primary);
+        }
+
+        #binary_chart {
+            height: 450px;
+            width: 100%;
+            min-height: 320px;
+            background: #ffffff;
+        }
+
+        /* ===== ORDER PANEL ===== */
+        .order-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .order-panel .panel-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .order-panel .panel-title i {
+            color: var(--gold);
+        }
+
+        /* ===== TRADE TYPE SELECTOR ===== */
+        .trade-type-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .trade-type-selector button {
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .trade-type-selector button:hover {
+            border-color: rgba(255,255,255,0.1);
+            color: var(--text-primary);
+        }
+
+        .trade-type-selector button.active {
+            background: rgba(59, 130, 246, 0.08);
+            border-color: var(--blue-primary);
+            color: var(--blue-primary);
+        }
+
+        /* ===== EXPIRY SELECTOR ===== */
+        .expiry-selector {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .expiry-selector button {
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .expiry-selector button:hover {
+            border-color: rgba(255,255,255,0.1);
+            color: var(--text-primary);
+        }
+
+        .expiry-selector button.active {
+            background: rgba(59, 130, 246, 0.08);
+            border-color: var(--blue-primary);
+            color: var(--blue-primary);
+        }
+
+        /* ===== AMOUNT ===== */
+        .amount-input {
+            margin-bottom: 1rem;
+        }
+
+        .amount-input label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .amount-input .input-wrap {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+        }
+
+        .amount-input .input-wrap input {
+            flex: 1;
+            padding: 0.7rem 0.8rem;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            outline: none;
+        }
+
+        .amount-input .input-wrap .currency {
+            padding: 0.7rem 0.8rem;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            background: rgba(255,255,255,0.02);
+            border-left: 1px solid var(--border-color);
+        }
+
+        .amount-input .quick-amounts {
+            display: flex;
+            gap: 0.3rem;
+            margin-top: 0.4rem;
+        }
+
+        .amount-input .quick-amounts button {
+            padding: 0.2rem 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .amount-input .quick-amounts button:hover {
+            border-color: rgba(255,255,255,0.1);
+            color: var(--text-primary);
+        }
+
+        /* ===== DIRECTION BUTTONS ===== */
+        .direction-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .direction-buttons .btn-rise {
+            padding: 0.8rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            background: var(--emerald-gradient);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .direction-buttons .btn-rise::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .direction-buttons .btn-rise:hover::before {
+            left: 100%;
+        }
+
+        .direction-buttons .btn-rise:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .direction-buttons .btn-fall {
+            padding: 0.8rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            background: var(--rose-gradient);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .direction-buttons .btn-fall::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .direction-buttons .btn-fall:hover::before {
+            left: 100%;
+        }
+
+        .direction-buttons .btn-fall:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(244, 63, 94, 0.3);
+        }
+
+        /* ===== MATCHES BUTTON ===== */
+        .btn-match {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid var(--gold);
+            border-radius: var(--radius-sm);
+            background: rgba(245, 158, 11, 0.05);
+            color: var(--gold);
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 0.8rem;
+        }
+
+        .btn-match:hover {
+            background: rgba(245, 158, 11, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.15);
+        }
+
+        /* ===== PAYOUT INFO ===== */
+        .payout-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 1rem;
+            background: rgba(255,255,255,0.02);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .payout-info .label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .payout-info .value {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        /* ===== OPEN POSITIONS ===== */
+        .positions-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .positions-section .section-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .positions-section .section-header h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .positions-section .section-header .badge {
+            font-size: 0.7rem;
+            color: var(--emerald);
+            background: rgba(16, 185, 129, 0.08);
+            padding: 0.2rem 0.8rem;
+            border-radius: var(--radius-full);
+        }
+
+        .positions-table-wrap {
+            overflow-x: auto;
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .positions-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+        }
+
+        .positions-table th {
+            text-align: left;
+            padding: 0.8rem 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .positions-table td {
+            padding: 0.8rem 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .positions-table tr:last-child td { border-bottom: none; }
+
+        .positions-table .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .positions-table .status.active {
+            background: rgba(16, 185, 129, 0.08);
+            color: var(--emerald);
+        }
+        .positions-table .status.won {
+            background: rgba(16, 185, 129, 0.08);
+            color: var(--emerald);
+        }
+        .positions-table .status.lost {
+            background: rgba(244, 63, 94, 0.08);
+            color: var(--rose);
+        }
+
+        .positions-table .direction-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .positions-table .direction-badge.rise {
+            background: rgba(16, 185, 129, 0.08);
+            color: var(--emerald);
+        }
+        .positions-table .direction-badge.fall {
+            background: rgba(244, 63, 94, 0.08);
+            color: var(--rose);
+        }
+        .positions-table .direction-badge.match {
+            background: rgba(245, 158, 11, 0.08);
+            color: var(--gold);
+        }
+
+        .positions-table .pnl.profit { color: var(--emerald); font-weight: 600; }
+        .positions-table .pnl.loss { color: var(--rose); font-weight: 600; }
+
+        /* ============================================================
+                   RESPONSIVE
+                   ============================================================ */
+        @media (max-width: 1024px) {
+            .trade-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+                margin-top: 65px;
+            }
+            .page-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .asset-selector {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            .balance-display {
+                font-size: 0.65rem;
+                padding: 0.2rem 0.6rem;
+            }
+            .flag-icon {
+                width: 22px;
+                height: 22px;
+            }
+            .page-header h1 {
+                font-size: 1.3rem;
+            }
+            .trade-type-selector {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            .expiry-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            #binary_chart {
+                height: 280px;
+                min-height: 200px;
+            }
+            .chart-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+            }
+            .chart-toolbar .timeframes {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            .direction-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .site-name {
+                font-size: 0.9rem;
+            }
+            .logo-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+            .order-panel {
+                padding: 1rem;
+            }
+            .positions-table {
+                min-width: 480px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== ANIMATED BACKGROUND ===== -->
+    <div class="bg-glow"></div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav>
+        <div class="logo-area" onclick="location.href='index.html'">
+            <div class="logo-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="site-name">Flints<span>Market</span></div>
+        </div>
+
+        <div class="right-menu">
+            <img src="https://flagcdn.com/w320/us.png" alt="USD" class="flag-icon" onclick="showMessage('Currency: USD')">
+            <div class="balance-display" id="balanceDisplay">$12,450.00</div>
+            <button class="mobile-menu-btn" onclick="openSidebar()"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- ===== SIDEBAR ===== -->
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()">
+        <div class="sidebar-menu" onclick="event.stopPropagation()">
+            <div class="sidebar-header">
+                <div class="avatar-large" id="sidebarAvatar">KA</div>
+                <div>
+                    <div class="user-name" id="sidebarName">Kwame Adjei</div>
+                    <div class="user-email" id="sidebarEmail">kwame@example.com</div>
+                </div>
+                <button class="close-sidebar" onclick="closeSidebar()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="sidebar-nav">
+                <a href="dashboard.html" onclick="closeSidebar()"><i class="fas fa-th-large"></i> Dashboard</a>
+                <a href="trade.html" onclick="closeSidebar()"><i class="fas fa-arrow-trend-up"></i> Trade</a>
+                <a href="markets.html" onclick="closeSidebar()"><i class="fas fa-chart-simple"></i> Markets</a>
+                <a href="#" class="active" onclick="closeSidebar()"><i class="fas fa-layer-group"></i> Binary Options</a>
+                <a href="#" onclick="closeSidebar()"><i class="fas fa-arrow-right-arrow-left"></i> Forex</a>
+                <a href="#" onclick="closeSidebar()"><i class="fab fa-bitcoin"></i> Crypto</a>
+                <a href="#" onclick="closeSidebar()"><i class="fas fa-oil-can"></i> Oil</a>
+                <a href="deposit.html" onclick="closeSidebar()"><i class="fas fa-wallet"></i> Deposit</a>
+                <a href="withdraw.html" onclick="closeSidebar()"><i class="fas fa-arrow-right-from-bracket"></i> Withdraw</a>
+                <a href="history.html" onclick="closeSidebar()"><i class="fas fa-clock-rotate-left"></i> History</a>
+                <a href="settings.html" onclick="closeSidebar()"><i class="fas fa-gear"></i> Settings</a>
+                <a href="#" class="logout-item" onclick="logout(); closeSidebar();"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-container">
+
+        <!-- ===== PAGE HEADER ===== -->
+        <div class="page-header">
+            <div>
+                <h1><i class="fas fa-layer-group"></i> Binary Options</h1>
+                <p>Predict price movement — Rise, Fall, or Match!</p>
+            </div>
+            <div class="asset-selector">
+                <button class="active">BTC/USD</button>
+                <button>ETH/USD</button>
+                <button>SOL/USD</button>
+                <button>OIL/USD</button>
+                <button>EUR/USD</button>
+            </div>
+        </div>
+
+        <!-- ===== TRADING GRID ===== -->
+        <div class="trade-grid">
+
+            <!-- ===== CHART ===== -->
+            <div class="chart-container">
+                <div class="chart-toolbar">
+                    <div class="left">
+                        <div class="asset-info">
+                            <span style="font-weight:600;">BTC/USD</span>
+                            <span class="price up" id="chartPrice">$67,432.50</span>
+                            <span class="change up" id="chartChange">▲ +2.4%</span>
+                        </div>
+                    </div>
+                    <div class="timeframes">
+                        <button>1m</button>
+                        <button>5m</button>
+                        <button class="active">15m</button>
+                        <button>1h</button>
+                        <button>4h</button>
+                        <button>1d</button>
+                    </div>
+                </div>
+                <div id="binary_chart"></div>
+            </div>
+
+            <!-- ===== ORDER PANEL ===== -->
+            <div class="order-panel">
+                <div class="panel-title">
+                    <i class="fas fa-bolt"></i> Place Binary Option
+                </div>
+
+                <!-- Trade Type -->
+                <div class="trade-type-selector">
+                    <button class="active" data-type="rise">📈 Rise</button>
+                    <button data-type="fall">📉 Fall</button>
+                    <button data-type="match">🎯 Match</button>
+                </div>
+
+                <!-- Expiry -->
+                <div class="expiry-selector">
+                    <button class="active">1 min</button>
+                    <button>5 min</button>
+                    <button>15 min</button>
+                    <button>1 hour</button>
+                </div>
+
+                <!-- Amount -->
+                <div class="amount-input">
+                    <label>Investment Amount (USD)</label>
+                    <div class="input-wrap">
+                        <input type="number" id="binaryAmount" value="50" step="1" min="1" />
+                        <span class="currency">USD</span>
+                    </div>
+                    <div class="quick-amounts">
+                        <button onclick="setAmount(10)">$10</button>
+                        <button onclick="setAmount(25)">$25</button>
+                        <button onclick="setAmount(50)">$50</button>
+                        <button onclick="setAmount(100)">$100</button>
+                        <button onclick="setAmount(250)">$250</button>
+                    </div>
+                </div>
+
+                <!-- Direction Buttons -->
+                <div class="direction-buttons">
+                    <button class="btn-rise" onclick="placeBinaryTrade('rise')">
+                        <i class="fas fa-arrow-up" style="margin-right:6px;"></i> RISE (Up)
+                    </button>
+                    <button class="btn-fall" onclick="placeBinaryTrade('fall')">
+                        <i class="fas fa-arrow-down" style="margin-right:6px;"></i> FALL (Down)
+                    </button>
+                </div>
+
+                <!-- Match Button -->
+                <button class="btn-match" onclick="placeBinaryTrade('match')">
+                    <i class="fas fa-bullseye" style="margin-right:6px;"></i> 🎯 MATCH — Predict Exact Price
+                </button>
+
+                <!-- Payout Info -->
+                <div class="payout-info">
+                    <span class="label">Potential Payout:</span>
+                    <span class="value" id="payoutDisplay">+$95.00 (90%)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== OPEN POSITIONS ===== -->
+        <div class="positions-section">
+            <div class="section-header">
+                <h3><i class="fas fa-clock" style="color:var(--blue-primary);margin-right:6px;"></i> Active Binary Options</h3>
+                <span class="badge">3 Active</span>
+            </div>
+            <div class="positions-table-wrap">
+                <table class="positions-table">
+                    <thead>
+                        <tr>
+                            <th>Asset</th>
+                            <th>Direction</th>
+                            <th>Amount</th>
+                            <th>Entry Price</th>
+                            <th>Expiry</th>
+                            <th>Status</th>
+                            <th>P&L</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>BTC/USD</strong></td>
+                            <td><span class="direction-badge rise"><i class="fas fa-arrow-up"></i> RISE</span></td>
+                            <td>$50.00</td>
+                            <td>$67,432</td>
+                            <td style="color:var(--text-muted);font-size:0.75rem;">2 min left</td>
+                            <td><span class="status active"><i class="fas fa-circle" style="font-size:6px;"></i> Active</span></td>
+                            <td class="pnl profit">+$47.50</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ETH/USD</strong></td>
+                            <td><span class="direction-badge fall"><i class="fas fa-arrow-down"></i> FALL</span></td>
+                            <td>$75.00</td>
+                            <td>$2,250</td>
+                            <td style="color:var(--text-muted);font-size:0.75rem;">5 min left</td>
+                            <td><span class="status active"><i class="fas fa-circle" style="font-size:6px;"></i> Active</span></td>
+                            <td class="pnl loss">-$75.00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SOL/USD</strong></td>
+                            <td><span class="direction-badge match"><i class="fas fa-bullseye"></i> MATCH</span></td>
+                            <td>$100.00</td>
+                            <td>$145.20</td>
+                            <td style="color:var(--text-muted);font-size:0.75rem;">Expired</td>
+                            <td><span class="status won"><i class="fas fa-check-circle"></i> Won</span></td>
+                            <td class="pnl profit">+$120.00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>OIL/USD</strong></td>
+                            <td><span class="direction-badge fall"><i class="fas fa-arrow-down"></i> FALL</span></td>
+                            <td>$30.00</td>
+                            <td>$82.50</td>
+                            <td style="color:var(--text-muted);font-size:0.75rem;">Expired</td>
+                            <td><span class="status lost"><i class="fas fa-times-circle"></i> Lost</span></td>
+                            <td class="pnl loss">-$30.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align:center;padding:1.5rem 0 0.5rem;font-size:0.75rem;color:var(--text-muted);border-top:1px solid var(--border-color);margin-top:1.5rem;">
+            &copy; 2026 FlintsMarket — Premier Trading Platform
+        </div>
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        // ===== TRADING VIEW CHART — LINE CHART (DEFAULT) =====
+        let tvWidget = null;
+        let currentAsset = 'BTCUSD';
+
+        function initChart(asset) {
+            try {
+                if (tvWidget) {
+                    tvWidget.remove();
+                    tvWidget = null;
+                }
+
+                const container = document.getElementById('binary_chart');
+                if (!container) return;
+
+                container.style.background = '#ffffff';
+
+                tvWidget = new TradingView.widget({
+                    symbol: asset || 'BTCUSD',
+                    interval: '15',
+                    fullscreen: false,
+                    container_id: 'binary_chart',
+                    width: '100%',
+                    height: 450,
+                    autosize: true,
+                    toolbar_bg: '#f0f0f0',
+                    enable_publishing: false,
+                    hide_side_toolbar: false,
+                    allow_symbol_change: false,
+                    save_image: false,
+                    style: '3', // 3 = Line chart (default)
+                    timezone: 'exchange',
+                    theme: 'light',
+                    backgroundColor: '#ffffff',
+                    gridColor: 'rgba(0,0,0,0.04)',
+                    hide_top_toolbar: false,
+                    hide_legend: false,
+                    withdateranges: true,
+                    hide_volume: true,
+                    studies: ['MASimple@tv-basicstudies'],
+                    locale: 'en'
+                });
+
+                console.log('✅ Binary chart loaded with LINE chart style');
+            } catch (error) {
+                console.error('❌ Error loading chart:', error);
+                const container = document.getElementById('binary_chart');
+                if (container) {
+                    container.innerHTML = `
+                            <div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:0.5rem;background:#ffffff;color:#333;border-radius:12px;">
+                                <span style="font-size:2rem;">📊</span>
+                                <span style="font-weight:600;">Chart Loading...</span>
+                            </div>
+                        `;
+                }
+            }
+        }
+
+        // ===== ASSET SELECTOR =====
+        document.querySelectorAll('.asset-selector button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.asset-selector button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const asset = this.textContent.replace('/', '');
+                currentAsset = asset;
+                initChart(asset);
+                updatePriceDisplay(asset);
+            });
+        });
+
+        // ===== TIMEFRAME BUTTONS =====
+        document.querySelectorAll('.timeframes button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.timeframes button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                if (tvWidget) {
+                    const intervals = {
+                        '1m': '1',
+                        '5m': '5',
+                        '15m': '15',
+                        '1h': '60',
+                        '4h': '240',
+                        '1d': 'D'
+                    };
+                    const interval = intervals[this.textContent] || '15';
+                    tvWidget.chart().setResolution(interval);
+                }
+            });
+        });
+
+        // ===== TRADE TYPE SELECTOR =====
+        document.querySelectorAll('.trade-type-selector button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.trade-type-selector button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // ===== EXPIRY SELECTOR =====
+        document.querySelectorAll('.expiry-selector button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.expiry-selector button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // ===== QUICK AMOUNTS =====
+        function setAmount(amount) {
+            document.getElementById('binaryAmount').value = amount;
+            updatePayout();
+        }
+
+        // ===== UPDATE PAYOUT =====
+        function updatePayout() {
+            const amount = parseFloat(document.getElementById('binaryAmount').value) || 0;
+            const payout = amount * 0.9;
+            document.getElementById('payoutDisplay').textContent = '+$' + payout.toFixed(2) + ' (90%)';
+        }
+
+        document.getElementById('binaryAmount').addEventListener('input', updatePayout);
+
+        // ===== UPDATE PRICE DISPLAY =====
+        function updatePriceDisplay(asset) {
+            const prices = {
+                'BTCUSD': { price: 67432.50, change: '+2.4%', up: true },
+                'ETHUSD': { price: 2250.00, change: '+3.2%', up: true },
+                'SOLUSD': { price: 145.20, change: '+5.1%', up: true },
+                'OILUSD': { price: 82.50, change: '-0.8%', up: false },
+                'EURUSD': { price: 1.0892, change: '+0.3%', up: true }
+            };
+            const data = prices[asset] || prices['BTCUSD'];
+            const priceEl = document.getElementById('chartPrice');
+            const changeEl = document.getElementById('chartChange');
+            priceEl.textContent = '$' + data.price.toFixed(2);
+            priceEl.className = 'price ' + (data.up ? 'up' : 'down');
+            changeEl.textContent = (data.up ? '▲ ' : '▼ ') + data.change;
+            changeEl.className = 'change ' + (data.up ? 'up' : 'down');
+        }
+
+        // ===== PLACE BINARY TRADE =====
+        function placeBinaryTrade(direction) {
+            const amount = parseFloat(document.getElementById('binaryAmount').value);
+            const tradeType = document.querySelector('.trade-type-selector button.active');
+            const typeText = tradeType ? tradeType.textContent : 'Rise';
+
+            let btn;
+            if (direction === 'rise') btn = document.querySelector('.btn-rise');
+            else if (direction === 'fall') btn = document.querySelector('.btn-fall');
+            else btn = document.querySelector('.btn-match');
+
+            if (!amount || amount < 1) {
+                alert('⚠️ Please enter a valid amount (minimum $1)');
+                return;
+            }
+
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:6px;"></i> Processing...';
+            btn.style.opacity = '0.7';
+
+            setTimeout(() => {
+                const isWin = Math.random() > 0.3;
+                const payout = amount * 0.9;
+
+                btn.innerHTML = isWin ? '✅ Won!' : '❌ Lost!';
+                btn.style.background = isWin ? 'linear-gradient(135deg, #10b981, #34d399)' : 'linear-gradient(135deg, #f43f5e, #fb7185)';
+
+                const directionNames = {
+                    'rise': 'RISE (Up)',
+                    'fall': 'FALL (Down)',
+                    'match': 'MATCH (Exact Price)'
+                };
+
+                const resultMsg = isWin ?
+                    `🎉 CONGRATULATIONS! You won!\n\nDirection: ${directionNames[direction]}\nAmount: $${amount.toFixed(2)}\nPayout: +$${payout.toFixed(2)} (90%)` :
+                    `😔 Sorry, you lost.\n\nDirection: ${directionNames[direction]}\nAmount: $${amount.toFixed(2)}\nLoss: -$${amount.toFixed(2)}`;
+
+                setTimeout(() => {
+                    alert(resultMsg);
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                    btn.style.opacity = '1';
+                }, 1500);
+            }, 1500);
+        }
+
+        // ===== SIMULATE PRICE UPDATE =====
+        function updatePrice() {
+            const priceEl = document.getElementById('chartPrice');
+            const changeEl = document.getElementById('chartChange');
+            const current = parseFloat(priceEl.textContent.replace(/[^0-9.]/g, ''));
+            if (!isNaN(current)) {
+                const change = (Math.random() - 0.45) * 15;
+                const newPrice = Math.max(0, current + change);
+                const isUp = change > 0;
+                priceEl.textContent = '$' + newPrice.toFixed(2);
+                priceEl.className = 'price ' + (isUp ? 'up' : 'down');
+                const pct = ((change / current) * 100).toFixed(1);
+                changeEl.textContent = (isUp ? '▲ +' : '▼ -') + Math.abs(pct) + '%';
+                changeEl.className = 'change ' + (isUp ? 'up' : 'down');
+
+                // Update payout
+                updatePayout();
+            }
+        }
+
+        // ===== SIDEBAR =====
+        function openSidebar() { document.getElementById('sidebarOverlay').classList.add('active'); }
+        function closeSidebar() { document.getElementById('sidebarOverlay').classList.remove('active'); }
+        function logout() { if (confirm('Are you sure you want to logout?')) { alert('Logging out...'); } }
+        function showMessage(msg) { alert(msg); }
+
+        // ===== INIT =====
+        function init() {
+            setTimeout(() => initChart('BTCUSD'), 800);
+            setInterval(updatePrice, 3000);
+            updatePayout();
+            console.log('📊 Binary Options page loaded with LINE chart!');
+            console.log('📈 Trade: Rise, Fall, or Match!');
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
