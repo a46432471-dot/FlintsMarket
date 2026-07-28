@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=yes, viewport-fit=cover" />
     <title>FlintsMarket - Premier Trading Platform</title>
 
     <!-- ===== PREMIUM FONTS ===== -->
@@ -65,7 +65,7 @@
         .container {
             max-width: 1240px;
             margin: 0 auto;
-            padding: 0 32px;
+            padding: 0 24px;
         }
 
         a {
@@ -75,7 +75,7 @@
 
         /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar {
-            width: 5px;
+            width: 4px;
         }
         ::-webkit-scrollbar-track {
             background: var(--bg-deep);
@@ -85,20 +85,13 @@
             border-radius: 10px;
         }
 
-        /* ===== GLASS EFFECT ===== */
-        .glass {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
         /* ===== BUTTONS ===== */
         .btn-primary {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 18px 48px;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 36px;
             background: var(--gold-gradient);
             color: #0a0e1a;
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -112,6 +105,8 @@
             box-shadow: 0 4px 30px rgba(201, 154, 59, 0.25);
             position: relative;
             overflow: hidden;
+            min-height: 50px;
+            min-width: 44px;
         }
 
         .btn-primary::before {
@@ -137,8 +132,9 @@
         .btn-secondary {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 18px 48px;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 36px;
             background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -151,6 +147,8 @@
             border-radius: var(--radius-full);
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            min-height: 50px;
+            min-width: 44px;
         }
 
         .btn-secondary:hover {
@@ -161,7 +159,7 @@
         }
 
         /* ============================================================
-                   NAVIGATION
+                   NAVIGATION - MOBILE OPTIMIZED
                    ============================================================ */
         .navbar {
             position: fixed;
@@ -169,7 +167,7 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 18px 0;
+            padding: 14px 0;
             transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -178,7 +176,7 @@
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            padding: 10px 0;
+            padding: 8px 0;
         }
 
         .navbar .container {
@@ -190,36 +188,38 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
             font-family: 'Fraunces', serif;
-            font-size: 28px;
+            font-size: 22px;
             font-weight: 800;
             letter-spacing: -0.5px;
+            flex-shrink: 0;
         }
 
         .logo-icon {
-            width: 48px;
-            height: 48px;
+            width: 38px;
+            height: 38px;
             background: var(--gold-gradient);
-            border-radius: 14px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 900;
             color: #0a0e1a;
             position: relative;
+            flex-shrink: 0;
         }
 
         .logo-icon::after {
             content: '';
             position: absolute;
             inset: -2px;
-            border-radius: 16px;
+            border-radius: 12px;
             background: var(--gold-gradient);
             opacity: 0.3;
-            filter: blur(10px);
+            filter: blur(8px);
             z-index: -1;
         }
 
@@ -232,10 +232,10 @@
 
         .logo .tagline {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 9px;
+            font-size: 7px;
             font-weight: 600;
             color: var(--text-muted);
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             display: block;
             margin-top: -2px;
@@ -250,11 +250,11 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 36px;
+            gap: 28px;
         }
 
         .nav-links a {
-            font-size: 13.5px;
+            font-size: 13px;
             font-weight: 500;
             color: var(--text-secondary);
             transition: all 0.3s ease;
@@ -284,14 +284,14 @@
         .nav-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .btn-login {
-            font-size: 13.5px;
+            font-size: 13px;
             font-weight: 600;
             color: var(--text-secondary);
-            padding: 10px 24px;
+            padding: 8px 16px;
             border-radius: var(--radius-full);
             transition: all 0.3s ease;
             border: 1px solid transparent;
@@ -303,9 +303,9 @@
         }
 
         .btn-signup {
-            font-size: 13.5px;
+            font-size: 13px;
             font-weight: 600;
-            padding: 10px 28px;
+            padding: 8px 20px;
             background: var(--gold-gradient);
             color: #0a0e1a;
             border-radius: var(--radius-full);
@@ -325,22 +325,23 @@
             cursor: pointer;
             background: none;
             border: none;
-            padding: 4px;
+            padding: 6px 8px;
+            min-height: 44px;
+            min-width: 44px;
         }
 
         /* ============================================================
-                   HERO — WITH BACKGROUND SLIDESHOW & VISIBLE TEXT
+                   HERO — MOBILE OPTIMIZED
                    ============================================================ */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 120px 0 80px;
+            padding: 100px 0 60px;
             position: relative;
             overflow: hidden;
         }
 
-        /* ===== BACKGROUND SLIDESHOW ===== */
         .hero-slideshow {
             position: absolute;
             inset: 0;
@@ -363,7 +364,6 @@
             transform: scale(1);
         }
 
-        /* ===== STRONGER DARK OVERLAY FOR READABILITY ===== */
         .hero-slideshow::after {
             content: '';
             position: absolute;
@@ -372,7 +372,6 @@
             z-index: 1;
         }
 
-        /* Subtle gradient overlay to blend edges */
         .hero-slideshow::before {
             content: '';
             position: absolute;
@@ -389,7 +388,7 @@
             z-index: 2;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 70px;
+            gap: 50px;
             align-items: center;
         }
 
@@ -408,29 +407,28 @@
             }
         }
 
-        /* ===== HERO BADGE — DARK GLASS ===== */
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px 24px;
+            gap: 8px;
+            padding: 6px 18px;
             background: rgba(0, 0, 0, 0.45);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: var(--radius-full);
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: var(--gold-light);
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             animation: pulseBorder 3s ease-in-out infinite;
         }
 
         .hero-badge .dot {
-            width: 7px;
-            height: 7px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background: var(--emerald);
             animation: blink 1.5s ease-in-out infinite;
@@ -456,13 +454,12 @@
             }
         }
 
-        /* ===== HERO HEADLINE — PURE WHITE WITH GLOW ===== */
         .hero h1 {
             font-family: 'Fraunces', serif;
-            font-size: 64px;
+            font-size: 54px;
             font-weight: 900;
             line-height: 1.06;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             letter-spacing: -1.5px;
             color: #ffffff;
             text-shadow:
@@ -493,12 +490,11 @@
             filter: blur(2px);
         }
 
-        /* ===== SUBTITLE — BRIGHT WHITE ===== */
         .hero-subtitle {
-            font-size: 18px;
+            font-size: 16px;
             color: rgba(255, 255, 255, 0.92);
             max-width: 480px;
-            margin-bottom: 36px;
+            margin-bottom: 28px;
             line-height: 1.8;
             font-weight: 400;
             text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
@@ -506,17 +502,17 @@
 
         .hero-buttons {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
-            margin-bottom: 48px;
+            margin-bottom: 36px;
         }
 
-        /* ===== STATS — WHITE WITH GLOW ===== */
         .hero-stats {
             display: flex;
-            gap: 56px;
-            padding-top: 36px;
+            gap: 40px;
+            padding-top: 28px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
+            flex-wrap: wrap;
         }
 
         .stat-item {
@@ -526,7 +522,7 @@
 
         .stat-number {
             font-family: 'Fraunces', serif;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 800;
             color: #ffffff;
             text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
@@ -540,7 +536,7 @@
         }
 
         .stat-label {
-            font-size: 13px;
+            font-size: 12px;
             color: rgba(255, 255, 255, 0.7);
             font-weight: 400;
             letter-spacing: 0.2px;
@@ -551,7 +547,7 @@
         .hero-visual {
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 20px;
             animation: fadeUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
             opacity: 0;
         }
@@ -561,9 +557,9 @@
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: var(--radius-lg);
-            padding: 32px;
+            padding: 24px;
             overflow: hidden;
-            min-height: 340px;
+            min-height: 260px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -573,17 +569,17 @@
         .trading-illustration {
             position: relative;
             width: 100%;
-            height: 280px;
+            height: 220px;
             display: flex;
             align-items: flex-end;
-            gap: 6px;
+            gap: 5px;
         }
 
         .ill-bar {
             flex: 1;
-            border-radius: 6px 6px 0 0;
+            border-radius: 4px 4px 0 0;
             position: relative;
-            min-height: 8px;
+            min-height: 6px;
             animation: barRise 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
             transform-origin: bottom;
             opacity: 0;
@@ -697,15 +693,15 @@
 
         .floating-dots {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 16px;
+            right: 16px;
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
 
         .floating-dots span {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background: var(--gold-primary);
             opacity: 0.2;
@@ -735,26 +731,26 @@
 
         .illustration-glow {
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(201, 154, 59, 0.04), transparent 70%);
-            bottom: -100px;
-            right: -80px;
+            bottom: -80px;
+            right: -60px;
             z-index: -1;
         }
 
         .illustration-label {
             position: absolute;
-            bottom: 16px;
-            right: 24px;
-            font-size: 10px;
+            bottom: 12px;
+            right: 18px;
+            font-size: 9px;
             font-weight: 600;
             color: var(--text-muted);
             letter-spacing: 0.5px;
             text-transform: uppercase;
             background: rgba(0, 0, 0, 0.4);
-            padding: 4px 14px;
+            padding: 3px 10px;
             border-radius: var(--radius-full);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -764,7 +760,7 @@
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: var(--radius-lg);
-            padding: 24px 28px;
+            padding: 18px 20px;
             backdrop-filter: blur(20px);
             transition: all 0.4s ease;
         }
@@ -777,14 +773,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
         }
 
         .ticker-header .label {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 11px;
+            gap: 8px;
+            font-size: 10px;
             font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
@@ -792,18 +788,18 @@
         }
 
         .ticker-header .label .live-dot {
-            width: 7px;
-            height: 7px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background: var(--emerald);
             animation: blink 1.2s ease-in-out infinite;
         }
 
         .ticker-header .badge {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
             color: var(--text-muted);
-            padding: 4px 14px;
+            padding: 3px 10px;
             border-radius: var(--radius-full);
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -813,7 +809,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
+            padding: 8px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.02);
             transition: all 0.3s ease;
         }
@@ -823,26 +819,26 @@
         }
 
         .ticker-row:hover {
-            padding-left: 8px;
-            padding-right: 8px;
+            padding-left: 6px;
+            padding-right: 6px;
             background: rgba(255, 255, 255, 0.01);
-            border-radius: 8px;
+            border-radius: 6px;
         }
 
         .ticker-row .asset-group {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .ticker-row .asset-icon {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 700;
             background: rgba(255, 255, 255, 0.04);
         }
@@ -870,24 +866,24 @@
 
         .ticker-row .asset-name {
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .ticker-row .asset-full {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-muted);
         }
 
         .ticker-row .price {
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
             font-family: 'Fraunces', serif;
         }
 
         .ticker-row .change {
             font-weight: 700;
-            font-size: 12px;
-            padding: 4px 14px;
+            font-size: 11px;
+            padding: 2px 10px;
             border-radius: var(--radius-full);
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
@@ -903,29 +899,29 @@
         }
 
         /* ============================================================
-                   SECTION HEADERS
+                   SECTIONS — MOBILE OPTIMIZED
                    ============================================================ */
         .section-header {
             text-align: center;
-            margin-bottom: 56px;
+            margin-bottom: 40px;
         }
 
         .section-header .tag {
             display: inline-block;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             color: var(--gold-primary);
             text-transform: uppercase;
-            letter-spacing: 2.5px;
-            margin-bottom: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
             background: rgba(201, 154, 59, 0.06);
-            padding: 5px 22px;
+            padding: 4px 18px;
             border-radius: var(--radius-full);
         }
 
         .section-header h2 {
             font-family: 'Fraunces', serif;
-            font-size: 42px;
+            font-size: 34px;
             font-weight: 800;
             letter-spacing: -0.5px;
         }
@@ -939,9 +935,9 @@
 
         .section-header p {
             color: var(--text-secondary);
-            font-size: 17px;
+            font-size: 15px;
             max-width: 560px;
-            margin: 10px auto 0;
+            margin: 8px auto 0;
             font-weight: 400;
         }
 
@@ -949,7 +945,7 @@
                    TRUST BADGES
                    ============================================================ */
         .trust-section {
-            padding: 28px 0;
+            padding: 20px 0;
             border-top: 1px solid rgba(255, 255, 255, 0.03);
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             background: rgba(255, 255, 255, 0.005);
@@ -960,28 +956,28 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 12px;
         }
 
         .trust-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 13.5px;
+            gap: 8px;
+            font-size: 12px;
             color: var(--text-secondary);
             padding: 4px 0;
         }
 
         .trust-item .icon-wrap {
-            width: 36px;
-            height: 36px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             background: rgba(201, 154, 59, 0.06);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--gold-primary);
-            font-size: 14px;
+            font-size: 12px;
         }
 
         .trust-item strong {
@@ -993,53 +989,38 @@
                    MARKETS SECTION
                    ============================================================ */
         .markets-section {
-            padding: 90px 0 70px;
+            padding: 60px 0 50px;
         }
 
         .markets-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
+            gap: 20px;
         }
 
         .market-card {
             background: var(--bg-card);
             border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: var(--radius-lg);
-            padding: 36px 30px;
+            padding: 28px 24px;
             transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             overflow: hidden;
             cursor: default;
         }
 
-        .market-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: var(--radius-lg);
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(201, 154, 59, 0.04), transparent 60%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-        }
-
-        .market-card:hover::before {
-            opacity: 1;
-        }
-
         .market-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-6px);
             border-color: rgba(201, 154, 59, 0.1);
             box-shadow: var(--shadow-card);
         }
 
         .market-card .icon-wrap {
-            font-size: 22px;
-            margin-bottom: 16px;
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
+            font-size: 20px;
+            margin-bottom: 12px;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
             background: rgba(201, 154, 59, 0.08);
             color: var(--gold-primary);
             display: flex;
@@ -1062,26 +1043,26 @@
 
         .market-card h3 {
             font-family: 'Fraunces', serif;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             letter-spacing: -0.3px;
         }
 
         .market-card p {
             color: var(--text-secondary);
-            font-size: 14px;
-            line-height: 1.8;
+            font-size: 13px;
+            line-height: 1.7;
             font-weight: 400;
         }
 
         .market-card .tag {
             display: inline-block;
-            margin-top: 16px;
-            padding: 5px 18px;
+            margin-top: 12px;
+            padding: 4px 14px;
             background: rgba(201, 154, 59, 0.06);
             border-radius: var(--radius-full);
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             color: var(--gold-primary);
             letter-spacing: 0.3px;
@@ -1090,9 +1071,9 @@
         .market-card .trend {
             display: flex;
             align-items: center;
-            gap: 6px;
-            margin-top: 12px;
-            font-size: 12.5px;
+            gap: 4px;
+            margin-top: 10px;
+            font-size: 11px;
             font-weight: 600;
         }
 
@@ -1107,7 +1088,7 @@
                    HOW IT WORKS
                    ============================================================ */
         .how-section {
-            padding: 70px 0 90px;
+            padding: 50px 0 60px;
             background: rgba(255, 255, 255, 0.005);
             position: relative;
         }
@@ -1125,12 +1106,12 @@
         .how-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
+            gap: 20px;
         }
 
         .how-card {
             text-align: center;
-            padding: 40px 28px;
+            padding: 32px 20px;
             border-radius: var(--radius-md);
             background: var(--bg-card);
             border: 1px solid rgba(255, 255, 255, 0.03);
@@ -1146,20 +1127,20 @@
 
         .how-card .step-number {
             font-family: 'Fraunces', serif;
-            font-size: 52px;
+            font-size: 40px;
             font-weight: 900;
             color: var(--gold-primary);
             opacity: 0.08;
             position: absolute;
-            top: 12px;
-            right: 20px;
+            top: 8px;
+            right: 16px;
             line-height: 1;
         }
 
         .how-card .icon {
-            font-size: 36px;
+            font-size: 30px;
             color: var(--gold-primary);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             display: block;
         }
 
@@ -1172,13 +1153,13 @@
 
         .how-card h4 {
             font-family: 'Fraunces', serif;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .how-card p {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-secondary);
             line-height: 1.7;
             font-weight: 400;
@@ -1188,18 +1169,18 @@
                    FEATURES
                    ============================================================ */
         .features-section {
-            padding: 80px 0 90px;
+            padding: 60px 0 70px;
         }
 
         .features-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
+            gap: 20px;
         }
 
         .feature-card {
             text-align: center;
-            padding: 36px 24px;
+            padding: 28px 20px;
             border-radius: var(--radius-md);
             background: var(--bg-card);
             border: 1px solid rgba(255, 255, 255, 0.03);
@@ -1209,13 +1190,13 @@
         .feature-card:hover {
             background: var(--bg-card-hover);
             border-color: rgba(201, 154, 59, 0.06);
-            transform: translateY(-6px);
+            transform: translateY(-4px);
         }
 
         .feature-card .icon {
-            font-size: 30px;
+            font-size: 26px;
             color: var(--gold-primary);
-            margin-bottom: 14px;
+            margin-bottom: 10px;
             display: block;
         }
 
@@ -1228,204 +1209,36 @@
 
         .feature-card h4 {
             font-family: 'Fraunces', serif;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .feature-card p {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-secondary);
             line-height: 1.7;
             font-weight: 400;
         }
 
         /* ============================================================
-                   SECURITY
-                   ============================================================ */
-        .security-section {
-            padding: 80px 0;
-            background: rgba(255, 255, 255, 0.005);
-            position: relative;
-        }
-
-        .security-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(201, 154, 59, 0.08), transparent);
-        }
-
-        .security-wrap {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .security-content .tag {
-            display: inline-block;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--gold-primary);
-            text-transform: uppercase;
-            letter-spacing: 2.5px;
-            margin-bottom: 16px;
-            background: rgba(201, 154, 59, 0.06);
-            padding: 5px 22px;
-            border-radius: var(--radius-full);
-        }
-
-        .security-content h2 {
-            font-family: 'Fraunces', serif;
-            font-size: 36px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            margin-bottom: 16px;
-            line-height: 1.2;
-        }
-
-        .security-content h2 span {
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .security-content > p {
-            color: var(--text-secondary);
-            font-size: 16px;
-            line-height: 1.8;
-            margin-bottom: 32px;
-        }
-
-        .security-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .security-list-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-        }
-
-        .security-list-item .icon-wrap {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            background: rgba(201, 154, 59, 0.08);
-            color: var(--gold-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 15px;
-            flex-shrink: 0;
-        }
-
-        .security-list-item h4 {
-            font-family: 'Fraunces', serif;
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 2px;
-        }
-
-        .security-list-item p {
-            font-size: 13px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .security-badges {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        .security-badge-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: var(--radius-md);
-            padding: 28px 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .security-badge-card:hover {
-            border-color: rgba(201, 154, 59, 0.12);
-            transform: translateY(-4px);
-        }
-
-        .security-badge-card i {
-            font-size: 26px;
-            color: var(--gold-primary);
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .security-badge-card .badge-title {
-            font-family: 'Fraunces', serif;
-            font-weight: 700;
-            font-size: 14px;
-            margin-bottom: 3px;
-        }
-
-        .security-badge-card .badge-sub {
-            font-size: 11px;
-            color: var(--text-muted);
-            letter-spacing: 0.3px;
-        }
-
-        /* ============================================================
-                   RISK DISCLOSURE
-                   ============================================================ */
-        .risk-strip {
-            padding: 16px 0;
-            background: rgba(244, 114, 122, 0.03);
-            border-top: 1px solid rgba(244, 114, 122, 0.06);
-            border-bottom: 1px solid rgba(244, 114, 122, 0.06);
-        }
-
-        .risk-strip .container {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .risk-strip i {
-            color: var(--rose);
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        .risk-strip p {
-            font-size: 12px;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* ============================================================
                    TESTIMONIALS
                    ============================================================ */
         .testimonials-section {
-            padding: 90px 0 70px;
+            padding: 60px 0 50px;
         }
 
         .testimonial-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
+            gap: 20px;
         }
 
         .testimonial-card {
             background: var(--bg-card);
             border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: var(--radius-lg);
-            padding: 32px 28px;
+            padding: 24px 20px;
             transition: all 0.4s ease;
         }
 
@@ -1436,17 +1249,17 @@
 
         .testimonial-card .stars {
             color: var(--gold-primary);
-            font-size: 14px;
-            letter-spacing: 3px;
-            margin-bottom: 14px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
         }
 
         .testimonial-card blockquote {
-            font-size: 15px;
-            line-height: 1.8;
+            font-size: 14px;
+            line-height: 1.7;
             color: var(--text-secondary);
             font-style: italic;
-            margin-bottom: 18px;
+            margin-bottom: 14px;
             font-weight: 400;
         }
 
@@ -1454,25 +1267,25 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 14px;
+            gap: 10px;
         }
 
         .testimonial-card .author-left {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
         }
 
         .testimonial-card .avatar {
-            width: 46px;
-            height: 46px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: var(--gold-gradient);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 14px;
             color: #0a0e1a;
             flex-shrink: 0;
         }
@@ -1480,21 +1293,21 @@
         .testimonial-card .author-info .name {
             font-family: 'Fraunces', serif;
             font-weight: 700;
-            font-size: 15px;
+            font-size: 14px;
             color: var(--text-primary);
         }
 
         .testimonial-card .author-info .location {
-            font-size: 12.5px;
+            font-size: 11px;
             color: var(--text-muted);
         }
 
         .testimonial-card .verified {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
             color: var(--emerald);
             background: rgba(61, 214, 140, 0.08);
-            padding: 4px 12px;
+            padding: 2px 10px;
             border-radius: var(--radius-full);
             white-space: nowrap;
         }
@@ -1503,7 +1316,7 @@
                    CTA
                    ============================================================ */
         .cta-section {
-            padding: 90px 0;
+            padding: 60px 0;
             position: relative;
             overflow: hidden;
         }
@@ -1526,7 +1339,7 @@
 
         .cta-section h2 {
             font-family: 'Fraunces', serif;
-            font-size: 44px;
+            font-size: 34px;
             font-weight: 800;
             letter-spacing: -0.5px;
         }
@@ -1540,43 +1353,43 @@
 
         .cta-section p {
             color: var(--text-secondary);
-            font-size: 18px;
+            font-size: 16px;
             max-width: 520px;
-            margin: 12px auto 36px;
+            margin: 10px auto 28px;
             font-weight: 400;
         }
 
         .cta-buttons {
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
         .cta-features {
             display: flex;
             justify-content: center;
-            gap: 32px;
-            margin-top: 36px;
+            gap: 24px;
+            margin-top: 28px;
             flex-wrap: wrap;
         }
 
         .cta-features span {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-secondary);
             font-weight: 400;
         }
 
         .cta-features i {
             color: var(--emerald);
-            margin-right: 8px;
+            margin-right: 6px;
         }
 
         /* ============================================================
                    FOOTER
                    ============================================================ */
         .footer {
-            padding: 48px 0 28px;
+            padding: 36px 0 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.03);
         }
 
@@ -1585,12 +1398,12 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 24px;
+            gap: 16px;
         }
 
         .footer-brand {
             font-family: 'Fraunces', serif;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 800;
         }
 
@@ -1603,12 +1416,12 @@
 
         .footer-links {
             display: flex;
-            gap: 28px;
+            gap: 20px;
             flex-wrap: wrap;
         }
 
         .footer-links a {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-muted);
             transition: color 0.3s ease;
             font-weight: 400;
@@ -1620,12 +1433,12 @@
 
         .footer-social {
             display: flex;
-            gap: 12px;
+            gap: 10px;
         }
 
         .footer-social a {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -1634,7 +1447,7 @@
             justify-content: center;
             color: var(--text-muted);
             transition: all 0.3s ease;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .footer-social a:hover {
@@ -1646,10 +1459,10 @@
 
         .footer-bottom {
             text-align: center;
-            padding-top: 28px;
-            margin-top: 28px;
+            padding-top: 20px;
+            margin-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.03);
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-muted);
             font-weight: 400;
         }
@@ -1661,11 +1474,11 @@
 
         .footer-disclaimer {
             text-align: center;
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-muted);
             line-height: 1.8;
             max-width: 820px;
-            margin: 14px auto 0;
+            margin: 10px auto 0;
             opacity: 0.7;
         }
 
@@ -1678,14 +1491,14 @@
             left: 0;
             right: 0;
             z-index: 999;
-            padding: 14px 20px;
+            padding: 12px 16px;
             background: rgba(10, 14, 26, 0.96);
             backdrop-filter: blur(20px);
             border-top: 1px solid rgba(201, 154, 59, 0.08);
             display: none;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
+            gap: 10px;
             transform: translateY(100%);
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
@@ -1695,34 +1508,37 @@
         }
 
         .sticky-cta span {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--text-secondary);
         }
 
         .sticky-cta a {
-            padding: 10px 24px;
+            padding: 8px 20px;
             background: var(--gold-gradient);
             color: #0a0e1a;
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 12px;
             border-radius: var(--radius-full);
             white-space: nowrap;
         }
 
         /* ============================================================
-                   RESPONSIVE
+                   RESPONSIVE — DESKTOP FIRST
                    ============================================================ */
+
+        /* ===== TABLET ===== */
         @media (max-width: 1024px) {
             .hero .container {
                 grid-template-columns: 1fr;
                 text-align: center;
-                gap: 48px;
+                gap: 36px;
             }
 
             .hero-subtitle {
-                margin: 0 auto 36px;
+                margin: 0 auto 28px;
+                max-width: 100%;
             }
 
             .hero-buttons {
@@ -1749,33 +1565,46 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .security-wrap {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
             .hero-image-wrapper {
-                min-height: 240px;
+                min-height: 220px;
             }
         }
 
+        /* ===== MOBILE ===== */
         @media (max-width: 768px) {
             .container {
-                padding: 0 20px;
+                padding: 0 16px;
+            }
+
+            /* Navigation */
+            .logo {
+                font-size: 18px;
+                gap: 8px;
+            }
+
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+
+            .logo .tagline {
+                font-size: 6px;
+                letter-spacing: 1px;
             }
 
             .nav-links {
                 display: none;
                 flex-direction: column;
                 position: absolute;
-                top: 70px;
+                top: 62px;
                 left: 0;
                 right: 0;
                 background: rgba(10, 14, 26, 0.98);
                 backdrop-filter: blur(30px);
-                padding: 28px 32px;
+                padding: 20px 24px;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-                gap: 18px;
+                gap: 14px;
                 align-items: flex-start;
             }
 
@@ -1783,140 +1612,115 @@
                 display: flex;
             }
 
+            .nav-links a {
+                font-size: 15px;
+                padding: 6px 0;
+                width: 100%;
+            }
+
             .menu-toggle {
                 display: block;
             }
 
-            .hero h1 {
-                font-size: 36px;
+            .nav-actions .btn-login {
+                display: none;
             }
 
-            .hero-stats {
-                gap: 28px;
-                flex-wrap: wrap;
-            }
-
-            .stat-number {
-                font-size: 24px;
-            }
-
-            .markets-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .how-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .testimonial-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .security-badges {
-                grid-template-columns: 1fr;
-            }
-
-            .trust-grid {
-                justify-content: center;
-            }
-
-            .section-header h2 {
-                font-size: 30px;
-            }
-
-            .cta-section h2 {
-                font-size: 30px;
-            }
-
-            .footer .container {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .ticker-card {
-                padding: 18px;
-            }
-
-            .ticker-row {
+            .nav-actions .btn-signup {
                 font-size: 12px;
-                flex-wrap: wrap;
-                gap: 4px;
-                padding: 8px 0;
+                padding: 6px 14px;
             }
 
-            .ticker-row .change {
-                font-size: 11px;
-                padding: 2px 10px;
+            /* Hero */
+            .hero {
+                padding: 80px 0 40px;
+                min-height: auto;
             }
 
-            .ticker-row .asset-icon {
-                width: 24px;
-                height: 24px;
-                font-size: 10px;
-            }
-
-            .hero-image-wrapper {
-                min-height: 180px;
-                padding: 20px;
-            }
-
-            .trading-illustration {
-                height: 160px;
-            }
-
-            .sticky-cta {
-                display: flex;
-            }
-
-            body {
-                padding-bottom: 68px;
-            }
-
-            .risk-strip .container {
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-        }
-
-        @media (max-width: 480px) {
             .hero h1 {
-                font-size: 28px;
+                font-size: 30px;
+                line-height: 1.1;
+            }
+
+            .hero h1 .highlight::after {
+                height: 3px;
+                bottom: 0px;
             }
 
             .hero-subtitle {
                 font-size: 14px;
+                margin-bottom: 20px;
             }
 
-            .btn-primary,
-            .btn-secondary {
-                padding: 14px 24px;
-                font-size: 13px;
-                width: 100%;
-                justify-content: center;
+            .hero-badge {
+                font-size: 9px;
+                padding: 4px 14px;
+                margin-bottom: 14px;
             }
 
             .hero-buttons {
                 flex-direction: column;
                 align-items: stretch;
+                gap: 10px;
+                margin-bottom: 24px;
             }
 
-            .cta-features {
-                gap: 14px;
-                flex-direction: column;
-                align-items: center;
+            .btn-primary,
+            .btn-secondary {
+                padding: 14px 20px;
+                font-size: 14px;
+                width: 100%;
+                justify-content: center;
+                min-height: 48px;
+            }
+
+            .hero-stats {
+                gap: 20px;
+                padding-top: 20px;
+                justify-content: center;
+            }
+
+            .stat-number {
+                font-size: 22px;
+            }
+
+            .stat-label {
+                font-size: 10px;
+            }
+
+            .hero-image-wrapper {
+                min-height: 160px;
+                padding: 16px;
+            }
+
+            .trading-illustration {
+                height: 140px;
+                gap: 4px;
+            }
+
+            .illustration-label {
+                font-size: 7px;
+                padding: 2px 8px;
+                bottom: 8px;
+                right: 12px;
+            }
+
+            .floating-dots {
+                top: 10px;
+                right: 10px;
+            }
+            .floating-dots span {
+                width: 5px;
+                height: 5px;
+            }
+
+            .ticker-card {
+                padding: 14px 16px;
             }
 
             .ticker-row {
-                font-size: 11px;
                 padding: 6px 0;
-            }
-
-            .ticker-row .asset-group {
-                gap: 6px;
+                font-size: 11px;
             }
 
             .ticker-row .asset-icon {
@@ -1925,39 +1729,257 @@
                 font-size: 9px;
             }
 
+            .ticker-row .asset-name {
+                font-size: 11px;
+            }
+
+            .ticker-row .asset-full {
+                font-size: 9px;
+            }
+
             .ticker-row .price {
-                font-size: 12px;
+                font-size: 11px;
             }
 
             .ticker-row .change {
-                font-size: 10px;
+                font-size: 9px;
                 padding: 2px 8px;
             }
 
+            .ticker-header .label {
+                font-size: 9px;
+            }
+
+            .ticker-header .badge {
+                font-size: 8px;
+                padding: 2px 8px;
+            }
+
+            /* Sections */
+            .section-header {
+                margin-bottom: 28px;
+            }
+
+            .section-header h2 {
+                font-size: 26px;
+            }
+
+            .section-header p {
+                font-size: 13px;
+            }
+
+            .markets-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .market-card {
+                padding: 20px 18px;
+            }
+
+            .market-card .icon-wrap {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .market-card h3 {
+                font-size: 16px;
+            }
+
+            .market-card p {
+                font-size: 12px;
+            }
+
+            .how-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .how-card {
+                padding: 24px 18px;
+            }
+
+            .how-card .step-number {
+                font-size: 32px;
+                top: 6px;
+                right: 12px;
+            }
+
+            .how-card .icon {
+                font-size: 24px;
+            }
+
+            .how-card h4 {
+                font-size: 15px;
+            }
+
+            .how-card p {
+                font-size: 12px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .feature-card {
+                padding: 20px 16px;
+            }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .testimonial-card {
+                padding: 20px 16px;
+            }
+
+            .testimonial-card blockquote {
+                font-size: 13px;
+            }
+
+            .trust-grid {
+                justify-content: center;
+                gap: 8px;
+            }
+
+            .trust-item {
+                font-size: 10px;
+            }
+
+            .trust-item .icon-wrap {
+                width: 24px;
+                height: 24px;
+                font-size: 10px;
+            }
+
+            .cta-section {
+                padding: 40px 0;
+            }
+
+            .cta-section h2 {
+                font-size: 26px;
+            }
+
+            .cta-section p {
+                font-size: 14px;
+            }
+
+            .cta-features {
+                gap: 12px;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-features span {
+                font-size: 12px;
+            }
+
+            .footer .container {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+
+            .footer-links {
+                justify-content: center;
+                gap: 14px;
+            }
+
+            .footer-brand {
+                font-size: 18px;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+
+            .sticky-cta {
+                display: flex;
+            }
+
+            body {
+                padding-bottom: 62px;
+            }
+
+            .risk-strip .container {
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+
+            .risk-strip p {
+                font-size: 10px;
+            }
+
+            .risk-strip i {
+                font-size: 12px;
+            }
+        }
+
+        /* ===== SMALL PHONES ===== */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .hero-subtitle {
+                font-size: 13px;
+            }
+
+            .stat-number {
+                font-size: 18px;
+            }
+
+            .section-header h2 {
+                font-size: 22px;
+            }
+
             .hero-image-wrapper {
-                min-height: 140px;
-                padding: 16px;
+                min-height: 130px;
+                padding: 12px;
             }
 
             .trading-illustration {
-                height: 120px;
+                height: 110px;
                 gap: 3px;
             }
 
-            .illustration-label {
+            .ticker-row .asset-icon {
+                width: 18px;
+                height: 18px;
                 font-size: 8px;
-                padding: 2px 10px;
-                bottom: 10px;
-                right: 14px;
             }
 
-            .floating-dots {
-                top: 12px;
-                right: 12px;
+            .ticker-row .price {
+                font-size: 10px;
             }
-            .floating-dots span {
-                width: 6px;
-                height: 6px;
+
+            .ticker-row .change {
+                font-size: 8px;
+                padding: 1px 6px;
+            }
+
+            .sticky-cta span {
+                font-size: 10px;
+            }
+
+            .sticky-cta a {
+                font-size: 10px;
+                padding: 6px 14px;
+            }
+
+            .btn-signup {
+                font-size: 11px;
+                padding: 5px 12px;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                font-size: 13px;
+                padding: 12px 16px;
+                min-height: 44px;
             }
         }
     </style>
@@ -1981,11 +2003,14 @@
                 <li><a href="#how">How It Works</a></li>
                 <li><a href="#features">Why Us</a></li>
                 <li><a href="#testimonials">Testimonials</a></li>
+                <li style="width:100%;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.04);">
+                    <a href="login.html" style="color:var(--gold-primary);">Login</a>
+                </li>
             </ul>
 
             <div class="nav-actions">
-                <a href="login.html#" class="btn-login">Login</a>
-                <a href="signup.html#" class="btn-signup">Get Started</a>
+                <a href="login.html" class="btn-login">Login</a>
+                <a href="signup.html" class="btn-signup">Get Started</a>
                 <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -2016,8 +2041,7 @@
 
                 <p class="hero-subtitle">
                     FlintsMarket gives you access to global markets — from Bitcoin and
-                    Solana to Oil and Forex — all in one powerful, Ghana-friendly platform
-                    built for serious traders.
+                    Solana to Oil and Forex — all in one powerful platform built for serious traders.
                 </p>
 
                 <div class="hero-buttons">
@@ -2125,7 +2149,7 @@
                     </div>
                     <div class="ticker-row">
                         <div class="asset-group">
-                            <span class="asset-icon oil"><i class="fas fa-oil-can" style="font-size:11px;"></i></span>
+                            <span class="asset-icon oil"><i class="fas fa-oil-can" style="font-size:10px;"></i></span>
                             <div>
                                 <div class="asset-name">OIL/USD</div>
                                 <div class="asset-full">Crude Oil</div>
@@ -2136,7 +2160,7 @@
                     </div>
                     <div class="ticker-row">
                         <div class="asset-group">
-                            <span class="asset-icon binary"><i class="fas fa-chart-simple" style="font-size:11px;"></i></span>
+                            <span class="asset-icon binary"><i class="fas fa-chart-simple" style="font-size:10px;"></i></span>
                             <div>
                                 <div class="asset-name">BIN/USD</div>
                                 <div class="asset-full">Binary Index</div>
@@ -2215,8 +2239,8 @@
                 <div class="market-card">
                     <span class="icon-wrap"><i class="fas fa-oil-can"></i></span>
                     <h3>Oil Commodities</h3>
-                    <p>Ghana's favorite — trade Oil with real-time pricing, low spreads, and deep liquidity.</p>
-                    <span class="tag">#1 in Ghana</span>
+                    <p>Trade Oil with real-time pricing, low spreads, and deep liquidity — a favorite among traders.</p>
+                    <span class="tag">#1 Commodity</span>
                     <div class="trend down"><i class="fas fa-arrow-down"></i> Market stable</div>
                 </div>
 
@@ -2260,7 +2284,7 @@
                     <span class="step-number">02</span>
                     <span class="icon emerald"><i class="fas fa-wallet"></i></span>
                     <h4>Fund Your Wallet</h4>
-                    <p>Deposit with Mobile Money, card, or crypto — instant and secure. Start with as little as GH₵50.</p>
+                    <p>Deposit with Mobile Money, card, or crypto — instant and secure. Start with as little as $10.</p>
                 </div>
 
                 <div class="how-card">
@@ -2279,7 +2303,7 @@
             <div class="section-header">
                 <span class="tag">Why Us</span>
                 <h2>Why <span>FlintsMarket</span></h2>
-                <p>Built for Ghanaian traders, trusted by the world.</p>
+                <p>Built for serious traders, trusted by the world.</p>
             </div>
 
             <div class="features-grid">
@@ -2301,7 +2325,7 @@
                 <div class="feature-card">
                     <span class="icon"><i class="fas fa-headset"></i></span>
                     <h4>24/7 Support</h4>
-                    <p>Dedicated local support team in Ghana. We're here when you need us.</p>
+                    <p>Dedicated support team available round the clock. We're here when you need us.</p>
                 </div>
             </div>
         </div>
@@ -2381,7 +2405,7 @@
             <div class="section-header">
                 <span class="tag">Testimonials</span>
                 <h2>What Traders <span>Say</span></h2>
-                <p>Real stories from real traders across Ghana and beyond.</p>
+                <p>Real stories from real traders around the world.</p>
             </div>
 
             <div class="testimonial-grid">
@@ -2389,8 +2413,7 @@
                     <div class="stars">★★★★★</div>
                     <blockquote>
                         “FlintsMarket transformed my trading experience. The platform is fast,
-                        reliable, and the oil trading options are perfect for me as a Ghanaian trader.
-                        Withdrew my first GH₵3,200 profit in under 3 hours.”
+                        reliable, and the oil trading options are perfect for me.”
                     </blockquote>
                     <div class="author">
                         <div class="author-left">
@@ -2408,7 +2431,7 @@
                     <div class="stars">★★★★★</div>
                     <blockquote>
                         “I've tried many platforms, but FlintsMarket is different. Payouts are
-                        clear and withdrawals landed on my Mobile Money in under an hour. Highly recommend!”
+                        clear and withdrawals are fast. Highly recommend!”
                     </blockquote>
                     <div class="author">
                         <div class="author-left">
@@ -2426,7 +2449,7 @@
                     <div class="stars">★★★★★</div>
                     <blockquote>
                         “The crypto and forex pairs are always liquid, and the customer support
-                        team answered me at 2am on WhatsApp. Best trading platform in Ghana.”
+                        team is available 24/7. Best trading platform.”
                     </blockquote>
                     <div class="author">
                         <div class="author-left">
@@ -2464,7 +2487,7 @@
                 <span><i class="fas fa-check-circle"></i> No hidden fees</span>
                 <span><i class="fas fa-check-circle"></i> Instant deposits</span>
                 <span><i class="fas fa-check-circle"></i> Fast withdrawals</span>
-                <span><i class="fas fa-check-circle"></i> Ghana-friendly</span>
+                <span><i class="fas fa-check-circle"></i> 24/7 support</span>
             </div>
         </div>
     </section>
@@ -2526,7 +2549,6 @@
 
             setInterval(nextSlide, 5000);
 
-            // Preload images
             slides.forEach(slide => {
                 const img = new Image();
                 img.src = slide.style.backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
@@ -2634,8 +2656,7 @@
 
         console.log('🏦 FlintsMarket — Premier Trading Platform');
         console.log('📈 Trade Binary, Forex, Crypto & Oil');
-        console.log('🖼️ Background slideshow with 3 stunning images');
-        console.log('👁️ All text optimized for readability');
+        console.log('📱 Fully optimized for mobile devices');
     </script>
 </body>
 </html>
