@@ -559,7 +559,7 @@
     JAVASCRIPT
     ============================================================ -->
     <script type="module">
-        import { signUp, getSession } from './supabase.js'
+        import { supabase, signUp, getSession } from './supabase.js'
 
         // ===== CHECK IF ALREADY LOGGED IN =====
         async function checkSession() {
@@ -584,7 +584,7 @@
             }
         }
 
-        // ===== HANDLE SIGNUP =====
+        // ===== HANDLE SIGNUP — WITH MANUAL PROFILE CREATION =====
         window.handleSignup = async function(event) {
             event.preventDefault()
 
@@ -641,10 +641,19 @@
 
             try {
                 const fullName = firstName + ' ' + lastName
+
+                // STEP 1: Create user with Supabase auth
                 const { data, error } = await signUp(email, password, fullName)
 
                 if (error) {
-                    errorText.textContent = '❌ ' + error.message
+                    // Show specific error message
+                    if (error.message.includes('User already registered')) {
+                        errorText.textContent = '❌ This email is already registered. Please login.'
+                    } else if (error.message.includes('Password')) {
+                        errorText.textContent = '❌ ' + error.message
+                    } else {
+                        errorText.textContent = '❌ ' + error.message
+                    }
                     errorMsg.classList.add('show')
                     btn.innerHTML = originalText
                     btn.disabled = false
@@ -652,6 +661,46 @@
                 }
 
                 if (data?.user) {
+                    // STEP 2: Manually create profile (fallback if trigger fails)
+                    try {
+                        const { error: profileError } = await supabase
+                            .from('profiles')
+                            .insert({
+                                id: data.user.id,
+                                full_name: fullName,
+                                phone: document.getElementById('phoneInput').value.trim() || null,
+                                country: 'Ghana',
+                                tier: 'starter'
+                            })
+
+                        if (profileError) {
+                            console.warn('⚠️ Profile creation warning:', profileError.message)
+                            // Continue anyway — the user might still be able to login
+                        }
+                    } catch (err) {
+                        console.warn('⚠️ Profile creation error:', err.message)
+                    }
+
+                    // STEP 3: Manually create default balances (fallback if trigger fails)
+                    try {
+                        const assets = ['USD', 'BTC', 'ETH', 'SOL', 'OIL']
+                        for (const asset of assets) {
+                            const { error: balanceError } = await supabase
+                                .from('balances')
+                                .insert({
+                                    user_id: data.user.id,
+                                    asset: asset,
+                                    balance: 0
+                                })
+
+                            if (balanceError) {
+                                console.warn(`⚠️ Balance creation warning for ${asset}:`, balanceError.message)
+                            }
+                        }
+                    } catch (err) {
+                        console.warn('⚠️ Balance creation error:', err.message)
+                    }
+
                     // Success
                     successMsg.classList.add('show')
                     document.getElementById('successText').textContent = '✅ Account created! Please check your email to verify.'
@@ -666,6 +715,7 @@
             } catch (err) {
                 errorText.textContent = '❌ An unexpected error occurred. Please try again.'
                 errorMsg.classList.add('show')
+                console.error('Signup error:', err)
                 btn.innerHTML = originalText
                 btn.disabled = false
             }
