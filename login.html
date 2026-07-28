@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=yes, viewport-fit=cover" />
     <meta name="description" content="FlintsMarket - Login to your trading account" />
     <title>FlintsMarket | Login</title>
-    <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,20 80,40 80,70 50,90 20,70 20,40' fill='%233b82f6'/%3E%3C/svg%3E" />
+    <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,20 80,40 80,70 50,90 20,70 20,40' fill='%23c99a3b'/%3E%3C/svg%3E" />
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
         /* ============================================================
-                   CLEAN MODERN LOGIN THEME
+                   DARK THEME — MATCHES INDEX PAGE
                    ============================================================ */
         * {
             margin: 0;
@@ -21,19 +21,20 @@
         }
 
         :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-card: rgba(255, 255, 255, 0.04);
-            --bg-card-hover: rgba(255, 255, 255, 0.07);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted: #475569;
-            --border-color: rgba(255, 255, 255, 0.06);
-            --blue-primary: #3b82f6;
-            --blue-light: #60a5fa;
-            --blue-gradient: linear-gradient(135deg, #3b82f6, #6366f1);
-            --emerald: #10b981;
-            --rose: #f43f5e;
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #0d1224;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-hover: rgba(255, 255, 255, 0.06);
+            --text-primary: #f0ede8;
+            --text-secondary: #b0abc4;
+            --text-muted: #6b6882;
+            --border-color: rgba(255, 255, 255, 0.04);
+            --gold-primary: #c99a3b;
+            --gold-light: #e8c86a;
+            --gold-gradient: linear-gradient(135deg, #c99a3b, #e8c86a, #b8862a);
+            --emerald: #3dd68c;
+            --rose: #f4727a;
+            --blue-accent: #4a8cf7;
             --radius-lg: 20px;
             --radius-md: 14px;
             --radius-sm: 10px;
@@ -63,9 +64,9 @@
             z-index: 0;
             pointer-events: none;
             background: 
-                radial-gradient(ellipse at 20% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(99, 102, 241, 0.06) 0%, transparent 40%),
-                radial-gradient(ellipse at 50% 80%, rgba(16, 185, 129, 0.04) 0%, transparent 40%);
+                radial-gradient(ellipse at 20% 50%, rgba(201, 154, 59, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(201, 154, 59, 0.03) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 80%, rgba(61, 214, 140, 0.02) 0%, transparent 40%);
             animation: bgFloat 20s ease-in-out infinite;
         }
 
@@ -98,7 +99,7 @@
         }
 
         .login-card:hover {
-            border-color: rgba(59, 130, 246, 0.1);
+            border-color: rgba(201, 154, 59, 0.08);
         }
 
         /* ===== LOGO ===== */
@@ -110,15 +111,15 @@
         .login-logo .logo-icon {
             width: 56px;
             height: 56px;
-            background: var(--blue-gradient);
+            background: var(--gold-gradient);
             border-radius: 14px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            color: white;
+            color: #0a0e1a;
             font-size: 24px;
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
+            box-shadow: 0 4px 20px rgba(201, 154, 59, 0.25);
             margin-bottom: 0.8rem;
         }
 
@@ -129,7 +130,10 @@
         }
 
         .login-logo h1 span {
-            color: var(--blue-primary);
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .login-logo p {
@@ -162,8 +166,8 @@
         }
 
         .form-group .input-wrap:focus-within {
-            border-color: var(--blue-primary);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.05);
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 0 3px rgba(201, 154, 59, 0.05);
         }
 
         .form-group .input-wrap i {
@@ -210,13 +214,13 @@
         .options-row .remember-me input[type="checkbox"] {
             width: 16px;
             height: 16px;
-            accent-color: var(--blue-primary);
+            accent-color: var(--gold-primary);
             cursor: pointer;
         }
 
         .options-row .forgot-link {
             font-size: 0.8rem;
-            color: var(--blue-primary);
+            color: var(--gold-primary);
             text-decoration: none;
             font-weight: 500;
         }
@@ -231,8 +235,8 @@
             padding: 0.9rem;
             border: none;
             border-radius: var(--radius-sm);
-            background: var(--blue-gradient);
-            color: white;
+            background: var(--gold-gradient);
+            color: #0a0e1a;
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
             font-weight: 700;
@@ -259,7 +263,7 @@
 
         .btn-login:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 40px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 40px rgba(201, 154, 59, 0.3);
         }
 
         .btn-login:disabled {
@@ -338,7 +342,7 @@
         }
 
         .signup-link a {
-            color: var(--blue-primary);
+            color: var(--gold-primary);
             text-decoration: none;
             font-weight: 600;
         }
@@ -350,8 +354,8 @@
         /* ===== ERROR MESSAGE ===== */
         .error-msg {
             display: none;
-            background: rgba(244, 63, 94, 0.08);
-            border: 1px solid rgba(244, 63, 94, 0.15);
+            background: rgba(244, 114, 122, 0.08);
+            border: 1px solid rgba(244, 114, 122, 0.15);
             border-radius: var(--radius-sm);
             padding: 0.6rem 1rem;
             color: var(--rose);
@@ -360,6 +364,22 @@
         }
 
         .error-msg.show {
+            display: block;
+        }
+
+        /* ===== SUCCESS MESSAGE ===== */
+        .success-msg {
+            display: none;
+            background: rgba(61, 214, 140, 0.08);
+            border: 1px solid rgba(61, 214, 140, 0.15);
+            border-radius: var(--radius-sm);
+            padding: 0.6rem 1rem;
+            color: var(--emerald);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-msg.show {
             display: block;
         }
 
@@ -411,7 +431,13 @@
             <!-- ===== ERROR MESSAGE ===== -->
             <div class="error-msg" id="errorMsg">
                 <i class="fas fa-exclamation-circle" style="margin-right:6px;"></i>
-                Invalid email or password. Please try again.
+                <span id="errorText">Invalid email or password. Please try again.</span>
+            </div>
+
+            <!-- ===== SUCCESS MESSAGE ===== -->
+            <div class="success-msg" id="successMsg">
+                <i class="fas fa-check-circle" style="margin-right:6px;"></i>
+                <span id="successText">Login successful! Redirecting...</span>
             </div>
 
             <!-- ===== LOGIN FORM ===== -->
@@ -420,7 +446,7 @@
                     <label>Email Address</label>
                     <div class="input-wrap">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" id="emailInput" placeholder="you@example.com" required />
+                        <input type="email" id="emailInput" placeholder="you@example.com" required autocomplete="email" />
                     </div>
                 </div>
 
@@ -428,7 +454,7 @@
                     <label>Password</label>
                     <div class="input-wrap">
                         <i class="fas fa-lock"></i>
-                        <input type="password" id="passwordInput" placeholder="Enter your password" required />
+                        <input type="password" id="passwordInput" placeholder="Enter your password" required autocomplete="current-password" />
                     </div>
                 </div>
 
@@ -462,7 +488,7 @@
 
             <!-- ===== SIGNUP LINK ===== -->
             <div class="signup-link">
-                Don't have an account? <a href="#" onclick="showMessage('Signup page coming soon')">Create one</a>
+                Don't have an account? <a href="signup.html">Create one</a>
             </div>
         </div>
     </div>
@@ -470,67 +496,99 @@
     <!-- ============================================================
     JAVASCRIPT
     ============================================================ -->
-    <script>
+    <script type="module">
+        import { signIn, getSession } from './supabase.js'
+
+        // ===== CHECK IF ALREADY LOGGED IN =====
+        async function checkSession() {
+            const session = await getSession()
+            if (session) {
+                window.location.href = 'dashboard.html'
+            }
+        }
+        checkSession()
+
         // ===== HANDLE LOGIN =====
-        function handleLogin(event) {
-            event.preventDefault();
+        window.handleLogin = async function(event) {
+            event.preventDefault()
 
-            const email = document.getElementById('emailInput').value;
-            const password = document.getElementById('passwordInput').value;
-            const btn = document.getElementById('loginBtn');
-            const errorMsg = document.getElementById('errorMsg');
+            const email = document.getElementById('emailInput').value.trim()
+            const password = document.getElementById('passwordInput').value
+            const errorMsg = document.getElementById('errorMsg')
+            const successMsg = document.getElementById('successMsg')
+            const btn = document.getElementById('loginBtn')
+            const errorText = document.getElementById('errorText')
 
-            // Simple validation
+            // Hide previous messages
+            errorMsg.classList.remove('show')
+            successMsg.classList.remove('show')
+
+            // Validate
             if (!email || !password) {
-                errorMsg.textContent = '⚠️ Please enter both email and password.';
-                errorMsg.classList.add('show');
-                return;
+                errorText.textContent = '⚠️ Please enter both email and password.'
+                errorMsg.classList.add('show')
+                return
             }
 
             if (!email.includes('@')) {
-                errorMsg.textContent = '⚠️ Please enter a valid email address.';
-                errorMsg.classList.add('show');
-                return;
+                errorText.textContent = '⚠️ Please enter a valid email address.'
+                errorMsg.classList.add('show')
+                return
             }
 
-            // Hide error
-            errorMsg.classList.remove('show');
-
             // Show loading state
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Logging in...';
-            btn.disabled = true;
+            const originalText = btn.innerHTML
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Logging in...'
+            btn.disabled = true
 
-            // Simulate login
-            setTimeout(() => {
-                // Success - redirect to dashboard
-                btn.innerHTML = '✅ Success!';
-                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            try {
+                const { data, error } = await signIn(email, password)
 
-                setTimeout(() => {
-                    alert('✅ Login successful! Redirecting to dashboard...');
-                    window.location.href = 'dashboard.html';
-                }, 800);
-            }, 1500);
+                if (error) {
+                    errorText.textContent = '❌ ' + error.message
+                    errorMsg.classList.add('show')
+                    btn.innerHTML = originalText
+                    btn.disabled = false
+                    return
+                }
+
+                if (data?.user) {
+                    // Success
+                    successMsg.classList.add('show')
+                    document.getElementById('successText').textContent = '✅ Login successful! Redirecting...'
+                    
+                    btn.innerHTML = '✅ Success!'
+                    btn.style.background = 'linear-gradient(135deg, #3dd68c, #2d9b6e)'
+
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html'
+                    }, 1200)
+                }
+            } catch (err) {
+                errorText.textContent = '❌ An unexpected error occurred. Please try again.'
+                errorMsg.classList.add('show')
+                btn.innerHTML = originalText
+                btn.disabled = false
+            }
         }
 
         // ===== SHOW MESSAGE =====
-        function showMessage(msg) {
-            alert(msg);
+        window.showMessage = function(msg) {
+            alert(msg)
         }
 
         // ===== KEYBOARD SUPPORT =====
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
-                const form = document.getElementById('loginForm');
+                const form = document.getElementById('loginForm')
                 if (form) {
-                    form.dispatchEvent(new Event('submit'));
+                    form.dispatchEvent(new Event('submit'))
                 }
             }
-        });
+        })
 
-        console.log('🔐 FlintsMarket Login Page loaded successfully!');
-        console.log('📧 Login with email and password to access your account.');
+        console.log('🔐 FlintsMarket Login Page loaded!')
+        console.log('📧 Login with email and password to access your account.')
     </script>
 </body>
 </html>
