@@ -462,7 +462,7 @@
                 <span id="successText">Account created! Redirecting...</span>
             </div>
 
-            <!-- ===== SIGNUP FORM ===== -->
+            <!-- ===== SIGNUP FORM — NO SUPABASE ===== -->
             <form id="signupForm" onsubmit="handleSignup(event)">
                 <div class="name-row">
                     <div class="form-group">
@@ -556,22 +556,11 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT
+    JAVASCRIPT — NO SUPABASE
     ============================================================ -->
-    <script type="module">
-        import { supabase, signUp, getSession } from './supabase.js'
-
-        // ===== CHECK IF ALREADY LOGGED IN =====
-        async function checkSession() {
-            const session = await getSession()
-            if (session) {
-                window.location.href = 'dashboard.html'
-            }
-        }
-        checkSession()
-
+    <script>
         // ===== TOGGLE PASSWORD VISIBILITY =====
-        window.togglePassword = function() {
+        function togglePassword() {
             const passwordInput = document.getElementById('passwordInput')
             const icon = document.getElementById('passwordIcon')
 
@@ -584,8 +573,8 @@
             }
         }
 
-        // ===== HANDLE SIGNUP — WITH MANUAL PROFILE CREATION =====
-        window.handleSignup = async function(event) {
+        // ===== HANDLE SIGNUP — LOCAL ONLY =====
+        function handleSignup(event) {
             event.preventDefault()
 
             const firstName = document.getElementById('firstNameInput').value.trim()
@@ -639,90 +628,35 @@
             btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Creating Account...'
             btn.disabled = true
 
-            try {
-                const fullName = firstName + ' ' + lastName
-
-                // STEP 1: Create user with Supabase auth
-                const { data, error } = await signUp(email, password, fullName)
-
-                if (error) {
-                    // Show specific error message
-                    if (error.message.includes('User already registered')) {
-                        errorText.textContent = '❌ This email is already registered. Please login.'
-                    } else if (error.message.includes('Password')) {
-                        errorText.textContent = '❌ ' + error.message
-                    } else {
-                        errorText.textContent = '❌ ' + error.message
-                    }
-                    errorMsg.classList.add('show')
-                    btn.innerHTML = originalText
-                    btn.disabled = false
-                    return
+            // Simulate account creation (no backend)
+            setTimeout(() => {
+                // Save user data to localStorage (demo only)
+                const userData = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    phone: document.getElementById('phoneInput').value.trim() || null,
+                    createdAt: new Date().toISOString()
                 }
 
-                if (data?.user) {
-                    // STEP 2: Manually create profile (fallback if trigger fails)
-                    try {
-                        const { error: profileError } = await supabase
-                            .from('profiles')
-                            .insert({
-                                id: data.user.id,
-                                full_name: fullName,
-                                phone: document.getElementById('phoneInput').value.trim() || null,
-                                country: 'Ghana',
-                                tier: 'starter'
-                            })
+                // Store in localStorage
+                localStorage.setItem('flints_user', JSON.stringify(userData))
 
-                        if (profileError) {
-                            console.warn('⚠️ Profile creation warning:', profileError.message)
-                            // Continue anyway — the user might still be able to login
-                        }
-                    } catch (err) {
-                        console.warn('⚠️ Profile creation error:', err.message)
-                    }
+                // Success
+                successMsg.classList.add('show')
+                document.getElementById('successText').textContent = '✅ Account created successfully!'
 
-                    // STEP 3: Manually create default balances (fallback if trigger fails)
-                    try {
-                        const assets = ['USD', 'BTC', 'ETH', 'SOL', 'OIL']
-                        for (const asset of assets) {
-                            const { error: balanceError } = await supabase
-                                .from('balances')
-                                .insert({
-                                    user_id: data.user.id,
-                                    asset: asset,
-                                    balance: 0
-                                })
+                btn.innerHTML = '✅ Success!'
+                btn.style.background = 'linear-gradient(135deg, #3dd68c, #2d9b6e)'
 
-                            if (balanceError) {
-                                console.warn(`⚠️ Balance creation warning for ${asset}:`, balanceError.message)
-                            }
-                        }
-                    } catch (err) {
-                        console.warn('⚠️ Balance creation error:', err.message)
-                    }
-
-                    // Success
-                    successMsg.classList.add('show')
-                    document.getElementById('successText').textContent = '✅ Account created! Please check your email to verify.'
-
-                    btn.innerHTML = '✅ Success!'
-                    btn.style.background = 'linear-gradient(135deg, #3dd68c, #2d9b6e)'
-
-                    setTimeout(() => {
-                        window.location.href = 'login.html'
-                    }, 2000)
-                }
-            } catch (err) {
-                errorText.textContent = '❌ An unexpected error occurred. Please try again.'
-                errorMsg.classList.add('show')
-                console.error('Signup error:', err)
-                btn.innerHTML = originalText
-                btn.disabled = false
-            }
+                setTimeout(() => {
+                    window.location.href = 'login.html'
+                }, 1500)
+            }, 1200)
         }
 
         // ===== SHOW MESSAGE =====
-        window.showMessage = function(msg) {
+        function showMessage(msg) {
             alert(msg)
         }
 
@@ -736,8 +670,8 @@
             }
         })
 
-        console.log('📝 FlintsMarket Signup Page loaded!')
-        console.log('👤 New users can create an account to start trading.')
+        console.log('📝 FlintsMarket Signup Page loaded! (No Supabase)')
+        console.log('👤 New users can create an account locally.')
     </script>
 </body>
 </html>
