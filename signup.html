@@ -462,7 +462,7 @@
                 <span id="successText">Account created! Redirecting...</span>
             </div>
 
-            <!-- ===== SIGNUP FORM — NO SUPABASE ===== -->
+            <!-- ===== SIGNUP FORM ===== -->
             <form id="signupForm" onsubmit="handleSignup(event)">
                 <div class="name-row">
                     <div class="form-group">
@@ -556,7 +556,7 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT — NO SUPABASE
+    JAVASCRIPT — NO SUPABASE — REDIRECTS TO DASHBOARD
     ============================================================ -->
     <script>
         // ===== TOGGLE PASSWORD VISIBILITY =====
@@ -573,7 +573,7 @@
             }
         }
 
-        // ===== HANDLE SIGNUP — LOCAL ONLY =====
+        // ===== HANDLE SIGNUP — REDIRECT TO DASHBOARD =====
         function handleSignup(event) {
             event.preventDefault()
 
@@ -628,9 +628,9 @@
             btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Creating Account...'
             btn.disabled = true
 
-            // Simulate account creation (no backend)
+            // Simulate account creation
             setTimeout(() => {
-                // Save user data to localStorage (demo only)
+                // Save user data to localStorage
                 const userData = {
                     firstName: firstName,
                     lastName: lastName,
@@ -639,19 +639,27 @@
                     createdAt: new Date().toISOString()
                 }
 
-                // Store in localStorage
                 localStorage.setItem('flints_user', JSON.stringify(userData))
+
+                // Save login session (auto-login)
+                localStorage.setItem('flints_session', JSON.stringify({
+                    email: email,
+                    loggedIn: true,
+                    timestamp: new Date().toISOString()
+                }))
 
                 // Success
                 successMsg.classList.add('show')
-                document.getElementById('successText').textContent = '✅ Account created successfully!'
+                document.getElementById('successText').textContent = '✅ Account created! Redirecting to Dashboard...'
 
                 btn.innerHTML = '✅ Success!'
                 btn.style.background = 'linear-gradient(135deg, #3dd68c, #2d9b6e)'
 
+                // Redirect to dashboard after 1.5 seconds
                 setTimeout(() => {
-                    window.location.href = 'login.html'
+                    window.location.href = 'dashboard.html'
                 }, 1500)
+
             }, 1200)
         }
 
@@ -670,8 +678,23 @@
             }
         })
 
-        console.log('📝 FlintsMarket Signup Page loaded! (No Supabase)')
-        console.log('👤 New users can create an account locally.')
+        // ===== CHECK IF ALREADY LOGGED IN =====
+        (function checkSession() {
+            const session = localStorage.getItem('flints_session')
+            if (session) {
+                try {
+                    const data = JSON.parse(session)
+                    if (data.loggedIn) {
+                        window.location.href = 'dashboard.html'
+                    }
+                } catch (e) {
+                    // Invalid session, ignore
+                }
+            }
+        })()
+
+        console.log('📝 FlintsMarket Signup Page loaded!')
+        console.log('👤 New users are redirected to Dashboard after signup.')
     </script>
 </body>
 </html>
