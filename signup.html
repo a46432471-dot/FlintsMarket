@@ -538,7 +538,7 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT — FIXED: SAVES PASSWORD IN LOCALSTORAGE
+    JAVASCRIPT — FIXED: NO SESSION CHECK
     ============================================================ -->
     <script>
         // ===== TOGGLE PASSWORD VISIBILITY =====
@@ -612,19 +612,17 @@
 
             // Simulate account creation
             setTimeout(() => {
-                // ✅ FIXED: Save user data WITH password
+                // Save user data WITH password
                 const userData = {
                     firstName: firstName,
                     lastName: lastName,
                     email: email,
-                    password: password,  // ✅ NOW SAVED
+                    password: password,
                     phone: document.getElementById('phoneInput').value.trim() || null,
                     createdAt: new Date().toISOString()
                 }
 
                 localStorage.setItem('flints_user', JSON.stringify(userData))
-
-                // DO NOT auto-login — user must login manually
 
                 // Success
                 successMsg.classList.add('show')
@@ -656,20 +654,7 @@
             }
         })
 
-        // ===== CHECK IF ALREADY LOGGED IN =====
-        (function checkSession() {
-            const session = localStorage.getItem('flints_session')
-            if (session) {
-                try {
-                    const data = JSON.parse(session)
-                    if (data.loggedIn) {
-                        window.location.href = 'dashboard.html'
-                    }
-                } catch (e) {
-                    // Invalid session, ignore
-                }
-            }
-        })()
+        // ✅ REMOVED: The session check that was causing the loop!
 
         console.log('📝 FlintsMarket Signup Page loaded!')
         console.log('👤 Users are redirected to Login after signup.')
