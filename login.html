@@ -440,7 +440,7 @@
                 <span id="successText">Login successful! Redirecting...</span>
             </div>
 
-            <!-- ===== LOGIN FORM ===== -->
+            <!-- ===== LOGIN FORM — NO SUPABASE ===== -->
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
                     <label>Email Address</label>
@@ -494,22 +494,11 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT
+    JAVASCRIPT — NO SUPABASE
     ============================================================ -->
-    <script type="module">
-        import { signIn, getSession } from './supabase.js'
-
-        // ===== CHECK IF ALREADY LOGGED IN =====
-        async function checkSession() {
-            const session = await getSession()
-            if (session) {
-                window.location.href = 'dashboard.html'
-            }
-        }
-        checkSession()
-
-        // ===== HANDLE LOGIN =====
-        window.handleLogin = async function(event) {
+    <script>
+        // ===== HANDLE LOGIN — LOCAL ONLY =====
+        function handleLogin(event) {
             event.preventDefault()
 
             const email = document.getElementById('emailInput').value.trim()
@@ -541,18 +530,29 @@
             btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Logging in...'
             btn.disabled = true
 
-            try {
-                const { data, error } = await signIn(email, password)
+            // Simulate login (no backend)
+            setTimeout(() => {
+                // Check if user exists in localStorage (from signup)
+                const savedUser = localStorage.getItem('flints_user')
+                let userData = null
 
-                if (error) {
-                    errorText.textContent = '❌ ' + error.message
-                    errorMsg.classList.add('show')
-                    btn.innerHTML = originalText
-                    btn.disabled = false
-                    return
+                if (savedUser) {
+                    try {
+                        userData = JSON.parse(savedUser)
+                    } catch (e) {
+                        userData = null
+                    }
                 }
 
-                if (data?.user) {
+                // If user exists and email matches (simple check)
+                if (userData && userData.email === email) {
+                    // Save login session
+                    localStorage.setItem('flints_session', JSON.stringify({
+                        email: email,
+                        loggedIn: true,
+                        timestamp: new Date().toISOString()
+                    }))
+
                     // Success
                     successMsg.classList.add('show')
                     document.getElementById('successText').textContent = '✅ Login successful! Redirecting...'
@@ -563,17 +563,18 @@
                     setTimeout(() => {
                         window.location.href = 'dashboard.html'
                     }, 1200)
+                } else {
+                    // No user found
+                    errorText.textContent = '❌ No account found with this email. Please sign up first.'
+                    errorMsg.classList.add('show')
+                    btn.innerHTML = originalText
+                    btn.disabled = false
                 }
-            } catch (err) {
-                errorText.textContent = '❌ An unexpected error occurred. Please try again.'
-                errorMsg.classList.add('show')
-                btn.innerHTML = originalText
-                btn.disabled = false
-            }
+            }, 1000)
         }
 
         // ===== SHOW MESSAGE =====
-        window.showMessage = function(msg) {
+        function showMessage(msg) {
             alert(msg)
         }
 
@@ -587,7 +588,22 @@
             }
         })
 
-        console.log('🔐 FlintsMarket Login Page loaded!')
+        // ===== CHECK IF ALREADY LOGGED IN =====
+        (function checkSession() {
+            const session = localStorage.getItem('flints_session')
+            if (session) {
+                try {
+                    const data = JSON.parse(session)
+                    if (data.loggedIn) {
+                        window.location.href = 'dashboard.html'
+                    }
+                } catch (e) {
+                    // Invalid session, ignore
+                }
+            }
+        })()
+
+        console.log('🔐 FlintsMarket Login Page loaded! (No Supabase)')
         console.log('📧 Login with email and password to access your account.')
     </script>
 </body>
