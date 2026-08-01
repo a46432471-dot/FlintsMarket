@@ -459,7 +459,7 @@
             <!-- ===== SUCCESS MESSAGE ===== -->
             <div class="success-msg" id="successMsg">
                 <i class="fas fa-check-circle" style="margin-right:6px;"></i>
-                <span id="successText">Account created! Redirecting...</span>
+                <span id="successText">Account created! Redirecting to login...</span>
             </div>
 
             <!-- ===== SIGNUP FORM ===== -->
@@ -556,7 +556,7 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT — NO SUPABASE — REDIRECTS TO DASHBOARD
+    JAVASCRIPT — NO SUPABASE — REDIRECTS TO LOGIN
     ============================================================ -->
     <script>
         // ===== TOGGLE PASSWORD VISIBILITY =====
@@ -573,7 +573,7 @@
             }
         }
 
-        // ===== HANDLE SIGNUP — REDIRECT TO DASHBOARD =====
+        // ===== HANDLE SIGNUP — REDIRECT TO LOGIN =====
         function handleSignup(event) {
             event.preventDefault()
 
@@ -641,23 +641,18 @@
 
                 localStorage.setItem('flints_user', JSON.stringify(userData))
 
-                // Save login session (auto-login)
-                localStorage.setItem('flints_session', JSON.stringify({
-                    email: email,
-                    loggedIn: true,
-                    timestamp: new Date().toISOString()
-                }))
+                // DO NOT auto-login — user must login manually
 
                 // Success
                 successMsg.classList.add('show')
-                document.getElementById('successText').textContent = '✅ Account created! Redirecting to Dashboard...'
+                document.getElementById('successText').textContent = '✅ Account created! Please login.'
 
                 btn.innerHTML = '✅ Success!'
                 btn.style.background = 'linear-gradient(135deg, #3dd68c, #2d9b6e)'
 
-                // Redirect to dashboard after 1.5 seconds
+                // Redirect to login page after 1.5 seconds
                 setTimeout(() => {
-                    window.location.href = 'dashboard.html'
+                    window.location.href = 'login.html'
                 }, 1500)
 
             }, 1200)
@@ -694,7 +689,7 @@
         })()
 
         console.log('📝 FlintsMarket Signup Page loaded!')
-        console.log('👤 New users are redirected to Dashboard after signup.')
+        console.log('👤 Users are redirected to Login after signup.')
     </script>
 </body>
 </html>
