@@ -11,9 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
-        /* ============================================================
-                   DARK THEME — MATCHES INDEX PAGE
-                   ============================================================ */
+        /* ===== ALL YOUR EXISTING STYLES HERE (same as before) ===== */
         * {
             margin: 0;
             padding: 0;
@@ -53,7 +51,6 @@
             justify-content: center;
         }
 
-        /* ===== ANIMATED BACKGROUND ===== */
         .bg-glow {
             position: fixed;
             top: -50%;
@@ -75,7 +72,6 @@
             66% { transform: translate(20px, -30px) scale(0.95); }
         }
 
-        /* ===== SIGNUP CONTAINER ===== */
         .signup-container {
             position: relative;
             z-index: 1;
@@ -85,7 +81,6 @@
             margin: 1rem;
         }
 
-        /* ===== SIGNUP CARD ===== */
         .signup-card {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
@@ -101,7 +96,6 @@
             border-color: rgba(201, 154, 59, 0.08);
         }
 
-        /* ===== LOGO ===== */
         .signup-logo {
             text-align: center;
             margin-bottom: 2rem;
@@ -141,7 +135,6 @@
             margin-top: 0.2rem;
         }
 
-        /* ===== FORM ===== */
         .form-group {
             margin-bottom: 1rem;
         }
@@ -212,14 +205,12 @@
             margin-right: 4px;
         }
 
-        /* ===== NAME ROW ===== */
         .name-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0.8rem;
         }
 
-        /* ===== TERMS ===== */
         .terms-row {
             display: flex;
             align-items: flex-start;
@@ -252,7 +243,6 @@
             text-decoration: underline;
         }
 
-        /* ===== BUTTONS ===== */
         .btn-signup {
             width: 100%;
             padding: 0.9rem;
@@ -296,7 +286,6 @@
             box-shadow: none;
         }
 
-        /* ===== DIVIDER ===== */
         .divider {
             display: flex;
             align-items: center;
@@ -319,7 +308,6 @@
             letter-spacing: 1px;
         }
 
-        /* ===== SOCIAL SIGNUP ===== */
         .social-signup {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -356,7 +344,6 @@
         .social-btn.google i { color: #ea4335; }
         .social-btn.apple i { color: var(--text-primary); }
 
-        /* ===== LOGIN LINK ===== */
         .login-link {
             text-align: center;
             margin-top: 1.5rem;
@@ -374,7 +361,6 @@
             text-decoration: underline;
         }
 
-        /* ===== ERROR MESSAGE ===== */
         .error-msg {
             display: none;
             background: rgba(244, 114, 122, 0.08);
@@ -390,7 +376,6 @@
             display: block;
         }
 
-        /* ===== SUCCESS MESSAGE ===== */
         .success-msg {
             display: none;
             background: rgba(61, 214, 140, 0.08);
@@ -406,9 +391,6 @@
             display: block;
         }
 
-        /* ============================================================
-                   RESPONSIVE
-                   ============================================================ */
         @media (max-width: 480px) {
             .signup-card {
                 padding: 1.8rem 1.2rem;
@@ -556,7 +538,7 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT — NO SUPABASE — REDIRECTS TO LOGIN
+    JAVASCRIPT — FIXED: SAVES PASSWORD IN LOCALSTORAGE
     ============================================================ -->
     <script>
         // ===== TOGGLE PASSWORD VISIBILITY =====
@@ -573,7 +555,7 @@
             }
         }
 
-        // ===== HANDLE SIGNUP — REDIRECT TO LOGIN =====
+        // ===== HANDLE SIGNUP — SAVES PASSWORD =====
         function handleSignup(event) {
             event.preventDefault()
 
@@ -630,11 +612,12 @@
 
             // Simulate account creation
             setTimeout(() => {
-                // Save user data to localStorage
+                // ✅ FIXED: Save user data WITH password
                 const userData = {
                     firstName: firstName,
                     lastName: lastName,
                     email: email,
+                    password: password,  // ✅ NOW SAVED
                     phone: document.getElementById('phoneInput').value.trim() || null,
                     createdAt: new Date().toISOString()
                 }
